@@ -40,9 +40,9 @@ Samotné písně naleznete v adresáři *tp-songs*, který dále obsahuje 4 poda
 
 1.	V konzoli přejděte do adresáře, ve kterém chcete pracovat.
 2.	Stáhněte aktuální verzi zpěvníku příkazem
-    ```
-    git clone http://github.com/karel-brinda/tp-zpevnik
-    ```
+	```
+	git clone http://github.com/karel-brinda/tp-zpevnik
+	```
 3.	Přejděte do adresáře zpěvníku pomocí
 ```
   cd tp-zpevnik
