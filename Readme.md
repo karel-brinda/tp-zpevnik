@@ -17,18 +17,18 @@ Tento githubový repozitář poskytuje jednotný přístup k těmto zpěvníkům
 ## Vyžadovaný software
 
 * **Podporovaný OS**
-  * Linux – vše funguje bez problémů
-  * MacOS – zatím netestováno, vše by mělo fungovat bez problémů
-  * Windows – překlad ve Windows je zatím možný pouze z prostředí Cygwin
-*	**Python 3** (včetně programu **easy_install**) – nejjednodušší instalace je pravděpodobně v rámci balíku Anacoda (k dispozici pro Windows i Linux)
-  *	**Balík pypdf2**, nainstalovat lze např. příkazem
-  ```
-    easy_install-3 pypdf2
-  ```
-  * **Snakemake** – program podobný Make s mnohem většími možnostmi, který je postaven na Pythonu, slouží k sestavení celého zpěvníku. Nainstalujete ho pomocí
-  ```
-    easy_install-3 snakemake
-  ```
+	* Linux – vše funguje bez problémů
+	* MacOS – zatím netestováno, vše by mělo fungovat bez problémů
+	* Windows – překlad ve Windows je zatím možný pouze z prostředí Cygwin
+* **Python 3** (včetně programu **easy_install**) – nejjednodušší instalace je pravděpodobně v rámci balíku Anacoda (k dispozici pro Windows i Linux)
+	* **Balík pypdf2**, nainstalovat lze např. příkazem
+
+		easy_install-3 pypdf2
+
+	* **Snakemake** – program podobný Make s mnohem většími možnostmi, který je postaven na Pythonu, slouží k sestavení celého zpěvníku. Nainstalujete ho pomocí
+
+		easy_install-3 snakemake
+
 *	**XeLaTeX** – stačí mít standardně nainstalovaný TeX (v případě Windows MikTex, v případě Linuxu standardní latexové balíčky z repozitáře)
 *	**GIT** – program pro práci s repozitáři zdrojových kódů, pro všechny OS k dispozici na …
 
@@ -51,6 +51,7 @@ Samotné písně naleznete v adresáři *tp-songs*, který dále obsahuje 4 poda
 
 		git submodule init
 		git submodule update
+
 	Nyní byste měli mít k dispozici všechny potřebné soubory.
 
 5.	Celé sestavení provedete zadáním příkazu
@@ -71,11 +72,11 @@ Samotné písně naleznete v adresáři *tp-songs*, který dále obsahuje 4 poda
 3.	Opravte chyby.
 4.	Otestujte, zda se zpěvník správně přeloží (a neskončí např. xelatexovou chybou). Důkladně zkontrolujte, jestli po vysázení vypadá daná píseň správně.
 5.	Odešlete změny na server pomocí příkazů
-```
-git add jmeno_upraveneho_souboru_1.tex jmeno_upraveneho_souboru_2.tex
-git commit –m 'kratky popis zmen – co konkretne jste opravili'
-git push
-```
+
+		git add jmeno_upraveneho_souboru_1.tex jmeno_upraveneho_souboru_2.tex
+		git commit –m 'kratky popis zmen – co konkretne jste opravili'
+		git push
+
 6.	Na GitHub.com mě požádejte mě o merge (propuštění změn do původních repozitářů). Pokud bude změna korektní, schválím ji.
 
 ## Jak přidat novou píseň do databáze písní
@@ -85,37 +86,36 @@ Dodržujte, prosím, logiku celého zpěvníku (co se týče pojmenování a za�
 
 ## Jak vytvořit vlastní zpěvník
 
- 1. Do adresáře, kde si chcete vlastní zpěvník vytvořit, naklonujte tyto dva repozitáře:
-```
-  git clone http://github.com/karel-brinda/tpcb
-  git clone http://github.com/karel-brinda/tp-zpevnik
-```
- 2. První bude obsahovat potřebné skripty, druhý již zpracované písně. Nyní vytvořte soubor Snakefile s následujícím obsahem:
+1.	Do adresáře, kde si chcete vlastní zpěvník vytvořit, naklonujte tyto dva repozitáře:
 
-```python
-# -*-coding: utf-8 -*-
+		git clone http://github.com/karel-brinda/tpcb
+		git clone http://github.com/karel-brinda/tp-zpevnik
 
-left_page_head="Levá hlavička"
-right_page_head="Pravá hlavička"
-chordbook="muj_novy_zpevnik"
-#cover_front="obalka_predni.pdf"
-#cover_back="obalka_zadni.pdf"
+2.	První bude obsahovat potřebné skripty, druhý již zpracované písně. Nyní vytvořte soubor Snakefile s následujícím obsahem:
 
-songs=[
-	("tp-zpevnik/tp-songs/03_zahranicni/Beatles____Let_it_be.tex", 5), # 5 = transpozice o 5 půltónů nahoru
-	"tp-zpevnik/tp-songs/03_zahranicni/Beatles____Love_me_do.tex",
-]
+		# -*-coding: utf-8 -*-
 
-include:"tpcb/snake_incl.py"
+		left_page_head="Levá hlavička"
+		right_page_head="Pravá hlavička"
+		chordbook="muj_novy_zpevnik"
+		#cover_front="obalka_predni.pdf"
+		#cover_back="obalka_zadni.pdf"
+	
+		songs=[
+			("tp-zpevnik/tp-songs/03_zahranicni/Beatles____Let_it_be.tex", 5), # 5 = transpozice o 5 půltónů nahoru
+			"tp-zpevnik/tp-songs/03_zahranicni/Beatles____Love_me_do.tex",
+		]
 
-rule all:
-	input:
-		cb_pdf(chordbook)
+		include:"tpcb/snake_incl.py"
 
-```
- 3. Spusťte ```snakemake```
+		rule all:
+			input:
+				cb_pdf(chordbook)
+	
+3.	Spusťte
+		snakemake
 
-Měl by se vám vysázet zpěvník s písní Let it be transponovanou o 5 půltóny nahoru a s písní Love me do.
+	Měl by se vám vysázet zpěvník s písní Let it be transponovanou o 5 půltóny nahoru a s písní Love me do.
 
 ### Používané značky
 
@@ -130,5 +130,6 @@ Měl by se vám vysázet zpěvník s písní Let it be transponovanou o 5 půlt�
 ### Poznámky
 
 * Používejte evropskou hudební notaci (*B* = *A#*).
-* Mollové akordy používejte *mi*, tedy např. *Ami*
-* Do jedné značky ```\ch``` vkládejte právě jeden akordy (pokud jich tam bude více, pravděpodobně nebude správně fungovat transpozice)
+* Mollové akordy používejte *mi*, tedy např. *Ami*.
+* Do jedné značky ```\ch``` vkládejte právě jeden akordy (pokud jich tam bude více, pravděpodobně nebude správně fungovat transpozice).
+
