@@ -41,29 +41,28 @@ Samotné písně naleznete v adresáři *tp-songs*, který dále obsahuje 4 poda
 1.	V konzoli přejděte do adresáře, ve kterém chcete pracovat.
 2.	Stáhněte aktuální verzi zpěvníku příkazemi
 
-		```
 		git clone http://github.com/karel-brinda/tp-zpevnik
-		```
 
 3.	Přejděte do adresáře zpěvníku pomocí
-```
-  cd tp-zpevnik
-```
+  
+		cd tp-zpevnik
+
 4.	Inicializujte a stáhněte externí repozitáře (obsahují obálky zpěvníků a pak vlastní skripty pro sestavování zpěvníků) pomocí
-```
-  git submodule init
-  git submodule update
-```
-Nyní byste měli mít k dispozici všechny potřebné soubory.
+
+		git submodule init
+		git submodule update
+	Nyní byste měli mít k dispozici všechny potřebné soubory.
+
 5.	Celé sestavení provedete zadáním příkazu
-```
-  snakemake
-```
-Pokud chcete sestavit pouze některý zpěvník z TP 2011, zadejte
-```
-  snakemake –s tp2011.snakemake
-```
-Obdobně pro ostatní zpěvníky.
+
+		snakemake
+
+
+	Pokud chcete sestavit pouze některý zpěvník z TP 2011, zadejte
+
+		snakemake –s tp2011.snakemake
+
+	Obdobně pro ostatní zpěvníky.
 
 ## Jak opravit chybu v písni
 
