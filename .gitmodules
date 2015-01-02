@@ -1,0 +1,6 @@
+[submodule "tpcb"]
+	path = tpcb
+	url = https://github.com/karel-brinda/tpcb
+[submodule "tp-zpevnik-covers"]
+	path = tp-zpevnik-covers
+	url = https://github.com/karel-brinda/tp-zpevnik-covers

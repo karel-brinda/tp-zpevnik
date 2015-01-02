@@ -1,0 +1,23 @@
+# -*-coding: utf-8 -*-
+
+left_page_head="Zpěvník komplet"
+right_page_head="www.technicka-prestavka.cz"
+chordbook="TP_zpevnik_komplet"
+
+songs = []
+
+for path, subdirs, files in os.walk(r'tp-songs'):
+        for filename in files:
+                f = os.path.join(path, filename)
+                songs.append(str(f))
+
+#print(songs)
+songs=sorted(songs)
+#print(songs)
+
+include:"tpcb/snake_incl.py"
+
+rule all:
+	input:
+		cb_pdf(chordbook)
+
