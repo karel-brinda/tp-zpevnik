@@ -1,6 +1,7 @@
 ## Chordbook cache files
 *.pdf
 *.cache
+cache.*
 .snakemake
 
 
