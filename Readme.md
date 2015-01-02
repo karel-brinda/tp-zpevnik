@@ -40,9 +40,9 @@ Samotné písně naleznete v adresáři *tp-songs*, který dále obsahuje 4 poda
 
 1.	V konzoli přejděte do adresáře, ve kterém chcete pracovat.
 2.	Stáhněte aktuální verzi zpěvníku příkazem
-```
-  git clone http://github.com/karel-brinda/tp-zpevnik
-```
+    ```
+    git clone http://github.com/karel-brinda/tp-zpevnik
+    ```
 3.	Přejděte do adresáře zpěvníku pomocí
 ```
   cd tp-zpevnik
@@ -53,7 +53,6 @@ Samotné písně naleznete v adresáři *tp-songs*, který dále obsahuje 4 poda
   git submodule update
 ```
 Nyní byste měli mít k dispozici všechny potřebné soubory.
-
 5.	Celé sestavení provedete zadáním příkazu
 ```
   snakemake
@@ -72,9 +71,9 @@ Obdobně pro ostatní zpěvníky.
 4.	Otestujte, zda se zpěvník správně přeloží (a neskončí např. xelatexovou chybou). Důkladně zkontrolujte, jestli po vysázení vypadá daná píseň správně.
 5.	Odešlete změny na server pomocí příkazů
 ```
-  git add jmeno_upraveneho_souboru_1.tex jmeno_upraveneho_souboru_2.tex
-  git commit –m 'kratky popis zmen – co konkretne jste opravili'
-  git push
+git add jmeno_upraveneho_souboru_1.tex jmeno_upraveneho_souboru_2.tex
+git commit –m 'kratky popis zmen – co konkretne jste opravili'
+git push
 ```
 6.	Na GitHub.com mě požádejte mě o merge (propuštění změn do původních repozitářů). Pokud bude změna korektní, schválím ji.
 
@@ -90,7 +89,6 @@ Dodržujte, prosím, logiku celého zpěvníku (co se týče pojmenování a za�
   git clone http://github.com/karel-brinda/tpcb
   git clone http://github.com/karel-brinda/tp-zpevnik
 ```
-
  2. První bude obsahovat potřebné skripty, druhý již zpracované písně. Nyní vytvořte soubor Snakefile s následujícím obsahem:
 
 ```python
@@ -103,15 +101,15 @@ chordbook="muj_novy_zpevnik"
 #cover_back="obalka_zadni.pdf"
 
 songs=[
-("tp-zpevnik/tp-songs/03_zahranicni/Beatles____Let_it_be.tex", 5), # 5 = transpozice o 5 půltónů nahoru
-"tp-zpevnik/tp-songs/03_zahranicni/Beatles____Love_me_do.tex",
+	("tp-zpevnik/tp-songs/03_zahranicni/Beatles____Let_it_be.tex", 5), # 5 = transpozice o 5 půltónů nahoru
+	"tp-zpevnik/tp-songs/03_zahranicni/Beatles____Love_me_do.tex",
 ]
 
 include:"tpcb/snake_incl.py"
 
 rule all:
-input:
-cb_pdf(chordbook)
+	input:
+		cb_pdf(chordbook)
 
 ```
  3. Spusťte ```snakemake```
