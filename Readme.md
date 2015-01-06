@@ -27,14 +27,14 @@ Tento githubový repozitář poskytuje jednotný přístup k těmto zpěvníkům
 		easy_install-3 pypdf2
 		```
 
-	* **Snakemake** – program podobný Make s mnohem většími možnostmi, který je postaven na Pythonu, slouží k sestavení celého zpěvníku. Nainstalujete ho pomocí
+	* **Snakemake** (http://bitbucket.org/johanneskoester/snakemake/) – program podobný Make s mnohem většími možnostmi, který je postaven na Pythonu, slouží k sestavení celého zpěvníku. Nainstalujete ho pomocí
 
 		```bash
 		easy_install-3 snakemake
 		```
 
 *	**XeLaTeX** – stačí mít standardně nainstalovaný TeX (v případě Windows MikTex, v případě Linuxu standardní latexové balíčky z repozitáře)
-*	**GIT** – program pro práci s repozitáři zdrojových kódů, pro všechny OS k dispozici na …
+*	**GIT** (http://git-scm.com/) – program pro práci s repozitáři zdrojových kódů
 
 ## Organizace repozitářů
 
@@ -137,11 +137,10 @@ Dodržujte, prosím, logiku celého zpěvníku (co se týče pojmenování a za�
 * ```\kr``` - konec refrénu
 * ```\zs``` - začátek sloky
 * ```\ks``` - konec sloky
-* ```\ch{Dmi}{Text, nad kterým bude akord}``` - akord
+* ```\Ch{Dmi}{Text, nad kterým bude akord}``` - akord
 
 ### Poznámky
 
 * Používejte evropskou hudební notaci (*B* = *A#*).
 * Mollové akordy používejte *mi*, tedy např. *Ami*.
-* Do jedné značky ```\ch``` vkládejte právě jeden akordy (pokud jich tam bude více, pravděpodobně nebude správně fungovat transpozice).
-
+* Do jedné značky ```\Ch``` vkládejte právě jeden akordy (pokud jich tam bude více, pravděpodobně nebude správně fungovat transpozice).
