@@ -24,13 +24,13 @@ Tento githubový repozitář poskytuje jednotný přístup k těmto zpěvníkům
 	* **Balík pypdf2**, nainstalovat lze např. příkazem
 
 		```bash
-		easy_install-3 pypdf2
+		pip install pypdf2
 		```
 
 	* **Snakemake** (http://bitbucket.org/johanneskoester/snakemake/) – program podobný Make s mnohem většími možnostmi, který je postaven na Pythonu, slouží k sestavení celého zpěvníku. Nainstalujete ho pomocí
 
 		```bash
-		easy_install-3 snakemake
+		pip install snakemake
 		```
 
 *	**XeLaTeX** – stačí mít standardně nainstalovaný TeX (v případě Windows MikTex, v případě Linuxu standardní latexové balíčky z repozitáře)
