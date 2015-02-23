@@ -1,10 +1,10 @@
 # TP zpěvník
 
-Na tomto místě naleznete podklady k sestavení TP zpěvníků z let 2011 – 2013.
+Na tomto místě naleznete podklady k sestavení TP zpěvníků z let 2011 – 2013. Vysázené zpěvníky naleznete na http://karel-brinda.github.io/tp-zpevnik.
 
 Co tento systém umožňuje:
 *	Sestavit existující TP zpěvníky.
-*	Opravit případné chyby.
+*	Opravit chyby.
 *	Vytvořit si vlastní zpěvník na bázi TP zpěvníku (s libovolnými vlastními písněmi).
 *	Jednoduše transponovat jednotlivé písně do jiné tóniny.
 
@@ -17,10 +17,10 @@ Tento githubový repozitář poskytuje jednotný přístup k těmto zpěvníkům
 ## Vyžadovaný software
 
 * **Podporovaný OS**
-	* Linux – vše funguje bez problémů
-	* MacOS – zatím netestováno, vše by mělo fungovat bez problémů
-	* Windows – překlad ve Windows je zatím možný pouze z prostředí Cygwin
-* **Python 3** (včetně programu **easy_install**) – nejjednodušší instalace je pravděpodobně v rámci balíku Anacoda (k dispozici pro Windows i Linux)
+	* Linux
+	* MacOS
+	* Windows
+* **Python 3** (včetně programu **pip**) – nejjednodušší instalace je pravděpodobně v rámci balíku Anacoda (k dispozici pro Windows, Linux i MacOS)
 	* **Balík pypdf2**, nainstalovat lze např. příkazem
 
 		```bash
