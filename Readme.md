@@ -43,29 +43,18 @@ Samotné písně naleznete v adresáři *tp-songs*, který dále obsahuje 4 poda
 ## Jak sestavit zpěvníky
 
 1.	V konzoli přejděte do adresáře, ve kterém chcete pracovat.
-2.	Stáhněte aktuální verzi zpěvníku příkazem
+2.	Stáhněte aktuální verzi zpěvníku vč. dalších vyžadovaných repozitářů příkazem
 	```bash
-	git clone http://github.com/karel-brinda/tp-zpevnik
+	git clone --recursive http://github.com/karel-brinda/tp-zpevnik
 	```
 	
-3.	Přejděte do adresáře zpěvníku pomocí
+3.	Přejděte do adresáře zpěvníku a sestavte všechny zpěvníky pomocí
 	```bash
 	cd tp-zpevnik
-	```
-
-4.	Inicializujte a stáhněte externí repozitáře (obsahují obálky zpěvníků a pak vlastní skripty pro sestavování zpěvníků) pomocí
-	```bash
-	git submodule init
-	git submodule update
-	```
-	Nyní byste měli mít k dispozici všechny potřebné soubory.
-
-5.	Celé sestavení provedete zadáním příkazu
-	```bash
 	snakemake
 	```
 
-	Pokud chcete sestavit pouze některý zpěvník z TP 2011, zadejte
+	Pokud chcete sestavit pouze některý zpěvník, např. z TP 2011, zadejte
 	```bash
 	snakemake –s tp2011.snakemake
 	```
@@ -73,6 +62,12 @@ Samotné písně naleznete v adresáři *tp-songs*, který dále obsahuje 4 poda
 	Obdobně pro ostatní zpěvníky.
 
 ## Jak opravit chybu v písni
+
+### Jednodušší varianta
+
+Opravte soubor přímo přes webové rozhraní GitHubu (musíte být ale přihlášeni). Pak mi zašlete pull request.
+
+### Složitější varianta (ale preferovaná)
 
 1.	Vytvořte vlastní fork repozitáře http://github.com/karel-brinda/tp-zpevnik.
 2.	Naklonujte zpěvník ze svého nového repozítáře (vzniklého forknutím) včetně externích repozitářů (soubory v nich modifikovat nebudete, pro ty tedy fork vytvářet nemusíte).
