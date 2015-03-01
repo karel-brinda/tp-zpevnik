@@ -1,0 +1,16 @@
+language: python
+python:
+  - "3.2"
+  - "3.3"
+  - "3.4"
+# command to install dependencies
+install:
+  - "pip install ."
+  - "pip install -r requirements.txt"
+  - sudo apt-get install texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-xetex
+script:
+  -snakemake Snakefile.AllSongs
+  -snakemake Snakefile.TP2011
+  -snakemake Snakefile.TP2012
+  -snakemake Snakefile.TP2013
+  
