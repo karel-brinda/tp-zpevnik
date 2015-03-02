@@ -7,9 +7,11 @@ python:
   - "3.3"
   - "3.4"
 # command to install dependencies
+# - "sudo apt-get install texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-xetex iczech language-pack-cs"
+
 install:
   - "pip install -r requirements.txt"
-  - "sudo apt-get install texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-xetex iczech language-pack-cs"
+  - "sudo apt-get install texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-xetex"
   - "sudo ln -s /usr/share/i18n/SUPPORTED /var/lib/locales/supported.d/all"
   - "sudo locale-gen"
 script:
