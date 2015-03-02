@@ -1,4 +1,5 @@
 # TP zpěvník
+[![Build Status](https://travis-ci.org/karel-brinda/tp-zpevnik.svg?branch=master)](https://travis-ci.org/karel-brinda/tp-zpevnik)
 
 Na tomto místě naleznete podklady k sestavení TP zpěvníků z let 2011 – 2013. Vysázené zpěvníky naleznete na http://karel-brinda.github.io/tp-zpevnik.
 
@@ -56,7 +57,7 @@ Samotné písně naleznete v adresáři *tp-songs*, který dále obsahuje 4 poda
 
 	Pokud chcete sestavit pouze některý zpěvník, např. z TP 2011, zadejte
 	```bash
-	snakemake –s tp2011.snakemake
+	snakemake –s Snakefile.TP2011
 	```
 
 	Obdobně pro ostatní zpěvníky.
