@@ -107,8 +107,8 @@ Dodržujte, prosím, logiku celého zpěvníku (co se týče pojmenování a za�
 	#cover_back="obalka_zadni.pdf"
 	
 	songs=[
-		("tp-zpevnik/tp-songs/03_zahranicni/Beatles____Let_it_be.tex", 5), # 5 = transpozice o 5 půltónů nahoru
-		"tp-zpevnik/tp-songs/03_zahranicni/Beatles____Love_me_do.tex",
+		("./tp-songs/03_zahranicni/Beatles____Let_it_be.tex", 5), # 5 = transpozice o 5 půltónů nahoru
+		"./tp-songs/03_zahranicni/Beatles____Love_me_do.tex",
 	]
 
 	include:"tpcb/snake_incl.py"

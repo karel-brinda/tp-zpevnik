@@ -12,8 +12,9 @@ install:
   - "sudo ln -s /usr/share/i18n/SUPPORTED /var/lib/locales/supported.d/all"
   - "sudo locale-gen"
 script:
-  - "snakemake -p -s Snakefile.AllSongs"
+  - "snakemake -p -s Snakefile.test"
   - "snakemake -p -s Snakefile.TP2011"
   - "snakemake -p -s Snakefile.TP2012"
   - "snakemake -p -s Snakefile.TP2013"
+  - "snakemake -p -s Snakefile.AllSongs"
   
