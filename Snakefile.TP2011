@@ -8,11 +8,11 @@ cover_back="tp-zpevnik-covers/2011_back.pdf"
 
 
 songs=[
-	"./tp-songs/01_folk/(neznámý)____3_citrónky.tex",
-	"./tp-songs/01_folk/(neznámý)____Balada_o_princezně_a_o_hradu.tex",
-	"./tp-songs/01_folk/(neznámý)____Kolo_rovno_hovno.tex",
-	"./tp-songs/01_folk/(lidová)____A_te_Rehradice.tex",
-	"./tp-songs/01_folk/(lidová)____Kdyby_tady_byla_taková_panenka.tex",
+	"./tp-songs/01_folk/neznámý____3_citrónky.tex",
+	"./tp-songs/01_folk/neznámý____Balada_o_princezně_a_o_hradu.tex",
+	"./tp-songs/01_folk/neznámý____Kolo_rovno_hovno.tex",
+	"./tp-songs/01_folk/lidová____A_te_Rehradice.tex",
+	"./tp-songs/01_folk/lidová____Kdyby_tady_byla_taková_panenka.tex",
 	"./tp-songs/01_folk/Asonance____Čarodějnice_z_Amesbury.tex",
 	"./tp-songs/01_folk/Bratři_Ebenové____Folklóreček.tex",
 	"./tp-songs/01_folk/Bratři_Ebenové____Nikdo_to_nebere.tex",
@@ -85,7 +85,7 @@ songs=[
 	"./tp-songs/01_folk/Marsyas____Marsyas_a_Apollón.tex",
 	"./tp-songs/01_folk/Miki_Ryvola____Bedna_od_whisky.tex",
 	"./tp-songs/01_folk/Nerez____Tisíc_dnů_mezi_námi.tex",
-	"./tp-songs/01_folk/(neznámý)____Okoř.tex",
+	"./tp-songs/01_folk/neznámý____Okoř.tex",
 	"./tp-songs/01_folk/Pacifik____Malý_velký_muž.tex",
 	"./tp-songs/01_folk/Pacifik____Velrybářská_výprava.tex",
 	"./tp-songs/01_folk/Pavel_Dobeš____Něco_o_lásce.tex",
@@ -113,7 +113,7 @@ songs=[
 
 #########################
 
-	"./tp-songs/02_pop_rock/(neznámý)____Seděla_u_vody.tex",
+	"./tp-songs/02_pop_rock/neznámý____Seděla_u_vody.tex",
 	"./tp-songs/02_pop_rock/Aleš_Brichta____Dívka_s_perlami_ve_vlasech.tex",
 	"./tp-songs/02_pop_rock/Aleš_Brichta____Slečna_závist.tex",
 	"./tp-songs/02_pop_rock/Blue_Effect____Sluneční_hrob.tex",
