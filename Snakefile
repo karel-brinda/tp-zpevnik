@@ -30,4 +30,9 @@ rule TP2013:
 		"_TP_zpevnik_2013.pdf"
 	shell:
 		"snakemake -s Snakefile.TP2013"
+rule TPBAND:
+	output:
+		"_TPBAND_zpevnik.pdf"
+	shell:
+		"snakemake -s Snakefile.TPBAND"
 

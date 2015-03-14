@@ -1,0 +1,55 @@
+# -*-coding: utf-8 -*-
+
+left_page_head="Technická přestávka 2015"
+right_page_head="www.technicka-prestavka.cz"
+chordbook="TPBAND_zpevnik"
+cover_front="tp-zpevnik-covers/TPBAND_setlist.pdf"
+#cover_back="tp-zpevnik-covers/2013_back.pdf"
+
+
+songs=[
+	"./tp-songs/01_folk/Zuzana_Navarová___Sedávám_na_domovních_schodech.tex",
+	"./tp-songs/01_folk/Jarek_Nohavica____Básnířka.tex",
+	"./tp-songs/01_folk/Čechomor____Mezi_horami.tex",
+	"./tp-songs/02_pop_rock/Petr_Hapka____Šaškové_počmáraní.tex",
+	"./tp-songs/02_pop_rock/Václav_Neckář____Holka_ta_okatá.tex",
+	"./tp-songs/01_folk/Čechomor____Proměny.tex",
+	"./tp-songs/01_folk/Zuzana_Navarová___Somrkrálka_Blues.tex",
+	"./tp-songs/01_folk/Jarek_Nohavica____Cukrářská_bossanova.tex",
+	"./tp-songs/02_pop_rock/Trabant___Černej_Pasažér.tex",
+	"./tp-songs/02_pop_rock/Yvonne_Přenosilová____Sklípek.tex",
+	"./tp-songs/04_tp/Johnny___Dej_mi_nějaký_tóny.tex",
+	"./tp-songs/02_pop_rock/Jana_Kirschner___Žienka.tex",
+	"./tp-songs/02_pop_rock/Yvonne_Přenosilová____Boty_proti_lásce.tex",
+	"./tp-songs/02_pop_rock/film_Pražská_5____Strom_kýve_pahýly.tex",
+	"./tp-songs/03_zahranicni/Norah_Jones___Dont_Know_Why.tex",
+	"./tp-songs/03_zahranicni/Nick_Cave___Where_the_Wild_Roses_Grow.tex",
+	"./tp-songs/03_zahranicni/Camberries___Zombie.tex",
+	"./tp-songs/03_zahranicni/Mamas__Papas____California_dreaming.tex",
+	"./tp-songs/03_zahranicni/Lou_Reed____Perfect_day.tex",
+	"./tp-songs/03_zahranicni/Billy_Haley___Rock_Around_the_Clock.tex",
+	"./tp-songs/03_zahranicni/Gershwin___Summertime.tex",
+	"./tp-songs/03_zahranicni/Corneshop___Brimful_of_Asha.tex",
+	"./tp-songs/03_zahranicni/Beautiful_South___Dont_Marry_Her.tex",
+	"./tp-songs/03_zahranicni/Mungo_Jerry___Summertime.tex",
+	"./tp-songs/03_zahranicni/Suzanne_Vega___Caramel.tex",
+	"./tp-songs/03_zahranicni/Chuck_Berry___Johnny_D_Goode.tex",
+	"./tp-songs/03_zahranicni/Ray_Charles____Hit_the_road_Jack.tex",
+	"./tp-songs/03_zahranicni/Steve_Miller_Band___Joker.tex",
+	"./tp-songs/03_zahranicni/Cat_Stevents___Father_and_Son.tex",
+	"./tp-songs/03_zahranicni/Ping___Fucking_Perfect.tex",
+	"./tp-songs/03_zahranicni/4_Non_Blondes___Whats_Up.tex",
+
+### Pridavky po pridavcich
+	"./tp-songs/03_zahranicni/Proclaimers____500_miles.tex",
+	"./tp-songs/02_pop_rock/film_Kouř____Je_to_fajn,_fajnový.tex",
+	"./tp-songs/02_pop_rock/Ivan_Hlas____Jednou_mi_fotr_povídá.tex",
+	"./tp-songs/02_pop_rock/Vladimír_Mišík____Variace_na_renesanční_téma.tex",
+]
+
+include:"tpcb/snake_incl.py"
+
+rule all:
+	input:
+		cb_pdf(chordbook)
+
