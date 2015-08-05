@@ -9,11 +9,11 @@ cover_back="tp-zpevnik-covers/pedro_back.pdf"
 
 songs=[
 	#"./tp-songs/01_folk/(lidová)____A_te_Rehradice.tex",
-	"./tp-songs/01_folk/(lidová)____Kdyby_tady_byla_taková_panenka.tex",
+	"./tp-songs/01_folk/lidová____Kdyby_tady_byla_taková_panenka.tex",
 	#"./tp-songs/01_folk/(neznámý)____3_citrónky.tex",
 	#"./tp-songs/01_folk/(neznámý)____Balada_o_princezně_a_o_hradu.tex",
 	#"./tp-songs/01_folk/(neznámý)____Kolo_rovno_hovno.tex",
-	"./tp-songs/01_folk/(neznámý)____Okoř.tex",
+	"./tp-songs/01_folk/neznámý____Okoř.tex",
 	"./tp-songs/01_folk/Argema____Jarošovský_pivovar.tex",
 	"./tp-songs/01_folk/Asonance____Čarodějnice_z_Amesbury.tex",
 	#"./tp-songs/01_folk/Bratři_Ebenové____Folklóreček.tex",
