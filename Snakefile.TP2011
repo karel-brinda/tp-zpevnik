@@ -8,10 +8,11 @@ cover_back="tp-zpevnik-covers/2011_back.pdf"
 
 
 songs=[
-	"./tp-songs/01_folk/neznámý____3_citrónky.tex",
+	"./tp-songs/01_folk/neznámý____Tři_citrónky.tex",
 	"./tp-songs/01_folk/neznámý____Balada_o_princezně_a_o_hradu.tex",
 	"./tp-songs/01_folk/neznámý____Kolo_rovno_hovno.tex",
-	"./tp-songs/01_folk/lidová____A_te_Rehradice.tex",
+	#"./tp-songs/01_folk/lidová____A_te_Rehradice.tex",
+	"./tp-songs/01_folk/Vlasta_Redl____A_te_Rehradice.tex",
 	"./tp-songs/01_folk/lidová____Kdyby_tady_byla_taková_panenka.tex",
 	"./tp-songs/01_folk/Asonance____Čarodějnice_z_Amesbury.tex",
 	"./tp-songs/01_folk/Bratři_Ebenové____Folklóreček.tex",
@@ -81,7 +82,7 @@ songs=[
 	"./tp-songs/01_folk/Karel_Plíhal____Námořnická.tex",
 	"./tp-songs/01_folk/Karel_Plíhal____Ráda_se_miluje.tex",
 	"./tp-songs/01_folk/Karel_Plíhal____Trubadúrská.tex",
-	"./tp-songs/01_folk/Máci____Už_to_nenapravím.tex",
+	"./tp-songs/01_folk/Jaroslav_Samson_Lenk____Už_to_nenapravím.tex",
 	"./tp-songs/01_folk/Marsyas____Marsyas_a_Apollón.tex",
 	"./tp-songs/01_folk/Miki_Ryvola____Bedna_od_whisky.tex",
 	"./tp-songs/01_folk/Nerez____Tisíc_dnů_mezi_námi.tex",

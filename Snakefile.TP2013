@@ -8,7 +8,8 @@ cover_back="tp-zpevnik-covers/2013_back.pdf"
 
 
 songs=[
-	"./tp-songs/01_folk/lidová____A_te_Rehradice.tex",
+	#"./tp-songs/01_folk/lidová____A_te_Rehradice.tex",
+	"./tp-songs/01_folk/Vlasta_Redl____A_te_Rehradice.tex",
 	"./tp-songs/03_zahranicni/Alexandrovci____Kaťuša.tex",
 	"./tp-songs/01_folk/Argema____Jarošovský_pivovar.tex",
 	"./tp-songs/01_folk/Asonance____Čarodějnice_z_Amesbury.tex",
@@ -78,7 +79,7 @@ songs=[
 	"./tp-songs/01_folk/Karel_Plíhal____Nosorožec.tex",
 	"./tp-songs/01_folk/Karel_Plíhal____Ráda_se_miluje.tex",
 	"./tp-songs/01_folk/Karel_Plíhal____Trubadúrská.tex",
-	"./tp-songs/01_folk/Máci____Už_to_nenapravím.tex",
+	"./tp-songs/01_folk/Jaroslav_Samson_Lenk____Už_to_nenapravím.tex",
 	"./tp-songs/01_folk/Marsyas____Marsyas_a_Apollón.tex",
 	"./tp-songs/01_folk/Michal_Tučný____Pověste_ho_vejš.tex",
 	"./tp-songs/01_folk/Michal_Tučný____Všichni_jsou_už_v_Mexiku.tex",
@@ -198,7 +199,7 @@ songs=[
 	"./tp-songs/03_zahranicni/Beatles____Yellow_submarine.tex",
 	"./tp-songs/03_zahranicni/Beatles____Yesterday.tex",
 	"./tp-songs/03_zahranicni/Bob_Dylan____Knockin_on_heavens_door.tex",
-	"./tp-songs/03_zahranicni/Creedance_Clearwater_Revival____Proud_Mary.tex",
+	"./tp-songs/03_zahranicni/Creedence_Clearwater_Revival____Proud_Mary.tex",
 	"./tp-songs/03_zahranicni/Deep_Purple____Smoke_on_the_water.tex",
 	"./tp-songs/03_zahranicni/Eric_Clapton____Layla.tex",
 	"./tp-songs/03_zahranicni/Eagles____Hotel_California.tex",
