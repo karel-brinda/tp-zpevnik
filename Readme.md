@@ -57,7 +57,7 @@ Samotné písně naleznete v adresáři *tp-songs*, který dále obsahuje 4 poda
 
 	Pokud chcete sestavit pouze některý zpěvník, např. z TP 2011, zadejte
 	```bash
-	snakemake –s Snakefile.TP2011
+	snakemake -s Snakefile.TP2011
 	```
 
 	Obdobně pro ostatní zpěvníky.
@@ -77,7 +77,7 @@ Opravte soubor přímo přes webové rozhraní GitHubu (musíte být ale přihl�
 5.	Odešlete změny na server pomocí příkazů
 	```bash
 	git add jmeno_upraveneho_souboru_1.tex jmeno_upraveneho_souboru_2.tex
-	git commit –m 'kratky popis zmen – co konkretne jste opravili'
+	git commit -m 'kratky popis zmen - co konkretne jste opravili'
 	git push
 	```
 
