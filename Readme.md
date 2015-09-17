@@ -70,8 +70,11 @@ Opravte soubor přímo přes webové rozhraní GitHubu (musíte být ale přihl�
 
 ### Složitější varianta (ale preferovaná)
 
-1.	Vytvořte vlastní fork repozitáře http://github.com/karel-brinda/tp-zpevnik.
+1.	Vytvořte vlastní fork repozitáře http://github.com/karel-brinda/tp-zpevnik (ve web gui klikněte na tlačítko "fork" v pravo nahoře).
 2.	Naklonujte zpěvník ze svého nového repozítáře (vzniklého forknutím) včetně externích repozitářů (soubory v nich modifikovat nebudete, pro ty tedy fork vytvářet nemusíte).
+        ```bash
+        git clone --recursive http://github.com/<vase-username-na-githubu>/tp-zpevnik
+        ```
 3.	Opravte chyby.
 4.	Otestujte, zda se zpěvník správně přeloží (a neskončí např. xelatexovou chybou). Důkladně zkontrolujte, jestli po vysázení vypadá daná píseň správně.
 5.	Odešlete změny na server pomocí příkazů
