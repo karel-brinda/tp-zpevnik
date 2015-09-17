@@ -3,7 +3,9 @@ rule All:
 		"_TP_zpevnik_komplet.pdf",
 		"_TP_zpevnik_2011.pdf",
 		"_TP_zpevnik_2012.pdf",
-		"_TP_zpevnik_2013.pdf"
+		"_TP_zpevnik_2013.pdf",
+		"_TP_zpevnik_2015.pdf",
+		"_TPBAND_zpevnik.pdf"
 
 rule AllSongs:
 	output:
