@@ -24,10 +24,21 @@ rule TP2012:
 	shell:
 		"snakemake -s Snakefile.TP2012"
 
-
 rule TP2013:
 	output:
 		"_TP_zpevnik_2013.pdf"
 	shell:
 		"snakemake -s Snakefile.TP2013"
+
+rule TP2015:
+	output:
+		"_TP_zpevnik_2015.pdf"
+	shell:
+		"snakemake -s Snakefile.TP2015"
+
+rule TPBAND:
+	output:
+		"_TPBAND_zpevnik.pdf"
+	shell:
+		"snakemake -s Snakefile.TPBAND"
 
