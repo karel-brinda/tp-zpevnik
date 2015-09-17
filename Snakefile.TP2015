@@ -261,7 +261,7 @@ songs=[
 	"./tp-songs/03_zahranicni/Elvis___Hound_Dog.tex",
 	"./tp-songs/03_zahranicni/Elvis___Blue_Suede_Shoes.tex",
 	"./tp-songs/03_zahranicni/Ben_E_King___Stand_By_Me.tex",
-	"./tp-songs/04_tp/Johnny___On_hleda_ji.tex",
+	"./tp-songs/04_tp/Johnny___On_hledá_ji.tex",
 
 ### Pridavky po pridavcich
 	"./tp-songs/03_zahranicni/Gerard_Lenorman___La_Balade.tex",
@@ -272,5 +272,5 @@ include:"tpcb/snake_incl.py"
 
 rule all:
 	input:
-		cb_pdf(chordbook)
+		cb_pdf()
 
