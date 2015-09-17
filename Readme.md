@@ -115,7 +115,7 @@ Dodržujte, prosím, logiku celého zpěvníku (co se týče pojmenování a za�
 
 	rule all:
 		input:
-			cb_pdf(chordbook)
+			cb_pdf()
 	```	
 	
 3.	Spusťte
