@@ -10,16 +10,6 @@ except:
 	locale.setlocale(locale.LC_ALL,'cs_CZ.UTF-8')
 
 ##
-## KONFIGURACE
-##
-
-#vstupni_pisne="zpevnik.idx_pisne"
-#vystupni_pisne="zpevnik.ind_pisne"
-
-#vstupni_interpreti="zpevnik.idx_interpreti"
-#vystupni_interpreti="zpevnik.ind_interpreti"
-
-##
 ## REJSTRIKY
 ##
 
@@ -60,42 +50,36 @@ def zaznamy2tex(zaznamy):
 
 
 def udelejRejstrik(vstup, vystup):
-	vs = open(vstup, encoding='utf-8')
-	zaznamy = []
+	with open(vstup, encoding='utf-8') as vs:
+		zaznamy = []
+		
+		for line in vs:
+			if line.strip()=="":
+				break
+		
+			zaznam=["","",""]
+			
+			rozp = line.split("}{")
+			strana = rozp[1].strip()
+			strana = strana.replace("}","")
+			zac = rozp[0] 
+		
+			zac = zac.replace("\\indexentry {","")
+			
+			zac = zac.split("!")
+			
+			zaznam[0]=zac[0]
+			
+			try:
+				zaznam[1]=zac[1]
+			except IndexError:
+				pass
+		
+			zaznam[2]=strana
+			
+			zaznamy.append(zaznam)
+			
+		zaznamy = sorted(zaznamy, key = lambda zaznam: locale.strxfrm(zaznam[0].ljust(100)+zaznam[1]))
 	
-	for line in vs:
-		if line.strip()=="":
-			break
-	
-		zaznam=["","",""]
-		
-		rozp = line.split("}{")
-		strana = rozp[1].strip()
-		strana = strana.replace("}","")
-		zac = rozp[0] 
-	
-		zac = zac.replace("\\indexentry {","")
-		
-		zac = zac.split("!")
-		
-		zaznam[0]=zac[0]
-		
-		try:
-			zaznam[1]=zac[1]
-		except IndexError:
-			pass
-	
-		zaznam[2]=strana
-		
-		zaznamy.append(zaznam)
-		
-	zaznamy = sorted(zaznamy, key = lambda zaznam: locale.strxfrm(zaznam[0].ljust(100)+zaznam[1]))
-	#(key=cmp_to_key(locale.strcoll))
-	vs.close()
-	
-	vys = open(vystup,"w+", encoding='utf-8')
-	vys.write(zaznamy2tex(zaznamy))
-	vys.close()
-
-#udelejRejstrik(vstupni_pisne,vystupni_pisne)
-#udelejRejstrik(vstupni_interpreti,vystupni_interpreti)
+	with open(vystup,"w+", encoding='utf-8') as vys:
+		vys.write(zaznamy2tex(zaznamy))

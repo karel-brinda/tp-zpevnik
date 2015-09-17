@@ -12,32 +12,29 @@ ruleorder:
 from chords import *
 from index import *
 
-empty_page="empty.pdf"
-
 def cache_dir():
 	return "cache.{}".format(chordbook)
 
-def cb_pdf(chordbook):
+def cb_pdf():
 	return "_{}.pdf".format(chordbook)
 
-def cb_tex(chordbook):
+def empty_tex():
+	return os.path.join(cache_dir(),"empty.tex")
+
+def empty_pdf():
+	return os.path.join(cache_dir(),"empty.pdf")
+
+def cb_tex():
 	return os.path.join(cache_dir(),"_{}.tex".format(chordbook))
 
-def cb_idx(chordbook):
+def cb_idx():
 	return os.path.join(cache_dir(),"_{}.idx".format(chordbook))
 
-def cb_ind(chordbook):
+def cb_ind():
 	return os.path.join(cache_dir(),"_{}.ind".format(chordbook))
 
-def sc_tex(fn):
-	return os.path.join(cache_dir(),"0_{}.tex".format(fn))
-
-#rxcountpages = re.compile(r"$\s*/Type\s*/Page[/\s]", re.MULTILINE|re.DOTALL)
-#def countPages(filename):
-#    with open(filename,"rb") as f:
-#        data = f.read()
-#        text = str(data.decode("iso-8859-2"))
-#        return len(rxcountpages.findall(text))
+def sc_tex(song):
+	return os.path.join(cache_dir(),"0_{}.tex".format(song))
 
 
 #####
@@ -82,19 +79,17 @@ songs_dict_transp = OrderedDict(
 				]
 			)
 
-#print("SONGS DICT")
-#for x in songs_dict:
-#	print(x,songs_dict[x])
-
 # zpevnik.tex => zpevnik.pdf
 rule main_pdf:
 	output:
-		cb_pdf("{file}")
+		cb_pdf()
 	input:
-		cb_tex("{file}"),
+		empty_pdf(),
+		cb_tex(),
 		[sc_tex(x) for x in songs_dict.keys()],
-		empty_page
 	run:
+		empty_page=input[0]
+
 		if platform.system()=="Windows":
 			print("WINDOWS")
 			xelatex_command = """xelatex -include-directory "{dir}" -aux-directory "{dir}" -output-directory "{dir}" "{texfile}" """.format(
@@ -107,17 +102,17 @@ rule main_pdf:
 				xelatex "{texfile}"
 				""".format(
 					dir=cache_dir(),
-					texfile=os.path.relpath(cb_tex(wildcards.file),cache_dir()),
+					texfile=os.path.relpath(cb_tex(),cache_dir()),
 				)
 
 		shell(xelatex_command)
 
-		udelejRejstrik(cb_idx(wildcards.file)+"_pisne",cb_ind(wildcards.file)+"_pisne"); 
-		udelejRejstrik(cb_idx(wildcards.file)+"_interpreti",cb_ind(wildcards.file)+"_interpreti"); 
+		udelejRejstrik(cb_idx()+"_pisne",cb_ind()+"_pisne"); 
+		udelejRejstrik(cb_idx()+"_interpreti",cb_ind()+"_interpreti"); 
 
 		shell(xelatex_command)
 		
-		main_pdf=cb_tex(wildcards.file).replace(".tex",".pdf")
+		main_pdf=cb_tex().replace(".tex",".pdf")
 		merger = PyPDF2.PdfFileMerger()
 
 		# 0
@@ -148,13 +143,13 @@ rule main_pdf:
 
 		#shell("cp {} ./".format(cb_tex(wildcards.file).replace(".tex",".pdf")))
 		# count = countPages(cb_tex(wildcards.file).replace(".tex",".pdf"))
-		p = PyPDF2.PdfFileReader(open(cb_tex(wildcards.file).replace(".tex",".pdf"),"rb"))
+		p = PyPDF2.PdfFileReader(open(cb_tex().replace(".tex",".pdf"),"rb"))
 		#print("COUNT ",p.getNumPages())
 
 # cache/pisen.tex, cache/pisen2.tex => zpevnik.tex
 rule main_tex:
 	output:
-		cb_tex("{file}")
+		cb_tex()
 	run:
 		# todo: only filename
 		with open(output[0],"w+",encoding="utf-8") as f:
@@ -269,19 +264,23 @@ rule song_tex:
 
 rule empty_page:
 	output:
-		temp(empty_page),
-		temp(empty_page.replace(".pdf",".tex")),
+		empty_tex(),
+		empty_pdf()
 	run:
-		with open(output[1],"w+") as f:
+		with open(empty_tex(),"w+") as f:
 			f.write(r"""\documentclass[a4page]{article} 
 \begin{document}
 \thispagestyle{empty}
 ~
 \end{document}
 				""")
-		shell("xelatex \"{}\"".format(output[1]))
-
-rule clean:
-	run:
-		os.remove( cb_pdf(chordbook) )
-		shutil.rmtree( cache_dir() )
+		#shell("xelatex \"{}\"".format(output[0]))
+		xelatex_command = """cd {dir} && xelatex "{texfile}" """.format(
+				dir=cache_dir(),
+				texfile=os.path.basename(empty_tex()),
+			)
+		shell(xelatex_command)
+		#xelatex_command = """xelatex -include-directory "{dir}" -aux-directory "{dir}" -output-directory "{dir}" "{texfile}" """.format(
+		#		dir=cache_dir(),
+		#		texfile=empty_tex(),
+		#	)

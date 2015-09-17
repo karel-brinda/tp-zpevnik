@@ -70,7 +70,6 @@ def transposition_chord(chord,shift):
 
     return new_chord
 
-# from chords import *
 # transposition_song("""\Ch{Cmi}{Někdy} se \Ch{Fmi}{zajikáme} \Ch{Cmi}{štěstím,}""",3)
 def transposition_song(text,shift):
     parts = text.split("\Ch")
@@ -84,7 +83,6 @@ def transposition_song(text,shift):
         #print("original chord", original_chord)
         assert original_chord.find("\\")==-1,"Chord '{}' contains forbidden character '\\''".format(original_chord)
         new_chord=transposition_chord(original_chord,shift)
-        #print("new chord", new_chord)
         parts[i]="{"+new_chord+mod_part[right_index:]
 
     return "\Ch".join(parts)
