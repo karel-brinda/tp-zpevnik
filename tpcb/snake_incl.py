@@ -154,6 +154,8 @@ rule main_pdf:
 
 # cache/pisen.tex, cache/pisen2.tex => zpevnik.tex
 rule main_tex:
+	input:
+		workflow.snakefile
 	output:
 		cb_tex()
 	run:
