@@ -159,8 +159,8 @@ rule main_tex:
 		# todo: only filename
 		with open(output[0],"w+",encoding="utf-8") as f:
 			main_tex=r"""% -*-coding: utf-8 -*-
-				\documentclass[11pt,a4paper]{book}
-				""" + os.linesep.join(["\\def\\{}{{}}".format(x) for x in options]) \
+				\documentclass[11pt,a4paper{}]{{book}}""".format(",oneside" if "ONESIDE" in options else "") + \
+				os.linesep.join(["\\def\\{}{{}}".format(x) for x in options]) \
 				+ r"""
 				\usepackage[czech]{babel}
 				\usepackage{pdfpages}

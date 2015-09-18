@@ -6,7 +6,11 @@ chordbook="TPBAND_zpevnik"
 #cover_front="tp-zpevnik-covers/TPBAND_setlist.pdf"
 #cover_back="tp-zpevnik-covers/2013_back.pdf"
 
-options=["TPBAND","NOHEADER"]
+options=[
+		"TPBAND",
+		"NOHEADER",
+		"ONESIDE",
+	]
 
 songs=[
 	"./tp-songs/01_folk/Zuzana_Navarová____Sedávám_na_domovních_schodech.tex",
