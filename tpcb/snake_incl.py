@@ -265,7 +265,8 @@ rule song_tex:
 	output:
 		sc_tex("{song}")
 	input:
-		lambda wildcards: songs_dict[wildcards.song]
+		lambda wildcards: songs_dict[wildcards.song],
+		workflow.snakefile
 	run:
 		song=""
 		song2=""
