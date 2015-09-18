@@ -50,6 +50,11 @@ try:
 except NameError:
 	RHEAD=""
 
+try:
+	options=options
+except NameError:
+	options=[]
+
 songs_prop = []
 for x in songs:
 	# no transposition
@@ -155,6 +160,8 @@ rule main_tex:
 		with open(output[0],"w+",encoding="utf-8") as f:
 			main_tex=r"""% -*-coding: utf-8 -*-
 				\documentclass[11pt,a4paper]{book}
+				""" + os.linesep.join(["\\def\\{}{{}}".format(x) for x in options]) \
+				+ r"""
 				\usepackage[czech]{babel}
 				\usepackage{pdfpages}
 				\usepackage{fancyhdr}
