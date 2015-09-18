@@ -209,13 +209,17 @@ rule main_tex:
 				%%%
 				% Hlavicky
 				%%%
-				\pagestyle{fancy}
-				\fancyhead[RE]{""" + RHEAD + r"""}
-				\fancyhead[LO]{""" + LHEAD + r"""}
-				\fancyhead[RO]{}
-				\fancyhead[LE]{}
-				\fancyfoot{}
 
+				\ifdefined\NOHEADER
+					\pagestyle{empty}
+				\else
+					\pagestyle{fancy}
+					\fancyhead[RE]{""" + RHEAD + r"""}
+					\fancyhead[LO]{""" + LHEAD + r"""}
+					\fancyhead[RO]{}
+					\fancyhead[LE]{}
+					\fancyfoot{}
+				\fi
 
 				\begin{document}
 
