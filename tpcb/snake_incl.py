@@ -110,7 +110,8 @@ rule main_pdf:
 					texfile=os.path.relpath(cb_tex(),cache_dir()),
 				)
 
-		shell(xelatex_command)
+		if not os.path.isfile(cb_ind()+"_pisne") or not os.path.isfile(cb_ind()+"_interpreti"):
+			shell(xelatex_command)
 
 		udelejRejstrik(cb_idx()+"_pisne",cb_ind()+"_pisne"); 
 		udelejRejstrik(cb_idx()+"_interpreti",cb_ind()+"_interpreti"); 
