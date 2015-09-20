@@ -71,7 +71,7 @@ Opravte soubor přímo přes webové rozhraní GitHubu (musíte být ale přihl�
 ### Složitější varianta (ale preferovaná)
 
 1.	Vytvořte vlastní fork repozitáře http://github.com/karel-brinda/tp-zpevnik (ve web gui klikněte na tlačítko "fork" vpravo nahoře).
-2.	Naklonujte zpěvník ze svého nového repozítáře (vzniklého forknutím) včetně externích repozitářů (soubory v nich modifikovat nebudete, pro ty tedy fork vytvářet nemusíte).
+2.	Naklonujte zpěvník ze svého nového repozitáře (vzniklého forknutím) včetně externích repozitářů (soubory v nich modifikovat nebudete, pro ty tedy fork vytvářet nemusíte).
         ```bash
         git clone --recursive http://github.com/<vase-username-na-githubu>/tp-zpevnik
         ```
@@ -91,7 +91,7 @@ Opravte soubor přímo přes webové rozhraní GitHubu (musíte být ale přihl�
 Postupujte obdobným způsobem jako v minulém bodu. Místo opravy vytvořte soubor pro píseň z nějaké již existující.
 Dodržujte, prosím, logiku celého zpěvníku:
 
-1.	Pojmenujte píseň podle vzoru Celé_Jméno_Interpreta____Jméno_písně.tex.
+1.	Pojmenujte píseň podle vzoru `Celé_Jméno_Interpreta____Jméno_písně.tex`.
 	*	Jestliže se jiná píseň od interpreta ve zpěvníku už vyskytuje, ověřte, že je jeho jméno v přesně stejné formě.
 	*	V případě nejistoty si ověřte křestní jméno nebo pravopis na Google.
 	*	Jména písní by měla velké jen první písmeno a pak tam, kde patří podle jiných pravidel (vlastní jména, anglické dny v týdnu a měsíce apod.)
@@ -101,8 +101,8 @@ Dodržujte, prosím, logiku celého zpěvníku:
 
 3.	Ověřte správnost akordů a jejich umístění nad *začátky* slabik, a to i uprostřed slov (předložky k, s, v, z slabiku nezačínají).
 	*	Jestli píseň akordy ve vašem zdroji nemá uvedené, zkuste najít jiný.
-	*	Zkontrolujte, jestli zdrojový text nepoužíval anglické označení B / Bb místo českého H / B. Dodržujeme striktně české, a to i v zahraničních písních.
-	*	Opravte označení mollových akordů z "Am" na "Ami". Nezapomeňte na "mi7".
+	*	Zkontrolujte, jestli zdrojový text nepoužíval anglické označení *B* / *Bb* místo českého *H* / *B/*. Dodržujeme striktně české, a to i v zahraničních písních.
+	*	Opravte označení mollových akordů z *"Am"* na *"Ami"*. Nezapomeňte na případy *"mi7"*.
 
 4.	"Sólo", "předehra" / "intro", "mezihra" a podobné nepotřebují text a vlastní `\zs ... \ks` (výjimkou je sloka nahrazená sólem beze zpívání). Stačí v odpovídajícím místě napsat řadu akordů.
 
@@ -111,7 +111,7 @@ Dodržujte, prosím, logiku celého zpěvníku:
 6.	Po zavedení písně zpěvník přeložte a zkontrolujte, zda vypadá v pořádku a jak dlouhá se vysází. Jestli přesahuje jednu stránku jen o několik řádek, zkuste ji upravit, aby se vešla na jednu A4 celá:
 	*	Sekvenci akordů, které se v průběhu písně nebo v jejích částech opakuje v přesně stejném sledu, stačí napsat jen jednou.
 	*	Řádky od druhé sloky dále pospojovat po dvou nebo po celých slokách.
-	*	Zkrátit opakovaný text pomocí repetic /: ... :/ nebo tří teček, refrény vynechat.
+	*	Zkrátit opakovaný text pomocí repetic `/: ... :/` nebo tří teček, refrény vynechat.
 	*	Vynechat od druhé sloky dále výplně jako u Zítra ráno v pět nebo u Milionáře od Nohavici.
 	*	Když se vtěsnat na jednu stránku nepovede, využijte dobře prostor obou stránek. Je možno i ponechat na výběr dvě verze (viz Veličenstvo Kat).
 
@@ -165,5 +165,5 @@ Dodržujte, prosím, logiku celého zpěvníku:
 ### Poznámky
 
 * Používejte evropskou hudební notaci (*B* = *A#*).
-* Mollové akordy používejte *mi*, tedy např. *Ami*.
+* Pro mollové akordy používejte *mi*, tedy např. *Ami*.
 * Do jedné značky ```\Ch``` vkládejte právě jeden akordy (pokud jich tam bude více, pravděpodobně nebude správně fungovat transpozice).
