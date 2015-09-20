@@ -89,7 +89,31 @@ Opravte soubor přímo přes webové rozhraní GitHubu (musíte být ale přihl�
 ## Jak přidat novou píseň do databáze písní
 
 Postupujte obdobným způsobem jako v minulém bodu. Místo opravy vytvořte soubor pro píseň z nějaké již existující.
-Dodržujte, prosím, logiku celého zpěvníku (co se týče pojmenování a zařazení do kategorií).
+Dodržujte, prosím, logiku celého zpěvníku:
+
+1.	Pojmenujte píseň podle vzoru Celé_Jméno_Interpreta____Jméno_písně.tex.
+	*	Jestliže se jiná píseň od interpreta ve zpěvníku už vyskytuje, ověřte, že je jeho jméno v přesně stejné formě.
+	*	V případě nejistoty si ověřte křestní jméno nebo pravopis na Google.
+	*	Jména písní by měla velké jen první písmeno a pak tam, kde patří podle jiných pravidel (vlastní jména, anglické dny v týdnu a měsíce apod.)
+	*	Dodržujte prosím právě čtyři podtržítka mezi jménem interpreta a písně.
+
+2.	Prosím, nekopírujte nekriticky text z jiné stránky. Vložte si jej nejdřív do textového editoru a nechte ověřit překlepy.
+
+3.	Ověřte správnost akordů a jejich umístění nad *začátky* slabik, a to i uprostřed slov (předložky k, s, v, z slabiku nezačínají).
+	*	Jestli píseň akordy ve vašem zdroji nemá uvedené, zkuste najít jiný.
+	*	Zkontrolujte, jestli zdrojový text nepoužíval anglické označení B / Bb místo českého H / B. Dodržujeme striktně české, a to i v zahraničních písních.
+	*	Opravte označení mollových akordů z "Am" na "Ami". Nezapomeňte na "mi7".
+
+4.	"Sólo", "předehra" / "intro", "mezihra" a podobné nepotřebují text a vlastní `\zs ... \ks` (výjimkou je sloka nahrazená sólem beze zpívání). Stačí v odpovídajícím místě napsat řadu akordů.
+
+5.	České písně by měly mít texty psané jako celé věty včetně kompletní interpunkce, zalámané do veršů. Písničky v angličtině a několika dalších jazycích mají velké písmeno na začátku každé řádky a interpunkce na jejich koncích (kromě té se speciálním významem), včetně tečky na konci věty, se ruší.
+
+6.	Po zavedení písně zpěvník přeložte a zkontrolujte, zda vypadá v pořádku a jak dlouhá se vysází. Jestli přesahuje jednu stránku jen o několik řádek, zkuste ji upravit, aby se vešla na jednu A4 celá:
+	*	Sekvenci akordů, které se v průběhu písně nebo v jejích částech opakuje v přesně stejném sledu, stačí napsat jen jednou.
+	*	Řádky od druhé sloky dále pospojovat po dvou nebo po celých slokách.
+	*	Zkrátit opakovaný text pomocí repetic /: ... :/ nebo tří teček, refrény vynechat.
+	*	Vynechat od druhé sloky dále výplně jako u Zítra ráno v pět nebo u Milionáře od Nohavici.
+	*	Když se vtěsnat na jednu stránku nepovede, využijte dobře prostor obou stránek. Je možno i ponechat na výběr dvě verze (viz Veličenstvo Kat).
 
 ## Jak vytvořit vlastní zpěvník
 
