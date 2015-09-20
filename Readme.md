@@ -101,7 +101,7 @@ Dodržujte, prosím, logiku celého zpěvníku:
 
 3.	Ověřte správnost akordů a jejich umístění nad *začátky* slabik, a to i uprostřed slov (předložky k, s, v, z slabiku nezačínají).
 	*	Jestli píseň akordy ve vašem zdroji nemá uvedené, zkuste najít jiný.
-	*	Zkontrolujte, jestli zdrojový text nepoužíval anglické označení *B* / *Bb* místo českého *H* / *B/*. Dodržujeme striktně české, a to i v zahraničních písních.
+	*	Zkontrolujte, jestli zdrojový text nepoužíval anglické označení *B* / *Bb* místo českého *H* / *B*. Dodržujeme striktně české, a to i v zahraničních písních.
 	*	Opravte označení mollových akordů z *"Am"* na *"Ami"*. Nezapomeňte na případy *"mi7"*.
 
 4.	"Sólo", "předehra" / "intro", "mezihra" a podobné nepotřebují text a vlastní `\zs ... \ks` (výjimkou je sloka nahrazená sólem beze zpívání). Stačí v odpovídajícím místě napsat řadu akordů.
