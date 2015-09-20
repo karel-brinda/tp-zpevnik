@@ -10,8 +10,7 @@ cover_back="tp-zpevnik-covers/2012_back.pdf"
 songs=[
 	"./tp-songs/01_folk/neznámý____Tři_citrónky.tex",
 	"./tp-songs/01_folk/neznámý____Balada_o_princezně_a_o_hradu.tex",
-	#"./tp-songs/01_folk/lidová____A_te_Rehradice.tex",
-	"./tp-songs/01_folk/Vlasta_Redl____A_te_Rehradice.tex",
+	"./tp-songs/01_folk/lidová____A_te_Rehradice.tex",
 	"./tp-songs/03_zahranicni/Alexandrovci____Kaťuša.tex",
 	"./tp-songs/01_folk/lidová____Kdyby_tady_byla_taková_panenka.tex",
 	"./tp-songs/01_folk/Asonance____Čarodějnice_z_Amesbury.tex",
