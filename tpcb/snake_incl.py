@@ -92,6 +92,7 @@ rule main_pdf:
 		empty_pdf(),
 		cb_tex(),
 		[sc_tex(x) for x in songs_dict.keys()],
+		workflow.snakefile,
 	run:
 		empty_page=input[0]
 
@@ -110,11 +111,17 @@ rule main_pdf:
 					texfile=os.path.relpath(cb_tex(),cache_dir()),
 				)
 
-		if not os.path.isfile(cb_ind()+"_pisne") or not os.path.isfile(cb_ind()+"_interpreti"):
+		ind_pisne=cb_ind()+"_pisne"
+		ind_interpreti=cb_ind()+"_interpreti"
+		idx_pisne=cb_idx()+"_pisne"
+		idx_interpreti=cb_idx()+"_interpreti"
+
+		if (not os.path.isfile(ind_pisne) or not os.path.isfile(ind_interpreti)) or \
+		(os.path.getmtime(ind_pisne) < os.path.getmtime(workflow.snakefile)):
 			shell(xelatex_command)
 
-		udelejRejstrik(cb_idx()+"_pisne",cb_ind()+"_pisne"); 
-		udelejRejstrik(cb_idx()+"_interpreti",cb_ind()+"_interpreti"); 
+		udelejRejstrik(idx_pisne,idx_pisne); 
+		udelejRejstrik(idx_interpreti,ind_interpreti); 
 
 		shell(xelatex_command)
 		
@@ -155,7 +162,8 @@ rule main_pdf:
 # cache/pisen.tex, cache/pisen2.tex => zpevnik.tex
 rule main_tex:
 	input:
-		workflow.snakefile
+		workflow.snakefile,
+		[sc_tex(x) for x in songs_dict.keys()],
 	output:
 		cb_tex()
 	run:
