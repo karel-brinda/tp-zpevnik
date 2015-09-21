@@ -18,11 +18,11 @@ def cache_dir():
 def cb_pdf():
 	return "_{}.pdf".format(chordbook)
 
-def empty_tex():
-	return os.path.join(cache_dir(),"empty.tex")
-
-def empty_pdf():
-	return os.path.join(cache_dir(),"empty.pdf")
+#def empty_tex():
+#	return os.path.join(cache_dir(),"empty.tex")
+#
+#def empty_pdf():
+#	return os.path.join(cache_dir(),"empty.pdf")
 
 def cb_tex():
 	return os.path.join(cache_dir(),"_{}.tex".format(chordbook))
@@ -89,11 +89,11 @@ rule main_pdf:
 	output:
 		cb_pdf()
 	input:
-		empty_pdf(),
+		#empty_pdf(),
 		cb_tex(),
 		[sc_tex(x) for x in songs_dict.keys()],
 	run:
-		empty_page=input[0]
+		#empty_page=input[0]
 
 		if platform.system()=="Windows":
 			print("WINDOWS")
@@ -117,40 +117,42 @@ rule main_pdf:
 		udelejRejstrik(cb_idx()+"_interpreti",cb_ind()+"_interpreti"); 
 
 		shell(xelatex_command)
+		main_pdf=cb_tex().replace(".tex",".pdf");
+		os.rename(main_pdf, os.path.basename(main_pdf));
 		
-		main_pdf=cb_tex().replace(".tex",".pdf")
-		merger = PyPDF2.PdfFileMerger()
-
-		# 0
-		try:
-			p=PyPDF2.PdfFileReader(open(cover_front,'rb'))
-			cover_front_pages = p.getNumPages()
-			merger.append(PyPDF2.PdfFileReader(open(cover_front, 'rb')))
-			if cover_front_pages%2==1:
-				merger.append(PyPDF2.PdfFileReader(open(empty_page, 'rb')))
-		except NameError:
-			pass
-
-		# 1
-		main_pages = PyPDF2.PdfFileReader(open(main_pdf,'rb')).getNumPages()
-		merger.append(PyPDF2.PdfFileReader(open(main_pdf, 'rb')))
-
-		# 2
-		try:
-			p = PyPDF2.PdfFileReader(open(cover_back,'rb'))
-			cover_back_pages = p.getNumPages()
-			if (main_pages + cover_back_pages) % 2 == 1:
-				merger.append(PyPDF2.PdfFileReader(open(empty_page, 'rb')))
-			merger.append(PyPDF2.PdfFileReader(open(cover_back, 'rb')))
-		except NameError:
-			pass
-
-		merger.write(os.path.basename(main_pdf))
-
-		#shell("cp {} ./".format(cb_tex(wildcards.file).replace(".tex",".pdf")))
-		# count = countPages(cb_tex(wildcards.file).replace(".tex",".pdf"))
-		p = PyPDF2.PdfFileReader(open(cb_tex().replace(".tex",".pdf"),"rb"))
-		#print("COUNT ",p.getNumPages())
+#		main_pdf=cb_tex().replace(".tex",".pdf")
+#		merger = PyPDF2.PdfFileMerger()
+#
+#		# 0
+#		try:
+#			p=PyPDF2.PdfFileReader(open(cover_front,'rb'))
+#			cover_front_pages = p.getNumPages()
+#			merger.append(PyPDF2.PdfFileReader(open(cover_front, 'rb')))
+#			if cover_front_pages%2==1:
+#				merger.append(PyPDF2.PdfFileReader(open(empty_page, 'rb')))
+#		except NameError:
+#			pass
+#
+#		# 1
+#		main_pages = PyPDF2.PdfFileReader(open(main_pdf,'rb')).getNumPages()
+#		merger.append(PyPDF2.PdfFileReader(open(main_pdf, 'rb')))
+#
+#		# 2
+#		try:
+#			p = PyPDF2.PdfFileReader(open(cover_back,'rb'))
+#			cover_back_pages = p.getNumPages()
+#			if (main_pages + cover_back_pages) % 2 == 1:
+#				merger.append(PyPDF2.PdfFileReader(open(empty_page, 'rb')))
+#			merger.append(PyPDF2.PdfFileReader(open(cover_back, 'rb')))
+#		except NameError:
+#			pass
+#
+#		merger.write(os.path.basename(main_pdf))
+#
+#		#shell("cp {} ./".format(cb_tex(wildcards.file).replace(".tex",".pdf")))
+#		# count = countPages(cb_tex(wildcards.file).replace(".tex",".pdf"))
+#		p = PyPDF2.PdfFileReader(open(cb_tex().replace(".tex",".pdf"),"rb"))
+#		#print("COUNT ",p.getNumPages())
 
 # cache/pisen.tex, cache/pisen2.tex => zpevnik.tex
 rule main_tex:
@@ -159,6 +161,14 @@ rule main_tex:
 	output:
 		cb_tex()
 	run:
+		try:
+			shutil.copy(cover_front, os.path.join(cache_dir(),os.path.basename(cover_front)))
+		except NameError:
+			pass
+		try:
+			shutil.copy(cover_back, os.path.join(cache_dir(),os.path.basename(cover_back)))
+		except NameError:
+			pass
 		# todo: only filename
 		with open(output[0],"w+",encoding="utf-8") as f:
 			main_tex=r"""% -*-coding: utf-8 -*-
@@ -170,6 +180,8 @@ rule main_tex:
 				\usepackage{fancyhdr}
 				\usepackage{fontspec}
 				\usepackage[chordbk]{songbook}
+        \usepackage[xetex,pdfpagelabels=false]{hyperref}
+        \usepackage{refcount}
 
 				\usepackage{index}
 				\newindex[cisloPisne]{default}{idx_pisne}{ind_pisne}{Rejstřík písní}
@@ -182,6 +194,7 @@ rule main_tex:
 
 				\newcommand\zp[2]{
 					\stepcounter{cisloPisne}
+          \label{pis.\cisloPisne}
 					\begin{song}{#1}{}{}{}{#2}{}
 					\index{#1}
 					\index[interpreti]{#2!#1}
@@ -237,7 +250,19 @@ rule main_tex:
 				\fi
 
 				\setcounter{page}{0}
-			""" + os.linesep.join(
+			"""
+			try:
+				# Pokud přední obálka existuje, vloží ji a volnou stranu za ni (mimo ONESIDE)
+				# Předpokládá automaticky, že obálka má jen jednu stranu
+				open(cover_front,'rb')
+				main_tex += "\\shipout\\vbox{\XeTeXpdffile "+os.path.basename(cover_front)+" }\stepcounter{page}\n"
+				if "ONESIDE" in options:
+					main_tex += "\n"
+				else:
+					main_tex += "\\shipout\\vbox to \\vsize{\\hbox to \\hsize{}}\stepcounter{page}\n\n"
+			except NameError:
+				pass
+			main_tex += os.linesep.join(
 					["\input {{{}}}".format(os.path.relpath(sc_tex(x),cache_dir()))
 						for x in songs_dict.keys()]
 				) + r"""
@@ -254,8 +279,17 @@ rule main_tex:
 				\fancyfoot{}
 				\printindex
 
-				\end{document}
 			"""
+			try:
+				open(cover_back,'rb')
+				# Vložit jednu nebo dvě prázdné stránky tak, aby zadní obálka (pokud existuje) přišla nalevo (mimo ONESIDE)
+				if not "ONESIDE" in options:
+					main_tex += "\\ifodd\\value{page}\\shipout\\vbox to \\vsize{\\hbox to \\hsize{}}\stepcounter{page}\\fi\n"
+					main_tex += "\\shipout\\vbox to \\vsize{\\hbox to \\hsize{}}\stepcounter{page}\n"
+				main_tex += "\\shipout\\vbox{\XeTeXpdffile "+os.path.basename(cover_back)+" }\n\n"
+			except NameError:
+				pass
+			main_tex += "\end{document}";
 			f.write(main_tex)
 			shutil.copyfile(os.path.join("tpcb","songbook.sty"),os.path.join(cache_dir(),"songbook.sty"))
 			#shell("cp tpcb/songbook.sty {}".format(cache_dir()))
@@ -277,25 +311,25 @@ rule song_tex:
 			f.write(song2)
 		#shell("cp {} {}".format(input[0],output[0]))
 
-rule empty_page:
-	output:
-		empty_tex(),
-		empty_pdf()
-	run:
-		with open(empty_tex(),"w+") as f:
-			f.write(r"""\documentclass[a4page]{article} 
-\begin{document}
-\thispagestyle{empty}
-~
-\end{document}
-				""")
-		#shell("xelatex \"{}\"".format(output[0]))
-		xelatex_command = """cd {dir} && xelatex "{texfile}" """.format(
-				dir=cache_dir(),
-				texfile=os.path.basename(empty_tex()),
-			)
-		shell(xelatex_command)
-		#xelatex_command = """xelatex -include-directory "{dir}" -aux-directory "{dir}" -output-directory "{dir}" "{texfile}" """.format(
-		#		dir=cache_dir(),
-		#		texfile=empty_tex(),
-		#	)
+#rule empty_page:
+#	output:
+#		empty_tex(),
+#		empty_pdf()
+#	run:
+#		with open(empty_tex(),"w+") as f:
+#			f.write(r"""\documentclass[a4page]{article} 
+#\begin{document}
+#\thispagestyle{empty}
+#~
+#\end{document}
+#				""")
+#		#shell("xelatex \"{}\"".format(output[0]))
+#		xelatex_command = """cd {dir} && xelatex "{texfile}" """.format(
+#				dir=cache_dir(),
+#				texfile=os.path.basename(empty_tex()),
+#			)
+#		shell(xelatex_command)
+#		#xelatex_command = """xelatex -include-directory "{dir}" -aux-directory "{dir}" -output-directory "{dir}" "{texfile}" """.format(
+#		#		dir=cache_dir(),
+#		#		texfile=empty_tex(),
+#		#	)
