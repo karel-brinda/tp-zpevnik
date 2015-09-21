@@ -37,6 +37,34 @@ def sc_tex(song):
 	return os.path.join(cache_dir(),"0_{}.tex".format(song))
 
 
+def ind_pisne():
+	return cb_ind()+"_pisne"
+
+def	ind_interpreti():
+	return cb_ind()+"_interpreti"
+
+def idx_pisne():
+	return cb_idx()+"_pisne"
+
+def idx_interpreti():
+	return cb_idx()+"_interpreti"
+
+def call_xelatex(xelatex_file):
+	if platform.system()=="Windows":
+		xelatex_command = """xelatex -include-directory "{dir}" -aux-directory "{dir}" -output-directory "{dir}" "{texfile}" """.format(
+				dir=os.path.basedir(xelatex_file),
+				texfile=xelatex_file,
+			)
+	else:
+		xelatex_command = """
+			cd "{dir}"
+			xelatex "{texfile}"
+			""".format(
+				dir=os.path.dirname(xelatex_file),
+				texfile=os.path.basename(xelatex_file),
+			)
+	shell(xelatex_command)
+
 #####
 ##### SETTING ALL PARAMS
 #####
@@ -96,34 +124,14 @@ rule main_pdf:
 	run:
 		empty_page=input[0]
 
-		if platform.system()=="Windows":
-			print("WINDOWS")
-			xelatex_command = """xelatex -include-directory "{dir}" -aux-directory "{dir}" -output-directory "{dir}" "{texfile}" """.format(
-					dir=cache_dir(),
-					texfile=cb_tex(wildcards.file),
-				)
-		else:
-			xelatex_command = """
-				cd "{dir}"
-				xelatex "{texfile}"
-				""".format(
-					dir=cache_dir(),
-					texfile=os.path.relpath(cb_tex(),cache_dir()),
-				)
+		if (not os.path.isfile(ind_pisne()) or not os.path.isfile(ind_interpreti())) or \
+		(os.path.getmtime(ind_pisne()) < os.path.getmtime(workflow.snakefile)):
+			call_xelatex(input[1])
 
-		ind_pisne=cb_ind()+"_pisne"
-		ind_interpreti=cb_ind()+"_interpreti"
-		idx_pisne=cb_idx()+"_pisne"
-		idx_interpreti=cb_idx()+"_interpreti"
+		udelejRejstrik(idx_pisne(),ind_pisne()); 
+		udelejRejstrik(idx_interpreti(),ind_interpreti());
 
-		if (not os.path.isfile(ind_pisne) or not os.path.isfile(ind_interpreti)) or \
-		(os.path.getmtime(ind_pisne) < os.path.getmtime(workflow.snakefile)):
-			shell(xelatex_command)
-
-		udelejRejstrik(idx_pisne,idx_pisne); 
-		udelejRejstrik(idx_interpreti,ind_interpreti); 
-
-		shell(xelatex_command)
+		call_xelatex(input[1])
 		
 		main_pdf=cb_tex().replace(".tex",".pdf")
 		merger = PyPDF2.PdfFileMerger()
@@ -287,7 +295,7 @@ rule song_tex:
 
 rule empty_page:
 	output:
-		empty_tex(),
+		#empty_tex(),
 		empty_pdf()
 	run:
 		with open(empty_tex(),"w+") as f:
@@ -298,11 +306,12 @@ rule empty_page:
 \end{document}
 				""")
 		#shell("xelatex \"{}\"".format(output[0]))
-		xelatex_command = """cd {dir} && xelatex "{texfile}" """.format(
-				dir=cache_dir(),
-				texfile=os.path.basename(empty_tex()),
-			)
-		shell(xelatex_command)
+		#xelatex_command = """cd {dir} && xelatex "{texfile}" """.format(
+		#		dir=cache_dir(),
+		#		texfile=os.path.basename(empty_tex()),
+		#	)
+		#shell(xelatex_command)
+		call_xelatex(empty_tex())
 		#xelatex_command = """xelatex -include-directory "{dir}" -aux-directory "{dir}" -output-directory "{dir}" "{texfile}" """.format(
 		#		dir=cache_dir(),
 		#		texfile=empty_tex(),
