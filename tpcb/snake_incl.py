@@ -5,6 +5,7 @@ import os
 import PyPDF2
 import shutil
 import platform
+import filecmp
 
 ruleorder:
 	song_tex > main_tex
@@ -36,6 +37,34 @@ def cb_ind():
 def sc_tex(song):
 	return os.path.join(cache_dir(),"0_{}.tex".format(song))
 
+
+def ind_pisne():
+	return cb_ind()+"_pisne"
+
+def	ind_interpreti():
+	return cb_ind()+"_interpreti"
+
+def idx_pisne():
+	return cb_idx()+"_pisne"
+
+def idx_interpreti():
+	return cb_idx()+"_interpreti"
+
+def call_xelatex(xelatex_file):
+	if platform.system()=="Windows":
+		xelatex_command = """xelatex -include-directory "{dir}" -aux-directory "{dir}" -output-directory "{dir}" "{texfile}" """.format(
+				dir=os.path.basedir(xelatex_file),
+				texfile=xelatex_file,
+			)
+	else:
+		xelatex_command = """
+			cd "{dir}"
+			xelatex "{texfile}"
+			""".format(
+				dir=os.path.dirname(xelatex_file),
+				texfile=os.path.basename(xelatex_file),
+			)
+	shell(xelatex_command)
 
 #####
 ##### SETTING ALL PARAMS
@@ -87,36 +116,39 @@ songs_dict_transp = OrderedDict(
 # zpevnik.tex => zpevnik.pdf
 rule main_pdf:
 	output:
-		cb_pdf()
+		cb_pdf(),
+		ind_pisne(),
+		idx_pisne(),
+		idx_pisne()+".old",
+		ind_interpreti(),
+		idx_interpreti(),
 	input:
-		empty_pdf(),
 		cb_tex(),
+		empty_pdf(),
 		[sc_tex(x) for x in songs_dict.keys()],
+		workflow.snakefile,
 	run:
-		empty_page=input[0]
+		empty_page=empty_pdf()
 
-		if platform.system()=="Windows":
-			print("WINDOWS")
-			xelatex_command = """xelatex -include-directory "{dir}" -aux-directory "{dir}" -output-directory "{dir}" "{texfile}" """.format(
-					dir=cache_dir(),
-					texfile=cb_tex(wildcards.file),
-				)
+		volat_xelatex_dvakrat=False
+		xelatex_zavolan=0
+
+		if not os.path.isfile(ind_pisne()) or not os.path.isfile(ind_interpreti()):
+			call_xelatex(input[0])
+			udelejRejstrik(idx_pisne(),ind_pisne()); 
+			udelejRejstrik(idx_interpreti(),ind_interpreti());
+			shutil.copyfile(idx_pisne(),idx_pisne()+".old")
 		else:
-			xelatex_command = """
-				cd "{dir}"
-				xelatex "{texfile}"
-				""".format(
-					dir=cache_dir(),
-					texfile=os.path.relpath(cb_tex(),cache_dir()),
-				)
+			shutil.copyfile(idx_pisne(),idx_pisne()+".old")
+			udelejRejstrik(idx_pisne(),ind_pisne()); 
+			udelejRejstrik(idx_interpreti(),ind_interpreti());
 
-		if not os.path.isfile(cb_ind()+"_pisne") or not os.path.isfile(cb_ind()+"_interpreti"):
-			shell(xelatex_command)
+		call_xelatex(input[0])
 
-		udelejRejstrik(cb_idx()+"_pisne",cb_ind()+"_pisne"); 
-		udelejRejstrik(cb_idx()+"_interpreti",cb_ind()+"_interpreti"); 
-
-		shell(xelatex_command)
+		if not filecmp.cmp(idx_pisne(),idx_pisne()+".old"):
+			udelejRejstrik(idx_pisne(),ind_pisne()); 
+			udelejRejstrik(idx_interpreti(),ind_interpreti());
+			call_xelatex(input[0])
 		
 		main_pdf=cb_tex().replace(".tex",".pdf")
 		merger = PyPDF2.PdfFileMerger()
@@ -155,9 +187,11 @@ rule main_pdf:
 # cache/pisen.tex, cache/pisen2.tex => zpevnik.tex
 rule main_tex:
 	input:
-		workflow.snakefile
+		workflow.snakefile,
+		[sc_tex(x) for x in songs_dict.keys()],
 	output:
-		cb_tex()
+		cb_tex(),
+		os.path.join(cache_dir(),"songbook.sty"),
 	run:
 		# todo: only filename
 		with open(output[0],"w+",encoding="utf-8") as f:
@@ -258,12 +292,12 @@ rule main_tex:
 			"""
 			f.write(main_tex)
 			shutil.copyfile(os.path.join("tpcb","songbook.sty"),os.path.join(cache_dir(),"songbook.sty"))
-			#shell("cp tpcb/songbook.sty {}".format(cache_dir()))
+
 # o1/pisen.tex   =>  cache/pisen.tex
 # o2/pisen2.tex  =>  cache/pisen2.tex
 rule song_tex:
 	output:
-		sc_tex("{song}")
+		sc_tex("{song}"),
 	input:
 		lambda wildcards: songs_dict[wildcards.song],
 		workflow.snakefile
@@ -275,12 +309,11 @@ rule song_tex:
 			song2=transposition_song(song,songs_dict_transp[wildcards.song])
 		with open(output[0],"w+",encoding="utf-8") as f:
 			f.write(song2)
-		#shell("cp {} {}".format(input[0],output[0]))
 
 rule empty_page:
 	output:
 		empty_tex(),
-		empty_pdf()
+		empty_pdf(),
 	run:
 		with open(empty_tex(),"w+") as f:
 			f.write(r"""\documentclass[a4page]{article} 
@@ -290,11 +323,12 @@ rule empty_page:
 \end{document}
 				""")
 		#shell("xelatex \"{}\"".format(output[0]))
-		xelatex_command = """cd {dir} && xelatex "{texfile}" """.format(
-				dir=cache_dir(),
-				texfile=os.path.basename(empty_tex()),
-			)
-		shell(xelatex_command)
+		#xelatex_command = """cd {dir} && xelatex "{texfile}" """.format(
+		#		dir=cache_dir(),
+		#		texfile=os.path.basename(empty_tex()),
+		#	)
+		#shell(xelatex_command)
+		call_xelatex(empty_tex())
 		#xelatex_command = """xelatex -include-directory "{dir}" -aux-directory "{dir}" -output-directory "{dir}" "{texfile}" """.format(
 		#		dir=cache_dir(),
 		#		texfile=empty_tex(),
