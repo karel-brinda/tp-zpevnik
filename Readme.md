@@ -166,4 +166,4 @@ Dodržujte, prosím, logiku celého zpěvníku:
 
 * Používejte evropskou hudební notaci (*B* = *A#*).
 * Pro mollové akordy používejte *mi*, tedy např. *Ami*.
-* Do jedné značky ```\Ch``` vkládejte právě jeden akordy (pokud jich tam bude více, pravděpodobně nebude správně fungovat transpozice).
+* Do jedné značky ```\Ch``` vkládejte právě jeden akordy (pokud jich tam bude více, program ohlásí neznámý formát akordové značky).
