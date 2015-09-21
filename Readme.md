@@ -150,7 +150,7 @@ Dodržujte, prosím, logiku celého zpěvníku:
 	snakemake -s Snakefile.muj
 	```
 
-	Měl by se vám vysázet zpěvník `_muj.pdf` s písní Let it be transponovanou o 5 půltóny nahoru a s písní Love me do.
+	Měl by se vám vysázet zpěvník `_muj_novy_zpevnik.pdf` s písní Let it be transponovanou o 5 půltóny nahoru a s písní Love me do.
 
 ### Používané značky
 
