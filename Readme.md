@@ -123,7 +123,7 @@ Dodržujte, prosím, logiku celého zpěvníku:
 	git clone http://github.com/karel-brinda/tp-zpevnik
 	```
 
-2.	První bude obsahovat potřebné skripty, druhý již zpracované písně. Nyní vytvořte soubor Snakefile s následujícím obsahem:
+2.	První bude obsahovat potřebné skripty, druhý již zpracované písně. Nyní vytvořte soubor `Snakefile.muj` s následujícím obsahem:
 	```python
 	# -*-coding: utf-8 -*-
 	
@@ -147,10 +147,10 @@ Dodržujte, prosím, logiku celého zpěvníku:
 	
 3.	Spusťte
 	```bash
-	snakemake
+	snakemake -s Snakefile.muj
 	```
 
-	Měl by se vám vysázet zpěvník s písní Let it be transponovanou o 5 půltóny nahoru a s písní Love me do.
+	Měl by se vám vysázet zpěvník `_muj_novy_zpevnik.pdf` s písní Let it be transponovanou o 5 půltóny nahoru a s písní Love me do.
 
 ### Používané značky
 
@@ -166,4 +166,4 @@ Dodržujte, prosím, logiku celého zpěvníku:
 
 * Používejte evropskou hudební notaci (*B* = *A#*).
 * Pro mollové akordy používejte *mi*, tedy např. *Ami*.
-* Do jedné značky ```\Ch``` vkládejte právě jeden akordy (pokud jich tam bude více, pravděpodobně nebude správně fungovat transpozice).
+* Do jedné značky ```\Ch``` vkládejte právě jeden akordy (pokud jich tam bude více, program ohlásí neznámý formát akordové značky).
