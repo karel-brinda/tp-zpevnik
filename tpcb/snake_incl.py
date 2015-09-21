@@ -122,7 +122,7 @@ rule main_pdf:
 
 		#udelejRejstrik(cb_idx()+"_pisne",cb_ind()+"_pisne"); 
 		#udelejRejstrik(cb_idx()+"_interpreti",cb_ind()+"_interpreti"); 
-		udelejRejstrik(idx_pisne,idx_pisne);
+		udelejRejstrik(idx_pisne,ind_pisne);
 		udelejRejstrik(idx_interpreti,ind_interpreti);
 
 		shell(xelatex_command)
