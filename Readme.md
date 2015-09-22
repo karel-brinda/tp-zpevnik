@@ -117,13 +117,12 @@ Dodržujte, prosím, logiku celého zpěvníku:
 
 ## Jak vytvořit vlastní zpěvník
 
-1.	Do adresáře, kde si chcete vlastní zpěvník vytvořit, naklonujte tyto dva repozitáře:
+1.	Do adresáře, kde si chcete vlastní zpěvník vytvořit, naklonujte tento repozitář:
 	```bash
-	git clone http://github.com/karel-brinda/tpcb
 	git clone http://github.com/karel-brinda/tp-zpevnik
 	```
 
-2.	První bude obsahovat potřebné skripty, druhý již zpracované písně. Nyní vytvořte soubor Snakefile s následujícím obsahem:
+2.	Vytvořte soubor `Snakefile.muj`. Ukázkový soubor najdete pod názvem `Snakefile.test`. Ilustruje vložení písní Let it be a Love me do od Beatles a žádost o automatické spočítání transpozice u Let it be:
 	```python
 	# -*-coding: utf-8 -*-
 	
@@ -147,10 +146,10 @@ Dodržujte, prosím, logiku celého zpěvníku:
 	
 3.	Spusťte
 	```bash
-	snakemake
+	snakemake -s Snakefile.muj
 	```
 
-	Měl by se vám vysázet zpěvník s písní Let it be transponovanou o 5 půltóny nahoru a s písní Love me do.
+	Měl by se vám vysázet zpěvník `_muj_novy_zpevnik.pdf`.
 
 ### Používané značky
 
@@ -166,4 +165,4 @@ Dodržujte, prosím, logiku celého zpěvníku:
 
 * Používejte evropskou hudební notaci (*B* = *A#*).
 * Pro mollové akordy používejte *mi*, tedy např. *Ami*.
-* Do jedné značky ```\Ch``` vkládejte právě jeden akordy (pokud jich tam bude více, pravděpodobně nebude správně fungovat transpozice).
+* Do jedné značky ```\Ch``` vkládejte právě jeden akordy (pokud jich tam bude více, program ohlásí neznámý formát akordové značky).
