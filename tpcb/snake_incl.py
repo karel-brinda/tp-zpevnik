@@ -19,12 +19,6 @@ def cache_dir():
 def cb_pdf():
 	return "_{}.pdf".format(chordbook)
 
-def empty_tex():
-	return os.path.join(cache_dir(),"empty.tex")
-
-def empty_pdf():
-	return os.path.join(cache_dir(),"empty.pdf")
-
 def cb_tex():
 	return os.path.join(cache_dir(),"_{}.tex".format(chordbook))
 
@@ -124,12 +118,9 @@ rule main_pdf:
 		idx_interpreti(),
 	input:
 		cb_tex(),
-		empty_pdf(),
 		[sc_tex(x) for x in songs_dict.keys()],
 		workflow.snakefile,
 	run:
-		empty_page=empty_pdf()
-
 		volat_xelatex_dvakrat=False
 		xelatex_zavolan=0
 
@@ -149,40 +140,9 @@ rule main_pdf:
 			udelejRejstrik(idx_pisne(),ind_pisne()); 
 			udelejRejstrik(idx_interpreti(),ind_interpreti());
 			call_xelatex(input[0])
-		
+
 		main_pdf=cb_tex().replace(".tex",".pdf")
-		merger = PyPDF2.PdfFileMerger()
-
-		# 0
-		try:
-			p=PyPDF2.PdfFileReader(open(cover_front,'rb'))
-			cover_front_pages = p.getNumPages()
-			merger.append(PyPDF2.PdfFileReader(open(cover_front, 'rb')))
-			if cover_front_pages%2==1:
-				merger.append(PyPDF2.PdfFileReader(open(empty_page, 'rb')))
-		except NameError:
-			pass
-
-		# 1
-		main_pages = PyPDF2.PdfFileReader(open(main_pdf,'rb')).getNumPages()
-		merger.append(PyPDF2.PdfFileReader(open(main_pdf, 'rb')))
-
-		# 2
-		try:
-			p = PyPDF2.PdfFileReader(open(cover_back,'rb'))
-			cover_back_pages = p.getNumPages()
-			if (main_pages + cover_back_pages) % 2 == 1:
-				merger.append(PyPDF2.PdfFileReader(open(empty_page, 'rb')))
-			merger.append(PyPDF2.PdfFileReader(open(cover_back, 'rb')))
-		except NameError:
-			pass
-
-		merger.write(os.path.basename(main_pdf))
-
-		#shell("cp {} ./".format(cb_tex(wildcards.file).replace(".tex",".pdf")))
-		# count = countPages(cb_tex(wildcards.file).replace(".tex",".pdf"))
-		p = PyPDF2.PdfFileReader(open(cb_tex().replace(".tex",".pdf"),"rb"))
-		#print("COUNT ",p.getNumPages())
+		shutil.copyfile(main_pdf,os.path.basename(main_pdf))
 
 # cache/pisen.tex, cache/pisen2.tex => zpevnik.tex
 rule main_tex:
@@ -193,6 +153,14 @@ rule main_tex:
 		cb_tex(),
 		os.path.join(cache_dir(),"songbook.sty"),
 	run:
+		try:
+			shutil.copyfile(cover_front, os.path.join(cache_dir(),os.path.basename(cover_front)))
+		except NameError:
+			pass
+		try:
+			shutil.copyfile(cover_back, os.path.join(cache_dir(),os.path.basename(cover_back)))
+		except NameError:
+			pass
 		# todo: only filename
 		with open(output[0],"w+",encoding="utf-8") as f:
 			main_tex=r"""% -*-coding: utf-8 -*-
@@ -204,6 +172,9 @@ rule main_tex:
 				\usepackage{fancyhdr}
 				\usepackage{fontspec}
 				\usepackage[chordbk]{songbook}
+        \usepackage{refcount}
+        \usepackage[xetex,pdfpagelabels=false]{hyperref}
+				\usepackage{forloop}
 
 				\usepackage{index}
 				\newindex[cisloPisne]{default}{idx_pisne}{ind_pisne}{Rejstřík písní}
@@ -216,6 +187,7 @@ rule main_tex:
 
 				\newcommand\zp[2]{
 					\stepcounter{cisloPisne}
+          \label{pis.\cisloPisne}
 					\begin{song}{#1}{}{}{}{#2}{}
 					\index{#1}
 					\index[interpreti]{#2!#1}
@@ -242,6 +214,16 @@ rule main_tex:
 				\renewcommand{\SBRef}{}
 				\renewcommand{\SBIntro}{}
 				\renewcommand{\SBExtraKeys}{}
+
+				\newcounter{insertCur}
+				\newcounter{insertTotal}
+				\newcommand\insertPage[2]{\shipout\vbox{\XeTeXpdffile #1 page #2 }\stepcounter{page}}
+				\newcommand\countPages[1]{\setcounter{insertTotal}{\XeTeXpdfpagecount #1 }}
+				\newcommand\insertPDF[1]{\countPages{#1}\stepcounter{insertTotal}
+				  \forloop{insertCur}{1}{\value{insertCur} < \value{insertTotal}}{%
+					  \insertPage{#1}{\value{insertCur}}}}
+
+				\newcommand\emptyPage{\shipout\vbox to \vsize{\hbox to \hsize{}}\stepcounter{page}}
 
 				%%%
 				% Hlavicky
@@ -271,7 +253,20 @@ rule main_tex:
 				\fi
 
 				\setcounter{page}{0}
-			""" + os.linesep.join(
+			"""
+			try:
+				# Pokud přední obálka existuje, vloží ji a jednu nebo dvě volné strany za ni (mimo ONESIDE),
+				# aby první stránka zpěvníku vyšla napravo
+				open(cover_front,'rb')
+				main_tex += "\insertPDF{"+os.path.basename(cover_front)+"}\n"
+				if not "ONESIDE" in options:
+					main_tex += r"""
+					\emptyPage
+					\ifodd\value{page}\emptyPage\fi
+					"""
+			except NameError:
+				pass
+			main_tex += os.linesep.join(
 					["\input {{{}}}".format(os.path.relpath(sc_tex(x),cache_dir()))
 						for x in songs_dict.keys()]
 				) + r"""
@@ -288,8 +283,22 @@ rule main_tex:
 				\fancyfoot{}
 				\printindex
 
-				\end{document}
 			"""
+			try:
+				open(cover_back,'rb')
+				# Vložit jednu nebo dvě prázdné stránky tak, aby poslední strana zadní obálky (pokud existuje)
+				# vyšla nalevo (mimo ONESIDE)
+				if not "ONESIDE" in options:
+					main_tex += r"""
+					\emptyPage
+					\countPages{"""+os.path.basename(cover_back)+r"""}
+					\addtocounter{insertTotal}{\value{page}}
+					\ifodd\value{insertTotal}\emptyPage\fi
+					"""
+				main_tex += "\insertPDF{"+os.path.basename(cover_back)+"}\n\n"
+			except NameError:
+				pass
+			main_tex += "\end{document}";
 			f.write(main_tex)
 			shutil.copyfile(os.path.join("tpcb","songbook.sty"),os.path.join(cache_dir(),"songbook.sty"))
 
@@ -309,27 +318,3 @@ rule song_tex:
 			song2=transposition_song(song,songs_dict_transp[wildcards.song])
 		with open(output[0],"w+",encoding="utf-8") as f:
 			f.write(song2)
-
-rule empty_page:
-	output:
-		empty_tex(),
-		empty_pdf(),
-	run:
-		with open(empty_tex(),"w+") as f:
-			f.write(r"""\documentclass[a4page]{article} 
-\begin{document}
-\thispagestyle{empty}
-~
-\end{document}
-				""")
-		#shell("xelatex \"{}\"".format(output[0]))
-		#xelatex_command = """cd {dir} && xelatex "{texfile}" """.format(
-		#		dir=cache_dir(),
-		#		texfile=os.path.basename(empty_tex()),
-		#	)
-		#shell(xelatex_command)
-		call_xelatex(empty_tex())
-		#xelatex_command = """xelatex -include-directory "{dir}" -aux-directory "{dir}" -output-directory "{dir}" "{texfile}" """.format(
-		#		dir=cache_dir(),
-		#		texfile=empty_tex(),
-		#	)

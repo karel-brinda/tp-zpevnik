@@ -34,11 +34,11 @@ def zaznamy2tex(zaznamy):
 		# 2level/3level
 		
 		if Z2 == "":
-			tex += "\item "+Z1+", "+strana+"\n"
+			tex += "\item \hyperlink{page.\getpagerefnumber{pis."+strana+"}}{"+Z1+", "+strana+"}\n"
 		else:
 			if Z1 != predchoziZ1:
 				tex += "\item "+Z1+"\n"
-			tex += "\subitem "+Z2+", "+strana+"\n"
+			tex += "\subitem \hyperlink{page.\getpagerefnumber{pis."+strana+"}}{"+Z2+", "+strana+"}\n"
 			
 		predchoziPismeno = novePismeno
 		predchoziZ1 = Z1
