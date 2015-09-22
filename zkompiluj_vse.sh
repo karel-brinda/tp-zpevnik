@@ -1,3 +1,9 @@
 #! /usr/bin/env bash
 
-snakemake --cores
+set -e -o pipefail
+
+for zpevnik in Snakefile.*; do
+	snakemake -s $zpevnik --cores &
+done
+wait
+
