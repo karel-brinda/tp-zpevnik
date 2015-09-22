@@ -11,6 +11,7 @@ install:
   - "sudo locale-gen"
 script:
   - "snakemake -p -s Snakefile.test"
+  - "snakemake -p -s Snakefile.2pedro"
   - "snakemake -p -s Snakefile.TP2011"
   - "snakemake -p -s Snakefile.TP2012"
   - "snakemake -p -s Snakefile.TP2013"
