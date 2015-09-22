@@ -3,8 +3,8 @@
 left_page_head="Zpěvník písní táborových a jiných"
 right_page_head="www.technicka-prestavka.cz"
 chordbook="2pedro"
-cover_front="tp-zpevnik-covers/pedro_front.pdf"
-cover_back="tp-zpevnik-covers/pedro_back.pdf"
+#cover_front="tp-zpevnik-covers/pedro_front.pdf"
+#cover_back="tp-zpevnik-covers/pedro_back.pdf"
 
 
 songs=[
