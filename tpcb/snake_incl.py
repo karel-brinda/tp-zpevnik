@@ -229,14 +229,14 @@ rule main_tex:
 				\newcounter{numpages}
 				\newtoks\lastsong
 				\newcommand\twopagecheck{%
-				  \unless\ifdefined\ONESIDE
+					\unless\ifdefined\ONESIDE
 						\setcounter{numpages}{\value{page}}
 						\addtocounter{numpages}{-\value{lastpage}}
 						\ifnum\value{numpages}>2
 							\errmessage{^^J Píseň "\the\lastsong" má víc dvě stránky.^^J Enter = pokračovat, X = přerušit.^^J}
 						\else\ifnum\value{numpages}>1
-						  \unless\ifodd\value{page}
-							  \errmessage{^^J Píseň "\the\lastsong" začala na pravé a skončila na levé straně.^^J Enter = pokračovat, X = přerušit.^^J}
+							\unless\ifodd\value{page}
+								\errmessage{^^J Píseň "\the\lastsong" začala na pravé a skončila na levé straně.^^J Enter = pokračovat, X = přerušit.^^J}
 							\fi\fi
 						\fi
 						\setcounter{lastpage}{\value{page}}
