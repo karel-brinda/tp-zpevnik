@@ -6,9 +6,6 @@ chordbook="TP_zpevnik_2013"
 cover_front="tp-zpevnik-covers/2013_front.pdf"
 cover_back="tp-zpevnik-covers/2013_back.pdf"
 
-# Některé písně (Proměny, Mikymauz, Muzeum a další) nevycházejí správně na dvoustranu, ale
-# v rámci zachování číslování kontrolu vypneme
-options = [ "SKIPCHECK" ]
 
 songs=[
 	"./tp-songs/01_folk/lidová____A_te_Rehradice.tex",

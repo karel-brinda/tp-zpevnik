@@ -6,9 +6,6 @@ chordbook="TP_zpevnik_2012"
 cover_front="tp-zpevnik-covers/2012_front.pdf"
 cover_back="tp-zpevnik-covers/2012_back.pdf"
 
-# Některé písně (Maluj zase obrázky, Mikymauz, Možná, že se mýlím a další) nevycházejí
-# správně na dvoustranu, ale v rámci zachování číslování kontrolu vypneme
-options = [ "SKIPCHECK" ]
 
 songs=[
 	"./tp-songs/01_folk/neznámý____Tři_citrónky.tex",
