@@ -4,6 +4,9 @@ left_page_head="Zpěvník komplet"
 right_page_head="www.technicka-prestavka.cz"
 chordbook="TP_zpevnik_komplet"
 
+# U AllSongs nemáme žádnou kontrolu nad levými/pravými stránkami
+options = [ "SKIPCHECK" ]
+
 songs = []
 
 for path, subdirs, files in os.walk(r'tp-songs'):
