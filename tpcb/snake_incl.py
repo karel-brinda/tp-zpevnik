@@ -172,8 +172,8 @@ rule main_tex:
 				\usepackage{fancyhdr}
 				\usepackage{fontspec}
 				\usepackage[chordbk]{songbook}
-        \usepackage{refcount}
-        \usepackage[xetex,pdfpagelabels=false]{hyperref}
+				\usepackage{refcount}
+				\usepackage[xetex,pdfpagelabels=false]{hyperref}
 				\usepackage{forloop}
 
 				\usepackage{index}
@@ -187,8 +187,10 @@ rule main_tex:
 
 				\newcommand\zp[2]{
 					\stepcounter{cisloPisne}
-          \label{pis.\cisloPisne}
+					\label{pis.\cisloPisne}
 					\begin{song}{#1}{}{}{}{#2}{}
+					\twopagecheck
+					\global\lastsong={#1}
 					\index{#1}
 					\index[interpreti]{#2!#1}
 				}
@@ -220,8 +222,26 @@ rule main_tex:
 				\newcommand\insertPage[2]{\shipout\vbox{\XeTeXpdffile #1 page #2 }\stepcounter{page}}
 				\newcommand\countPages[1]{\setcounter{insertTotal}{\XeTeXpdfpagecount #1 }}
 				\newcommand\insertPDF[1]{\countPages{#1}\stepcounter{insertTotal}
-				  \forloop{insertCur}{1}{\value{insertCur} < \value{insertTotal}}{%
-					  \insertPage{#1}{\value{insertCur}}}}
+					\forloop{insertCur}{1}{\value{insertCur} < \value{insertTotal}}{%
+						\insertPage{#1}{\value{insertCur}}}}
+
+				\newcounter{lastpage}
+				\newcounter{numpages}
+				\newtoks\lastsong
+				\newcommand\twopagecheck{%
+					\unless\ifdefined\ONESIDE
+						\setcounter{numpages}{\value{page}}
+						\addtocounter{numpages}{-\value{lastpage}}
+						\ifnum\value{numpages}>2
+							\errmessage{^^J Píseň "\the\lastsong" má víc dvě stránky.^^J Enter = pokračovat, X = přerušit.^^J}
+						\else\ifnum\value{numpages}>1
+							\unless\ifodd\value{page}
+								\errmessage{^^J Píseň "\the\lastsong" začala na pravé a skončila na levé straně.^^J Enter = pokračovat, X = přerušit.^^J}
+							\fi\fi
+						\fi
+						\setcounter{lastpage}{\value{page}}
+					\fi
+				}
 
 				\newcommand\emptyPage{\shipout\vbox to \vsize{\hbox to \hsize{}}\stepcounter{page}}
 
@@ -249,7 +269,7 @@ rule main_tex:
 
 				\mainmatter
 				\ifWordBk
-				  \twocolumn
+					\twocolumn
 				\fi
 
 				\setcounter{page}{0}
@@ -270,6 +290,7 @@ rule main_tex:
 					["\input {{{}}}".format(os.path.relpath(sc_tex(x),cache_dir()))
 						for x in songs_dict.keys()]
 				) + r"""
+				\twopagecheck
 
 				%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 				%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
