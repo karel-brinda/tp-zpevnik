@@ -172,8 +172,8 @@ rule main_tex:
 				\usepackage{fancyhdr}
 				\usepackage{fontspec}
 				\usepackage[chordbk]{songbook}
-        \usepackage{refcount}
-        \usepackage[xetex,pdfpagelabels=false]{hyperref}
+				\usepackage{refcount}
+				\usepackage[xetex,pdfpagelabels=false]{hyperref}
 				\usepackage{forloop}
 
 				\usepackage{index}
@@ -187,7 +187,7 @@ rule main_tex:
 
 				\newcommand\zp[2]{
 					\stepcounter{cisloPisne}
-          \label{pis.\cisloPisne}
+					\label{pis.\cisloPisne}
 					\begin{song}{#1}{}{}{}{#2}{}
 					\index{#1}
 					\index[interpreti]{#2!#1}
@@ -220,8 +220,8 @@ rule main_tex:
 				\newcommand\insertPage[2]{\shipout\vbox{\XeTeXpdffile #1 page #2 }\stepcounter{page}}
 				\newcommand\countPages[1]{\setcounter{insertTotal}{\XeTeXpdfpagecount #1 }}
 				\newcommand\insertPDF[1]{\countPages{#1}\stepcounter{insertTotal}
-				  \forloop{insertCur}{1}{\value{insertCur} < \value{insertTotal}}{%
-					  \insertPage{#1}{\value{insertCur}}}}
+					\forloop{insertCur}{1}{\value{insertCur} < \value{insertTotal}}{%
+						\insertPage{#1}{\value{insertCur}}}}
 
 				\newcommand\emptyPage{\shipout\vbox to \vsize{\hbox to \hsize{}}\stepcounter{page}}
 
@@ -249,7 +249,7 @@ rule main_tex:
 
 				\mainmatter
 				\ifWordBk
-				  \twocolumn
+					\twocolumn
 				\fi
 
 				\setcounter{page}{0}
