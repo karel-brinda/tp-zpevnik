@@ -44,6 +44,7 @@ Samotné písně naleznete v adresáři *tp-songs*, který dále obsahuje 4 poda
 ## Jak sestavit zpěvníky
 
 1.	V konzoli přejděte do adresáře, ve kterém chcete pracovat.
+
 2.	Stáhněte aktuální verzi zpěvníku vč. dalších vyžadovaných repozitářů příkazem
 	```bash
 	git clone --recursive http://github.com/karel-brinda/tp-zpevnik
@@ -71,12 +72,16 @@ Opravte soubor přímo přes webové rozhraní GitHubu (musíte být ale přihl�
 ### Složitější varianta (ale preferovaná)
 
 1.	Vytvořte vlastní fork repozitáře http://github.com/karel-brinda/tp-zpevnik (ve web gui klikněte na tlačítko "fork" vpravo nahoře).
+
 2.	Naklonujte zpěvník ze svého nového repozitáře (vzniklého forknutím) včetně externích repozitářů (soubory v nich modifikovat nebudete, pro ty tedy fork vytvářet nemusíte).
 	```bash
 	git clone --recursive http://github.com/<vase-username-na-githubu>/tp-zpevnik
 	```
+
 3.	Opravte chyby.
+
 4.	Otestujte, zda se zpěvník správně přeloží (a neskončí např. xelatexovou chybou). Důkladně zkontrolujte, jestli po vysázení vypadá daná píseň správně.
+
 5.	Odešlete změny na server pomocí příkazů
 	```bash
 	git add jmeno_upraveneho_souboru_1.tex jmeno_upraveneho_souboru_2.tex
