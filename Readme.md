@@ -52,7 +52,7 @@ Samotné písně naleznete v adresáři *tp-songs*, který dále obsahuje 4 poda
 3.	Přejděte do adresáře zpěvníku a sestavte všechny zpěvníky pomocí
 	```bash
 	cd tp-zpevnik
-	snakemake
+	./zkompiluj_vse_seriove.sh
 	```
 
 	Pokud chcete sestavit pouze některý zpěvník, např. z TP 2011, zadejte
@@ -72,7 +72,7 @@ Opravte soubor přímo přes webové rozhraní GitHubu (musíte být ale přihl�
 
 1.	Vytvořte vlastní fork repozitáře http://github.com/karel-brinda/tp-zpevnik (ve web gui klikněte na tlačítko "fork" vpravo nahoře).
 2.	Naklonujte zpěvník ze svého nového repozitáře (vzniklého forknutím) včetně externích repozitářů (soubory v nich modifikovat nebudete, pro ty tedy fork vytvářet nemusíte).
-        ```bash
+	```bash
         git clone --recursive http://github.com/<vase-username-na-githubu>/tp-zpevnik
         ```
 3.	Opravte chyby.
@@ -84,7 +84,7 @@ Opravte soubor přímo přes webové rozhraní GitHubu (musíte být ale přihl�
 	git push
 	```
 
-6.	Na GitHub.com mě požádejte mě o merge (propuštění změn do původních repozitářů). Pokud bude změna korektní, schválím ji.
+6.	Na GitHub.com mě požádejte mě o merge (propuštění změn do původních repozitářů – zelené tlačítko Pull request). Pokud bude změna korektní, schválím ji.
 
 ## Jak přidat novou píseň do databáze písní
 
@@ -97,14 +97,14 @@ Dodržujte, prosím, logiku celého zpěvníku:
 	*	Jména písní by měla velké jen první písmeno a pak tam, kde patří podle jiných pravidel (vlastní jména, anglické dny v týdnu a měsíce apod.)
 	*	Dodržujte prosím právě čtyři podtržítka mezi jménem interpreta a písně.
 
-2.	Prosím, nekopírujte nekriticky text z jiné stránky. Vložte si jej nejdřív do textového editoru a nechte ověřit překlepy.
+2.	Prosím, nekopírujte nekriticky text z jiné stránky. Minimálně si jej vložte nejdřív do textového editoru a nechte ověřit překlepy.
 
 3.	Ověřte správnost akordů a jejich umístění nad *začátky* slabik, a to i uprostřed slov (předložky k, s, v, z slabiku nezačínají).
 	*	Jestli píseň akordy ve vašem zdroji nemá uvedené, zkuste najít jiný.
 	*	Zkontrolujte, jestli zdrojový text nepoužíval anglické označení *B* / *Bb* místo českého *H* / *B*. Dodržujeme striktně české, a to i v zahraničních písních.
 	*	Opravte označení mollových akordů z *"Am"* na *"Ami"*. Nezapomeňte na případy *"mi7"*.
 
-4.	"Sólo", "předehra" / "intro", "mezihra" a podobné nepotřebují text a vlastní `\zs ... \ks` (výjimkou je sloka nahrazená sólem beze zpívání). Stačí v odpovídajícím místě napsat řadu akordů.
+4.	"Sólo", "předehra" / "intro", "mezihra" a podobné nepotřebují text a vlastní `\zs ... \ks` (výjimkou je sloka nahrazená sólem beze zpívání). Stačí v odpovídajícím místě napsat řadu akordů s prázdným textem.
 
 5.	České písně by měly mít texty psané jako celé věty včetně kompletní interpunkce, zalámané do veršů. Písničky v angličtině a několika dalších jazycích mají velké písmeno na začátku každé řádky a interpunkce na jejich koncích (kromě té se speciálním významem), včetně tečky na konci věty, se ruší.
 
@@ -119,7 +119,7 @@ Dodržujte, prosím, logiku celého zpěvníku:
 
 1.	Do adresáře, kde si chcete vlastní zpěvník vytvořit, naklonujte tento repozitář:
 	```bash
-	git clone http://github.com/karel-brinda/tp-zpevnik
+	git clone --recursive http://github.com/karel-brinda/tp-zpevnik
 	```
 
 2.	Vytvořte soubor `Snakefile.muj`. Ukázkový soubor najdete pod názvem `Snakefile.test`. Ilustruje vložení písní Let it be a Love me do od Beatles a žádost o automatické spočítání transpozice u Let it be:
