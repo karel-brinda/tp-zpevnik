@@ -229,6 +229,7 @@ rule main_tex:
 				\newcounter{numpages}
 				\newtoks\lastsong
 				\newcommand\twopagecheck{%
+					\unless\ifdefined\SKIPCHECK
 					\unless\ifdefined\ONESIDE
 						\setcounter{numpages}{\value{page}}
 						\addtocounter{numpages}{-\value{lastpage}}
@@ -238,7 +239,7 @@ rule main_tex:
 							\unless\ifodd\value{page}
 								\errmessage{^^J Píseň "\the\lastsong" začala na pravé a skončila na levé straně.^^J Enter = pokračovat, X = přerušit.^^J}
 							\fi\fi
-						\fi
+						\fi\fi
 						\setcounter{lastpage}{\value{page}}
 					\fi
 				}
@@ -283,6 +284,7 @@ rule main_tex:
 					main_tex += r"""
 					\emptyPage
 					\ifodd\value{page}\emptyPage\fi
+					\setcounter{lastpage}{\value{page}}
 					"""
 			except NameError:
 				pass
