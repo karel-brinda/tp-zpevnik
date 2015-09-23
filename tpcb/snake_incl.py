@@ -228,16 +228,25 @@ rule main_tex:
 				\newcounter{lastpage}
 				\newcounter{numpages}
 				\newtoks\lastsong
+				\newtoks\errors
+				\newcounter{errorCount}
+				\def\space{ }
 				\newcommand\twopagecheck{%
 					\unless\ifdefined\SKIPCHECK
 					\unless\ifdefined\ONESIDE
 						\setcounter{numpages}{\value{page}}
 						\addtocounter{numpages}{-\value{lastpage}}
 						\ifnum\value{numpages}>2
-							\errmessage{^^J Píseň "\the\lastsong" má víc dvě stránky.^^J Enter = pokračovat, X = přerušit.^^J}
+							\message{^^J^^J\space\space Píseň "\the\lastsong" má víc dvě stránky.^^J^^J}
+							\stepcounter{errorCount}
+							\edef\nerrors{\the\errors^^J\space\space\the\lastsong}
+							\global\errors\expandafter{\nerrors}
 						\else\ifnum\value{numpages}>1
 							\unless\ifodd\value{page}
-								\errmessage{^^J Píseň "\the\lastsong" začala na pravé a skončila na levé straně.^^J Enter = pokračovat, X = přerušit.^^J}
+								\message{^^J^^J\space\space Píseň "\the\lastsong" začala na pravé a skončila na levé.^^J^^J}
+								\stepcounter{errorCount}
+								\edef\nerrors{\the\errors^^J\space\space\the\lastsong}
+								\global\errors\expandafter{\nerrors}
 							\fi\fi
 						\fi\fi
 						\setcounter{lastpage}{\value{page}}
@@ -321,7 +330,17 @@ rule main_tex:
 				main_tex += "\insertPDF{"+os.path.basename(cover_back)+"}\n\n"
 			except NameError:
 				pass
-			main_tex += "\end{document}";
+			main_tex += r"""
+				\ifnum\value{errorCount} > 0
+					\errmessage{^^J^^J**Chyby zarovnání dvoustran u písní:**\the\errors^^J^^J%
+					Překlad nyní skončí chybou. Opravte konflikty a spusťte znovu, případně,^^J%
+					jestliže chcete tuto kontrolu vypnout, přidejte options = [ "ONESIDE"\space]^^J%
+					nebo options = [ "SKIPCHECK"\space]%
+}
+				\fi
+
+				\end{document}
+			"""
 			f.write(main_tex)
 			shutil.copyfile(os.path.join("tpcb","songbook.sty"),os.path.join(cache_dir(),"songbook.sty"))
 
