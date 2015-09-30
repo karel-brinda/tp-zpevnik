@@ -34,6 +34,9 @@ def sc_tex(song):
 def sc_pdf(song):
 	return os.path.join("output",chordbook+"_singles","{}.pdf".format(song))
 
+def sc_lytex(song):
+	return os.path.join(cache_dir(),"0_{}.lytex".format(song))
+
 def ind_pisne():
 	return cb_ind()+"_pisne"
 
@@ -89,19 +92,24 @@ for x in songs:
 		songs_prop.append((
 			x,
 			0,
-			os.path.basename(x).replace(".tex","")
+			os.path.basename(x).replace(".tex","").replace(".lytex","")
 		))
 	# transposition ... must be a list
 	else:
 		songs_prop.append((
 			x[0],
 			int(x[1]),
-			os.path.basename(x[0]).replace(".tex","")
+			os.path.basename(x[0]).replace(".tex","").replace(".lytex","")
 		))
 
 songs_dict = OrderedDict([ (x[2],x[0]) for x in songs_prop ])
 
 songs_dict_transp = OrderedDict([ (x[2],x[1]) for x in songs_prop ])
+
+# Jestli jsou požadovány noty, zkontrolovat, zda máme lilypond-book
+if "MUSIC" in options:
+	if None == shutil.which("lilypond-book"):
+		raise Exception("lilypond-book není na vašem systému nainstalován, noty nelze překládat!")
 
 # zpevnik.tex => zpevnik.pdf
 rule main_pdf:
@@ -198,8 +206,8 @@ rule copies:
 		shutil.copyfile(os.path.join("tpcb","template.tex"),os.path.join(cache_dir(),"template.tex"))
 		shutil.copyfile(os.path.join("tpcb","songbook.sty"),os.path.join(cache_dir(),"songbook.sty"))
 
-# o1/pisen.tex   =>  cache/pisen.tex
-# o2/pisen2.tex  =>  cache/pisen2.tex
+# o1/pisen.(ly)tex   =>  cache/pisen.tex
+# o2/pisen2.(ly)tex  =>  cache/pisen2.tex
 rule song_tex:
 	output:
 		sc_tex("{song}"),
@@ -207,13 +215,16 @@ rule song_tex:
 		lambda wildcards: songs_dict[wildcards.song],
 		workflow.snakefile
 	run:
-		song=""
-		song2=""
 		with open(input[0],"r",encoding="utf-8") as f:
 			song=f.read()
 			song2=transposition_song(song,songs_dict_transp[wildcards.song])
-		with open(output[0],"w+",encoding="utf-8") as f:
-			f.write(song2)
+		if ".lytex" in input[0] and "MUSIC" in options:
+			with open(sc_lytex(wildcards.song),"w+",encoding="utf-8") as f:
+				f.write(song2)
+			shell("lilypond-book --format=latex --output="+cache_dir()+" "+sc_lytex(wildcards.song))
+		else:
+			with open(output[0],"w+",encoding="utf-8") as f:
+				f.write(song2)
 
 # cache/pisen.tex => cache/_single_pisen.pdf
 rule song_pdf:

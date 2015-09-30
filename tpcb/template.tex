@@ -15,6 +15,7 @@
 \usepackage[chordbk]{songbook}
 \usepackage[xetex,pdfpagelabels=false,pdfborder={0 0 0}]{hyperref}
 \usepackage{forloop}
+\usepackage{verbatim}
 
 \unless\ifdefined\SINGLE
   \newindex[cisloPisne]{default}{idx_pisne}{ind_pisne}{Rejstřík písní}
@@ -113,6 +114,8 @@
 }
 
 \newcommand\emptyPage{\shipout\vbox to \vsize{\hbox to \hsize{\hss}\vss}\stepcounter{page}}
+
+\newenvironment{lilypond}{\comment}{\endcomment} % Ignorovat lilypond, pokud zbude v .tex
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

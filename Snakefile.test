@@ -6,11 +6,15 @@ chordbook="muj_novy_zpevnik"
 #cover_front="obalka_predni.pdf"
 #cover_back="obalka_zadni.pdf"
 
+# Takto lze přidávat volby (ONESIDE, NOHEADER, SKIPCHECK, TPBAND, MUSIC).
+# Odstraňte # před následující řádkou, jestli chcete, aby se u Love me do zobrazily (pokusné) noty.
+
+#options=["SINGLES","MUSIC"]
 options=["SINGLES"]
 
 songs=[
     ("./tp-songs/03_zahranicni/Beatles____Let_it_be.tex", 5), # 5 = transpozice o 5 půltónů nahoru
-    "./tp-songs/03_zahranicni/Beatles____Love_me_do.tex",
+    "./tp-songs/03_zahranicni/Beatles____Love_me_do.lytex",
 ]
 
 include:"tpcb/snake_incl.py"
