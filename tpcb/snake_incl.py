@@ -46,14 +46,14 @@ def idx_interpreti():
 
 def call_xelatex(xelatex_file):
 	if platform.system()=="Windows":
-		xelatex_command = """xelatex -include-directory "{dir}" -aux-directory "{dir}" -output-directory "{dir}" "{texfile}" """.format(
+		xelatex_command = """xelatex -interaction nonstopmode -include-directory "{dir}" -aux-directory "{dir}" -output-directory "{dir}" "{texfile}" """.format(
 				dir=os.path.basedir(xelatex_file),
 				texfile=xelatex_file,
 			)
 	else:
 		xelatex_command = """
 			cd "{dir}"
-			xelatex "{texfile}"
+			xelatex -interaction nonstopmode "{texfile}"
 			""".format(
 				dir=os.path.dirname(xelatex_file),
 				texfile=os.path.basename(xelatex_file),
@@ -121,9 +121,6 @@ rule main_pdf:
 		[sc_tex(x) for x in songs_dict.keys()],
 		workflow.snakefile,
 	run:
-		volat_xelatex_dvakrat=False
-		xelatex_zavolan=0
-
 		if not os.path.isfile(ind_pisne()) or not os.path.isfile(ind_interpreti()):
 			call_xelatex(input[0])
 			udelejRejstrik(idx_pisne(),ind_pisne()); 
@@ -168,11 +165,10 @@ rule main_tex:
 				os.linesep.join(["\\def\\{}{{}}".format(x) for x in options]) \
 				+ r"""
 				\usepackage[czech]{babel}
-				\usepackage{pdfpages}
+				\usepackage{calc}
 				\usepackage{fancyhdr}
 				\usepackage{fontspec}
 				\usepackage[chordbk]{songbook}
-				\usepackage{refcount}
 				\usepackage[xetex,pdfpagelabels=false]{hyperref}
 				\usepackage{forloop}
 
