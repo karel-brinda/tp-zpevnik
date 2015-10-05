@@ -3,7 +3,7 @@
 left_page_head="Technická přestávka 2015"
 right_page_head="TP band"
 chordbook="TPBAND_zpevnik"
-#cover_front="tp-zpevnik-covers/TPBAND_setlist.pdf"
+cover_front="tp-zpevnik-covers/TPBAND_front.pdf"
 #cover_back="tp-zpevnik-covers/2013_back.pdf"
 
 options=[
