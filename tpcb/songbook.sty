@@ -544,7 +544,7 @@
     \setbox1=\hbox{\ChFont\sbChord#1\relax\strut}%
     \setbox0=\hbox{#2}%
     \ifdim\wd1<\wd0%
-      \strut\raise\SBChordRaise\copy1\kern-\wd1\copy0%
+      \strut\raise\SBChordRaise\copy1\kern-\wd1{#2}%
     \else%
       \strut\copy0\kern-\wd0\strut\raise\SBChordRaise\copy1%
     \fi%

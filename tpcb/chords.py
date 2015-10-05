@@ -1,5 +1,7 @@
 # -*-coding: utf-8 -*-
 
+import re
+
 tone_normalization={
     "Cb" : "H",
     "C"  : "C",
@@ -72,6 +74,35 @@ def transposition_chord(chord,shift):
 
 # transposition_song("""\Ch{Cmi}{Někdy} se \Ch{Fmi}{zajikáme} \Ch{Cmi}{štěstím,}""",3)
 def transposition_song(text,shift):
+    lines = text.split("\n")
+    for i in range(1, len(lines)):
+        parts = lines[i].split("<")
+        for j in range(1, len(parts)):
+            right_index = parts[j].find(">")
+            if right_index == -1:
+                continue
+            chord = parts[j][0:right_index]
+            # Pokud je těsně za akordem mezera, ukončit jej hned, aby "visel
+            # ve vzduchu" a nepřekrýval se s následujícími slovy. Toto je
+            # konzistentní s akordem umístěným na konec řádky.
+            if parts[j].find(" ", right_index+1) == right_index+1:
+                end_index = right_index+1
+            else:
+                # Pokud je v řetězci některý ze speciálních znaků \, } nebo &
+                # (typicky třeba kvůli uvozovkám), ukončíme text akordu před
+                # nimi.  Také mezery na konci pustíme ven.
+                end_match = re.search(r"}|\\|&", parts[j])
+                if end_match == None:
+                    end_index = re.search(" *$", parts[j]).start()
+                else:
+                    end_index = re.search(" *$", parts[j][:end_match.start()]).start()
+            if end_index != -1:
+                parts[j] = "\Ch{" + chord + "}{" + parts[j][right_index+1:end_index] + "}" + parts[j][end_index:]
+            else:
+                parts[j] = "\Ch{" + chord + "}{" + parts[j][right_index+1:] + "}"
+        lines[i] = "".join(parts)
+    text = "\n".join(lines)
+
     parts = text.split("\Ch")
     for i in range(1,len(parts)):
         #print("part", parts[i])
