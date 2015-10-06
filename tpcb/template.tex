@@ -2,15 +2,15 @@
   \ifdefined\ONESIDE,oneside\fi%
 ]{book}
 
-\usepackage[czech]{babel}
+\usepackage{fontspec}
+\usepackage{index}
 \usepackage{calc}
 \usepackage{fancyhdr}
-\usepackage{fontspec}
+\usepackage[czech]{babel}
 \usepackage[chordbk]{songbook}
-\usepackage[xetex,pdfpagelabels=false]{hyperref}
+\usepackage[xetex,pdfpagelabels=false,pdfborder={0 0 0}]{hyperref}
 \usepackage{forloop}
 
-\usepackage{index}
 \newindex[cisloPisne]{default}{idx_pisne}{ind_pisne}{Rejstřík písní}
 \newindex[cisloPisne]{interpreti}{idx_interpreti}{ind_interpreti}{Rejstřík interpretů}
 
@@ -62,7 +62,7 @@
 % Makra pro vkládání celých PDF (přední a zadní obálka)
 \newcounter{insertCur}
 \newcounter{insertTotal}
-\newcommand\insertPage[2]{\shipout\vbox{\XeTeXpdffile #1 page #2 }\stepcounter{page}}
+\newcommand\insertPage[2]{\shipout\vbox to 29.7cm{\vss\hbox to 21cm{\hss{\XeTeXpdffile #1 page #2 }\hss}\vss}\stepcounter{page}}
 \newcommand\countPages[1]{\setcounter{insertTotal}{\XeTeXpdfpagecount #1 }}
 \newcommand\insertPDF[1]{\countPages{#1}\stepcounter{insertTotal}
   \forloop{insertCur}{1}{\value{insertCur} < \value{insertTotal}}{%
@@ -97,7 +97,7 @@
   \fi
 }
 
-\newcommand\emptyPage{\shipout\vbox to \vsize{\hbox to \hsize{}}\stepcounter{page}}
+\newcommand\emptyPage{\shipout\vbox to \vsize{\hbox to \hsize{\hss}\vss}\stepcounter{page}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -134,6 +134,10 @@
 % Kontrola dvojstránek probíhá v rámci \zs, takže pro poslední písničku ji 
 % musíme zavolat ručně
 \twopagecheck
+
+% Hot Fix: přebít \thispagestyle{plain} z index.sty, způsobuje čísla stránek
+% na první stránce rejstříku
+\renewcommand\thispagestyle[1]{}
 
 % Rejstřík podle interpretů
 \fancyfoot{}
