@@ -62,7 +62,7 @@
 % Makra pro vkládání celých PDF (přední a zadní obálka)
 \newcounter{insertCur}
 \newcounter{insertTotal}
-\newcommand\insertPage[2]{\shipout\vbox{\XeTeXpdffile #1 page #2 }\stepcounter{page}}
+\newcommand\insertPage[2]{\shipout\vbox to 29.7cm{\vss\hbox to 21cm{\hss{\XeTeXpdffile #1 page #2 }\hss}\vss}\stepcounter{page}}
 \newcommand\countPages[1]{\setcounter{insertTotal}{\XeTeXpdfpagecount #1 }}
 \newcommand\insertPDF[1]{\countPages{#1}\stepcounter{insertTotal}
   \forloop{insertCur}{1}{\value{insertCur} < \value{insertTotal}}{%
