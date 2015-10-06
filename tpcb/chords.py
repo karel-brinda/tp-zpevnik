@@ -75,31 +75,36 @@ def transposition_chord(chord,shift):
 # transposition_song("""\Ch{Cmi}{Někdy} se \Ch{Fmi}{zajikáme} \Ch{Cmi}{štěstím,}""",3)
 def transposition_song(text,shift):
     lines = text.split("\n")
-    for i in range(1, len(lines)):
+    for i in range(0, len(lines)):
         parts = lines[i].split("<")
         for j in range(1, len(parts)):
             right_index = parts[j].find(">")
-            if right_index == -1:
-                continue
+            if right_index == -1: continue
             chord = parts[j][0:right_index]
             # Pokud je těsně za akordem mezera, ukončit jej hned, aby "visel
             # ve vzduchu" a nepřekrýval se s následujícími slovy. Toto je
             # konzistentní s akordem umístěným na konec řádky.
             if parts[j].find(" ", right_index+1) == right_index+1:
                 end_index = right_index+1
+                star = False
             else:
                 # Pokud je v řetězci některý ze speciálních znaků \, } nebo &
                 # (typicky třeba kvůli uvozovkám), ukončíme text akordu před
                 # nimi.  Také mezery na konci pustíme ven.
                 end_match = re.search(r"}|\\|&", parts[j])
                 if end_match == None:
-                    end_index = re.search(" *$", parts[j]).start()
+                    end_index = re.search("\s*$", parts[j]).start()
+                    # Detekuje přerušení uprostřed slova
+                    star = (end_index == len(parts[j]) and j < len(parts)-1)
                 else:
-                    end_index = re.search(" *$", parts[j][:end_match.start()]).start()
+                    end_index = re.search("\s*$", parts[j][:end_match.start()]).start()
+                    star = False
             if end_index != -1:
-                parts[j] = "\Ch{" + chord + "}{" + parts[j][right_index+1:end_index] + "}" + parts[j][end_index:]
+                parts[j] = ("\Ch*" if star else "\Ch") + "{" + chord + "}{" + \
+                    parts[j][right_index+1:end_index] + "}" + parts[j][end_index:]
             else:
-                parts[j] = "\Ch{" + chord + "}{" + parts[j][right_index+1:] + "}"
+                parts[j] = ("\Ch*" if star else "\Ch") + "{" + chord + "}{" + \
+                    parts[j][right_index+1:] + "}"
         lines[i] = "".join(parts)
     text = "\n".join(lines)
 
@@ -108,12 +113,13 @@ def transposition_song(text,shift):
         #print("part", parts[i])
         mod_part=parts[i].lstrip()
         #assert parts[i][0]=="{"
+        star=(parts[i][0]=="*")
         left_index=mod_part.find("{")
         right_index=mod_part.find("}")
         original_chord=mod_part[left_index+1:right_index].strip()
         #print("original chord", original_chord)
         assert original_chord.find("\\")==-1,"Chord '{}' contains forbidden character '\\''".format(original_chord)
         new_chord=transposition_chord(original_chord,shift)
-        parts[i]="{"+new_chord+mod_part[right_index:]
+        parts[i]=("*{" if star else "{")+new_chord+mod_part[right_index:]
 
     return "\Ch".join(parts)
