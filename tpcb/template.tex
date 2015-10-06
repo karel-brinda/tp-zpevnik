@@ -2,15 +2,15 @@
   \ifdefined\ONESIDE,oneside\fi%
 ]{book}
 
-\usepackage[czech]{babel}
+\usepackage{fontspec}
+\usepackage{index}
 \usepackage{calc}
 \usepackage{fancyhdr}
-\usepackage{fontspec}
+\usepackage[czech]{babel}
 \usepackage[chordbk]{songbook}
-\usepackage[xetex,pdfpagelabels=false]{hyperref}
+\usepackage[xetex,pdfpagelabels=false,pdfborder={0 0 0}]{hyperref}
 \usepackage{forloop}
 
-\usepackage{index}
 \newindex[cisloPisne]{default}{idx_pisne}{ind_pisne}{Rejstřík písní}
 \newindex[cisloPisne]{interpreti}{idx_interpreti}{ind_interpreti}{Rejstřík interpretů}
 
@@ -97,7 +97,7 @@
   \fi
 }
 
-\newcommand\emptyPage{\shipout\vbox to \vsize{\hbox to \hsize{}}\stepcounter{page}}
+\newcommand\emptyPage{\shipout\vbox to \vsize{\hbox to \hsize{\hss}\vss}\stepcounter{page}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -134,6 +134,10 @@
 % Kontrola dvojstránek probíhá v rámci \zs, takže pro poslední písničku ji 
 % musíme zavolat ručně
 \twopagecheck
+
+% Hot Fix: přebít \thispagestyle{plain} z index.sty, způsobuje čísla stránek
+% na první stránce rejstříku
+\renewcommand\thispagestyle[1]{}
 
 % Rejstřík podle interpretů
 \fancyfoot{}

@@ -64,7 +64,7 @@ def udelejRejstrik(vstup, vystup):
 			strana = strana.replace("}","")
 			zac = rozp[0] 
 		
-			zac = zac.replace("\\indexentry {","")
+			zac = zac.replace("\\indexentry {","").replace("|hyperpage","")
 			
 			zac = zac.split("!")
 			
