@@ -405,7 +405,11 @@
   %  \else\keyIndex{{\protect\sbChord#3\protect\relax} -- #2}{\theSBSongCnt}\fi%
   \vspace{\SpaceAboveSTitle}%
   \if#1Y\begin{center}\fi
-    {\STitleNumberFont\theSBSongCnt}{\STitleFont\ --- #2}%
+    \ifdefined\SINGLE
+      {\STitleFont #2}%
+    \else
+      {\STitleNumberFont\theSBSongCnt}{\STitleFont\ --- #2}%
+    \fi
     \ifWordsOnly\relax\else{\STitleKeyFont}\fi%
   \if#1Y\end{center}\fi
   \STitleMarkboth{#2}{\relax}%
