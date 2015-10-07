@@ -10,16 +10,19 @@ options=[
 		"TPBAND",
 		"NOHEADER",
 		"ONESIDE",
+#		"MUSIC",
 	]
 
 songs=[
 	"./tp-songs/03_zahranicni/Champs____Tequilla.tex",
-	"./tp-songs/03_zahranicni/Pink____Fucking_Perfect.tex",
+	"./tp-songs/03_zahranicni/Steve_Miller_Band____Joker.tex",
 	"./tp-songs/03_zahranicni/Peggy_Lee____Good_Day.tex",
-	"./tp-songs/03_zahranicni/Natalie_Imbruglia____Torn.tex",
-	"./tp-songs/03_zahranicni/Mamas__Papas____California_dreaming.tex",
+	"./tp-songs/03_zahranicni/Meredith_Brooks____Bitch.tex",
 	"./tp-songs/03_zahranicni/Eva_Cassidy____Wade_in_the_Water.tex",
 
+	"./tp-songs/03_zahranicni/Natalie_Imbruglia____Torn.tex",
+	"./tp-songs/03_zahranicni/Mamas__Papas____California_dreaming.tex",
+	"./tp-songs/03_zahranicni/Pink____Fucking_Perfect.tex",
 	"./tp-songs/01_folk/Zuzana_Navarová____Sedávám_na_domovních_schodech.tex",
 	"./tp-songs/01_folk/Jarek_Nohavica____Básnířka.tex",
 	"./tp-songs/02_pop_rock/Petr_Hapka____Šaškové_počmáraní.tex",
@@ -30,8 +33,8 @@ songs=[
 	"./tp-songs/01_folk/Ježek____Svítá.tex",
 	"./tp-songs/02_pop_rock/Trabant____Černej_pasažér.tex",
 	"./tp-songs/01_folk/Jarek_Nohavica____Cukrářská_bossanova.tex",
-	"./tp-songs/04_tp/Johnny____Dej_mi_nějaký_tóny.tex",
 	"./tp-songs/04_tp/Johnny____On_hledá_ji.tex",
+	"./tp-songs/04_tp/Johnny____Dej_mi_nějaký_tóny.tex",
 	"./tp-songs/02_pop_rock/Yvonne_Přenosilová____Boty_proti_lásce.tex",
 	"./tp-songs/02_pop_rock/film_Pražská_5____Strom_kýve_pahýly.tex",
 	"./tp-songs/03_zahranicni/Norah_Jones____Dont_Know_Why.tex",
@@ -43,7 +46,6 @@ songs=[
 	"./tp-songs/03_zahranicni/Cornershop____Brimful_of_Asha.tex",
 	"./tp-songs/03_zahranicni/Suzanne_Vega____Caramel.tex",
 	"./tp-songs/03_zahranicni/Chuck_Berry____Johnny_B_Goode.tex",
-	"./tp-songs/03_zahranicni/Steve_Miller_Band____Joker.tex",
 	"./tp-songs/03_zahranicni/4_Non_Blondes____Whats_Up.tex",
 	"./tp-songs/03_zahranicni/Bobby_McFerrin____Dont_Worry_Be_Happy.tex",
 	"./tp-songs/03_zahranicni/Bill_Haley____Rock_Around_the_Clock.tex",
@@ -55,7 +57,6 @@ songs=[
 	("./tp-songs/02_pop_rock/film_Kouř____Je_to_fajn,_fajnový.tex",3),
 	"./tp-songs/03_zahranicni/Elvis_Presley____Blue_Suede_Shoes.tex",
 	"./tp-songs/03_zahranicni/Elvis_Presley____Hound_Dog.tex",
-	"./tp-songs/03_zahranicni/Meredith_Brooks____Bitch.tex",
 ### Pridavky po pridavcich
 	"./tp-songs/03_zahranicni/Gerard_Lenorman____La_Ballade.tex",
 	"./tp-songs/03_zahranicni/Leonard_Cohen____Suzanne.tex",
