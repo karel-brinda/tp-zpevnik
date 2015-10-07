@@ -1,0 +1,170 @@
+\documentclass[11pt,a4paper%
+  \ifdefined\ONESIDE,oneside\fi%
+]{book}
+
+\usepackage{fontspec}
+\usepackage{index}
+\usepackage{calc}
+\usepackage{fancyhdr}
+\usepackage[czech]{babel}
+\usepackage[chordbk]{songbook}
+\usepackage[xetex,pdfpagelabels=false,pdfborder={0 0 0}]{hyperref}
+\usepackage{forloop}
+
+\newindex[cisloPisne]{default}{idx_pisne}{ind_pisne}{Rejstřík písní}
+\newindex[cisloPisne]{interpreti}{idx_interpreti}{ind_interpreti}{Rejstřík interpretů}
+
+\selectlanguage{czech}
+
+\newcounter{cisloPisne}
+\newcommand\cisloPisne{\arabic{cisloPisne}}
+
+% Hlavičky
+\ifdefined\NOHEADER
+  \pagestyle{empty}
+\else
+  \pagestyle{fancy}
+  \fancyhead[RE]{\RHEAD}
+  \fancyhead[LO]{\LHEAD}
+  \fancyhead[RO]{}
+  \fancyhead[LE]{}
+  \fancyfoot{}
+\fi
+
+% Zkratky pro makra songbook.sty
+\newcommand\zp[2]{
+  \stepcounter{cisloPisne}
+  \label{pis.\cisloPisne}
+  \begin{song}{#1}{}{}{}{#2}{}
+  \twopagecheck
+  \global\lastsong={#1}
+  \index{#1}
+  \index[interpreti]{#2!#1}
+}
+\newcommand\kp{\end{song}}
+\newcommand\zs{\begin{SBVerse}}
+\newcommand\ks{\end{SBVerse}}
+\newcommand\zr{\begin{SBChorus}}
+\newcommand\kr{\end{SBChorus}}
+
+% Nastavení songbook
+\renewcommand\CpyRt{}
+\renewcommand\SBChorusTag{R:}
+\renewcommand\SBBaseLang{Czech}
+\renewcommand\SBUnknownTag{}
+\renewcommand\SBWAndMTag{}
+\font\myTinySF=cmss8 at 8pt
+\renewcommand{\CpyRt}{}
+\renewcommand{\SBRef}{}
+\renewcommand{\SBIntro}{}
+\renewcommand{\SBExtraKeys}{}
+
+% Makra pro vkládání celých PDF (přední a zadní obálka)
+\newcounter{insertCur}
+\newcounter{insertTotal}
+\newcommand\insertPage[2]{\shipout\vbox to 29.7cm{\vss\hbox to 21cm{\hss{\XeTeXpdffile #1 page #2 }\hss}\vss}\stepcounter{page}}
+\newcommand\countPages[1]{\setcounter{insertTotal}{\XeTeXpdfpagecount #1 }}
+\newcommand\insertPDF[1]{\countPages{#1}\stepcounter{insertTotal}
+  \forloop{insertCur}{1}{\value{insertCur} < \value{insertTotal}}{%
+    \insertPage{#1}{\value{insertCur}}}}
+
+% Makra pro kontrolu rozložení dvoustran
+\newcounter{lastpage}
+\newcounter{numpages}
+\newtoks\lastsong
+\newtoks\errors
+\newcounter{errorCount}
+\def\space{ }
+\newcommand\twopagecheck{%
+  \unless\ifdefined\SKIPCHECK
+  \unless\ifdefined\ONESIDE
+    \setcounter{numpages}{\value{page}}
+    \addtocounter{numpages}{-\value{lastpage}}
+    \ifnum\value{numpages}>2
+      \message{^^J^^J\space\space Píseň "\the\lastsong" má víc dvě stránky.^^J^^J}
+      \stepcounter{errorCount}
+      \edef\nerrors{\the\errors^^J\space\space\the\lastsong}
+      \global\errors\expandafter{\nerrors}
+    \else\ifnum\value{numpages}>1
+      \unless\ifodd\value{page}
+        \message{^^J^^J\space\space Píseň "\the\lastsong" začala na pravé a skončila na levé.^^J^^J}
+        \stepcounter{errorCount}
+        \edef\nerrors{\the\errors^^J\space\space\the\lastsong}
+        \global\errors\expandafter{\nerrors}
+      \fi\fi
+    \fi\fi
+    \setcounter{lastpage}{\value{page}}
+  \fi
+}
+
+\newcommand\emptyPage{\shipout\vbox to \vsize{\hbox to \hsize{\hss}\vss}\stepcounter{page}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+% FIXME: co tohle dělá?
+\ifWordBk
+  \twocolumn
+\fi
+
+% Stránky je potřeba počítat od sudé (pravé)
+\setcounter{page}{0}
+
+% Přední obálka
+\ifdefined\FRONTCOVER
+  \insertPDF{\FRONTCOVER}
+  \unless\ifdefined\ONESIDE
+    % Pokud přední obálka existuje, vloží ji a jednu nebo dvě volné strany za 
+    % ni (mimo ONESIDE), aby první stránka zpěvníku vyšla napravo
+    \emptyPage
+    \ifodd\value{page}\emptyPage\fi
+    % Pro budoucí \twopagecheck v \zs první písničky
+    \setcounter{lastpage}{\value{page}}
+  \fi
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Seznam písní
+
+\input{_list.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Kontrola dvojstránek probíhá v rámci \zs, takže pro poslední písničku ji 
+% musíme zavolat ručně
+\twopagecheck
+
+% Hot Fix: přebít \thispagestyle{plain} z index.sty, způsobuje čísla stránek
+% na první stránce rejstříku
+\renewcommand\thispagestyle[1]{}
+
+% Rejstřík podle interpretů
+\fancyfoot{}
+\printindex[interpreti]
+% Rejstřík podle písní
+\fancyfoot{}
+\printindex
+
+% Zadní obálka
+\ifdefined\BACKCOVER
+  \unless\ifdefined\ONESIDE
+    % Vložit jednu nebo dvě prázdné stránky tak, aby poslední strana zadní 
+    % obálky (pokud existuje) vyšla nalevo (mimo ONESIDE)
+    \emptyPage
+    \countPages{\BACKCOVER}
+    \addtocounter{insertTotal}{\value{page}}
+    \ifodd\value{insertTotal}\emptyPage\fi
+  \fi
+  \insertPDF{\BACKCOVER}
+\fi
+
+% Vypsat písně, které neprošly kontrolou dvoustran
+\ifnum\value{errorCount} > 0
+  \errmessage{^^J^^J^^J**Chyby zarovnání dvoustran u písní:**\the\errors^^J^^J%
+  Překlad nyní skončí chybou. Opravte konflikty a spusťte znovu, případně,^^J%
+  jestliže chcete tuto kontrolu vypnout, přidejte options nebo options = [ "SKIPCHECK"\space]^^J%
+}
+\fi
+
+\end{document}

@@ -22,6 +22,9 @@ def cb_pdf():
 def cb_tex():
 	return os.path.join(cache_dir(),"_{}.tex".format(chordbook))
 
+def cb_list():
+	return os.path.join(cache_dir(),"_list.tex".format(chordbook))
+
 def cb_idx():
 	return os.path.join(cache_dir(),"_{}.idx".format(chordbook))
 
@@ -46,14 +49,14 @@ def idx_interpreti():
 
 def call_xelatex(xelatex_file):
 	if platform.system()=="Windows":
-		xelatex_command = """xelatex -include-directory "{dir}" -aux-directory "{dir}" -output-directory "{dir}" "{texfile}" """.format(
+		xelatex_command = """xelatex -interaction nonstopmode -include-directory "{dir}" -aux-directory "{dir}" -output-directory "{dir}" "{texfile}" """.format(
 				dir=os.path.basedir(xelatex_file),
 				texfile=xelatex_file,
 			)
 	else:
 		xelatex_command = """
 			cd "{dir}"
-			xelatex "{texfile}"
+			xelatex -interaction nonstopmode "{texfile}"
 			""".format(
 				dir=os.path.dirname(xelatex_file),
 				texfile=os.path.basename(xelatex_file),
@@ -121,9 +124,6 @@ rule main_pdf:
 		[sc_tex(x) for x in songs_dict.keys()],
 		workflow.snakefile,
 	run:
-		volat_xelatex_dvakrat=False
-		xelatex_zavolan=0
-
 		if not os.path.isfile(ind_pisne()) or not os.path.isfile(ind_interpreti()):
 			call_xelatex(input[0])
 			udelejRejstrik(idx_pisne(),ind_pisne()); 
@@ -149,8 +149,10 @@ rule main_tex:
 	input:
 		workflow.snakefile,
 		[sc_tex(x) for x in songs_dict.keys()],
+		os.path.join("tpcb","template.tex"),
 	output:
 		cb_tex(),
+		cb_list(),
 		os.path.join(cache_dir(),"songbook.sty"),
 	run:
 		try:
@@ -161,188 +163,28 @@ rule main_tex:
 			shutil.copyfile(cover_back, os.path.join(cache_dir(),os.path.basename(cover_back)))
 		except NameError:
 			pass
-		# todo: only filename
 		with open(output[0],"w+",encoding="utf-8") as f:
-			main_tex=r"""% -*-coding: utf-8 -*-
-				\documentclass[11pt,a4paper{}]{{book}}""".format(",oneside" if "ONESIDE" in options else "") + \
-				os.linesep.join(["\\def\\{}{{}}".format(x) for x in options]) \
-				+ r"""
-				\usepackage[czech]{babel}
-				\usepackage{pdfpages}
-				\usepackage{fancyhdr}
-				\usepackage{fontspec}
-				\usepackage[chordbk]{songbook}
-				\usepackage{refcount}
-				\usepackage[xetex,pdfpagelabels=false]{hyperref}
-				\usepackage{forloop}
-
-				\usepackage{index}
-				\newindex[cisloPisne]{default}{idx_pisne}{ind_pisne}{Rejstřík písní}
-				\newindex[cisloPisne]{interpreti}{idx_interpreti}{ind_interpreti}{Rejstřík interpretů}
-
-				\selectlanguage{czech}
-
-				\newcounter{cisloPisne}
-				\newcommand\cisloPisne{\arabic{cisloPisne}}
-
-				\newcommand\zp[2]{
-					\stepcounter{cisloPisne}
-					\label{pis.\cisloPisne}
-					\begin{song}{#1}{}{}{}{#2}{}
-					\twopagecheck
-					\global\lastsong={#1}
-					\index{#1}
-					\index[interpreti]{#2!#1}
-				}
-				\newcommand\kp{\end{song}}
-				\newcommand\zs{\begin{SBVerse}}
-				\newcommand\ks{\end{SBVerse}}
-				\newcommand\zr{\begin{SBChorus}}
-				\newcommand\kr{\end{SBChorus}}
-
-				\renewcommand\CpyRt{}
-				\renewcommand\SBChorusTag{R:}
-				\renewcommand\SBBaseLang{Czech}
-				\renewcommand\SBUnknownTag{}
-				\renewcommand\SBWAndMTag{}
-
-				%\DeclareOption{compactallsongs}{\CompactAllModetrue}
-
-				%%%
-				% nejaky blbosti, vypinam, co se da
-				%%%
-				\font\myTinySF=cmss8 at 8pt
-				\renewcommand{\CpyRt}{}
-				\renewcommand{\SBRef}{}
-				\renewcommand{\SBIntro}{}
-				\renewcommand{\SBExtraKeys}{}
-
-				\newcounter{insertCur}
-				\newcounter{insertTotal}
-				\newcommand\insertPage[2]{\shipout\vbox{\XeTeXpdffile #1 page #2 }\stepcounter{page}}
-				\newcommand\countPages[1]{\setcounter{insertTotal}{\XeTeXpdfpagecount #1 }}
-				\newcommand\insertPDF[1]{\countPages{#1}\stepcounter{insertTotal}
-					\forloop{insertCur}{1}{\value{insertCur} < \value{insertTotal}}{%
-						\insertPage{#1}{\value{insertCur}}}}
-
-				\newcounter{lastpage}
-				\newcounter{numpages}
-				\newtoks\lastsong
-				\newtoks\errors
-				\newcounter{errorCount}
-				\def\space{ }
-				\newcommand\twopagecheck{%
-					\unless\ifdefined\SKIPCHECK
-					\unless\ifdefined\ONESIDE
-						\setcounter{numpages}{\value{page}}
-						\addtocounter{numpages}{-\value{lastpage}}
-						\ifnum\value{numpages}>2
-							\message{^^J^^J\space\space Píseň "\the\lastsong" má víc dvě stránky.^^J^^J}
-							\stepcounter{errorCount}
-							\edef\nerrors{\the\errors^^J\space\space\the\lastsong}
-							\global\errors\expandafter{\nerrors}
-						\else\ifnum\value{numpages}>1
-							\unless\ifodd\value{page}
-								\message{^^J^^J\space\space Píseň "\the\lastsong" začala na pravé a skončila na levé.^^J^^J}
-								\stepcounter{errorCount}
-								\edef\nerrors{\the\errors^^J\space\space\the\lastsong}
-								\global\errors\expandafter{\nerrors}
-							\fi\fi
-						\fi\fi
-						\setcounter{lastpage}{\value{page}}
-					\fi
-				}
-
-				\newcommand\emptyPage{\shipout\vbox to \vsize{\hbox to \hsize{}}\stepcounter{page}}
-
-				%%%
-				% Hlavicky
-				%%%
-
-				\ifdefined\NOHEADER
-					\pagestyle{empty}
-				\else
-					\pagestyle{fancy}
-					\fancyhead[RE]{""" + RHEAD + r"""}
-					\fancyhead[LO]{""" + LHEAD + r"""}
-					\fancyhead[RO]{}
-					\fancyhead[LE]{}
-					\fancyfoot{}
-				\fi
-
-				\begin{document}
-
-				%%%
-				% Uncomment "\maketitle" statement to make a title page.
-				%%%
-				%\maketitle
-
-				\mainmatter
-				\ifWordBk
-					\twocolumn
-				\fi
-
-				\setcounter{page}{0}
-			"""
+			main_tex = os.linesep.join(["\\def\\{}{{}}".format(x) for x in options])+"\n"
+			main_tex += "\\def\\RHEAD{{{}}}\n".format(RHEAD)
+			main_tex += "\\def\\LHEAD{{{}}}\n".format(LHEAD)
 			try:
-				# Pokud přední obálka existuje, vloží ji a jednu nebo dvě volné strany za ni (mimo ONESIDE),
-				# aby první stránka zpěvníku vyšla napravo
-				open(cover_front,'rb')
-				main_tex += "\insertPDF{"+os.path.basename(cover_front)+"}\n"
-				if not "ONESIDE" in options:
-					main_tex += r"""
-					\emptyPage
-					\ifodd\value{page}\emptyPage\fi
-					\setcounter{lastpage}{\value{page}}
-					"""
+				main_tex += "\\def\\FRONTCOVER{{{}}}\n".format(os.path.basename(cover_front))
 			except NameError:
 				pass
-			main_tex += os.linesep.join(
+			try:
+				main_tex += "\\def\\BACKCOVER{{{}}}\n".format(os.path.basename(cover_back))
+			except NameError:
+				pass
+			main_tex += "\n\input{template.tex}\n"
+			f.write(main_tex)
+		with open(output[1],"w+",encoding="utf-8") as f:
+			list_tex = os.linesep.join(
 					["\input {{{}}}".format(os.path.relpath(sc_tex(x),cache_dir()))
 						for x in songs_dict.keys()]
-				) + r"""
-				\twopagecheck
-
-				%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-				%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-				%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-				% rejstrik podle interpretu
-				\fancyfoot{}
-				\printindex[interpreti]
-				% rejstrik podle pisni
-				\fancyfoot{}
-				\printindex
-
-			"""
-			try:
-				open(cover_back,'rb')
-				# Vložit jednu nebo dvě prázdné stránky tak, aby poslední strana zadní obálky (pokud existuje)
-				# vyšla nalevo (mimo ONESIDE)
-				if not "ONESIDE" in options:
-					main_tex += r"""
-					\emptyPage
-					\countPages{"""+os.path.basename(cover_back)+r"""}
-					\addtocounter{insertTotal}{\value{page}}
-					\ifodd\value{insertTotal}\emptyPage\fi
-					"""
-				main_tex += "\insertPDF{"+os.path.basename(cover_back)+"}\n\n"
-			except NameError:
-				pass
-			main_tex += r"""
-				\ifnum\value{errorCount} > 0
-					\errmessage{^^J^^J**Chyby zarovnání dvoustran u písní:**\the\errors^^J^^J%
-					Překlad nyní skončí chybou. Opravte konflikty a spusťte znovu, případně,^^J%
-					jestliže chcete tuto kontrolu vypnout, přidejte options = [ "ONESIDE"\space]^^J%
-					nebo options = [ "SKIPCHECK"\space]%
-}
-				\fi
-
-				\end{document}
-			"""
-			f.write(main_tex)
-			shutil.copyfile(os.path.join("tpcb","songbook.sty"),os.path.join(cache_dir(),"songbook.sty"))
+				)
+			f.write(list_tex)
+		shutil.copyfile(os.path.join("tpcb","template.tex"),os.path.join(cache_dir(),"template.tex"))
+		shutil.copyfile(os.path.join("tpcb","songbook.sty"),os.path.join(cache_dir(),"songbook.sty"))
 
 # o1/pisen.tex   =>  cache/pisen.tex
 # o2/pisen2.tex  =>  cache/pisen2.tex
