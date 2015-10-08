@@ -543,18 +543,38 @@
 }
 
 %%%
-\newcommand{\Ch}[2]{{%
+\makeatletter
+\def\Ch{\@ifstar\@Ch\@@Ch}
+
+\def\@Ch#1#2{{%
   \ifChordBk%
     \setbox1=\hbox{\ChFont\sbChord#1\relax\strut}%
     \setbox0=\hbox{#2}%
     \ifdim\wd1<\wd0%
-      \strut\raise\SBChordRaise\copy1\kern-\wd1\copy0%
+      \strut\raise\SBChordRaise\copy1\kern-\wd1{#2}%
+    \else\ifdim\wd0=0pt%
+      \strut\copy0\kern-\wd0\strut\raise\SBChordRaise\copy1%
+    \else%
+      \strut\raise\SBChordRaise\copy1\kern-\wd1\strut\hbox to \wd1{#2\cleaders\hbox{\kern-.5pt-\kern-.5pt}\hfill}%
+    \fi\fi%
+  \else%
+    #2%
+  \fi}}
+
+\def\@@Ch#1#2{{%
+  \ifChordBk%
+    \setbox1=\hbox{\ChFont\sbChord#1\relax\strut}%
+    \setbox0=\hbox{#2}%
+    \ifdim\wd1<\wd0%
+      \strut\raise\SBChordRaise\copy1\kern-\wd1{#2}%
     \else%
       \strut\copy0\kern-\wd0\strut\raise\SBChordRaise\copy1%
     \fi%
   \else%
     #2%
   \fi}}
+
+\makeatother
 
 \newcommand{\ChX}[2]{%
   \ifWordsOnly%
