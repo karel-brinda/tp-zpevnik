@@ -22,9 +22,6 @@ def cb_pdf():
 def cb_tex():
 	return os.path.join(cache_dir(),"_{}.tex".format(chordbook))
 
-def cb_list():
-	return os.path.join(cache_dir(),"_list.tex".format(chordbook))
-
 def cb_idx():
 	return os.path.join(cache_dir(),"_{}.idx".format(chordbook))
 
@@ -33,6 +30,12 @@ def cb_ind():
 
 def sc_tex(song):
 	return os.path.join(cache_dir(),"0_{}.tex".format(song))
+
+def sc_pdf(song):
+	try:
+		return os.path.join(singles_dir,"{}.pdf".format(song))
+	except NameError:
+		return "{}.pdf".format(song)
 
 
 def ind_pisne():
@@ -110,6 +113,8 @@ songs_dict_transp = OrderedDict(
 				]
 			)
 
+singles = [ sc_pdf(x) for x in songs_dict.keys() ]
+
 # zpevnik.tex => zpevnik.pdf
 rule main_pdf:
 	output:
@@ -123,6 +128,8 @@ rule main_pdf:
 		cb_tex(),
 		[sc_tex(x) for x in songs_dict.keys()],
 		workflow.snakefile,
+		os.path.join(cache_dir(),"template.tex"),
+		os.path.join(cache_dir(),"songbook.sty"),
 	run:
 		if not os.path.isfile(ind_pisne()) or not os.path.isfile(ind_interpreti()):
 			call_xelatex(input[0])
@@ -142,7 +149,7 @@ rule main_pdf:
 			call_xelatex(input[0])
 
 		main_pdf=cb_tex().replace(".tex",".pdf")
-		shutil.copyfile(main_pdf,os.path.basename(main_pdf))
+		shutil.copyfile(main_pdf,output[0])
 
 # cache/pisen.tex, cache/pisen2.tex => zpevnik.tex
 rule main_tex:
@@ -152,8 +159,7 @@ rule main_tex:
 		os.path.join("tpcb","template.tex"),
 	output:
 		cb_tex(),
-		cb_list(),
-		os.path.join(cache_dir(),"songbook.sty"),
+		os.path.join(cache_dir(),"_list.tex"),
 	run:
 		try:
 			shutil.copyfile(cover_front, os.path.join(cache_dir(),os.path.basename(cover_front)))
@@ -164,7 +170,8 @@ rule main_tex:
 		except NameError:
 			pass
 		with open(output[0],"w+",encoding="utf-8") as f:
-			main_tex = os.linesep.join(["\\def\\{}{{}}".format(x) for x in options])+"\n"
+			main_tex = "\\def\\thelist{_list.tex}\n"
+			main_tex += os.linesep.join(["\\def\\{}{{}}".format(x) for x in options])+"\n"
 			main_tex += "\\def\\RHEAD{{{}}}\n".format(RHEAD)
 			main_tex += "\\def\\LHEAD{{{}}}\n".format(LHEAD)
 			try:
@@ -183,6 +190,15 @@ rule main_tex:
 						for x in songs_dict.keys()]
 				)
 			f.write(list_tex)
+
+rule copies:
+	input:
+		os.path.join("tpcb","template.tex"),
+		os.path.join("tpcb","songbook.sty"),
+	output:
+		os.path.join(cache_dir(),"template.tex"),
+		os.path.join(cache_dir(),"songbook.sty"),
+	run:
 		shutil.copyfile(os.path.join("tpcb","template.tex"),os.path.join(cache_dir(),"template.tex"))
 		shutil.copyfile(os.path.join("tpcb","songbook.sty"),os.path.join(cache_dir(),"songbook.sty"))
 
@@ -202,3 +218,19 @@ rule song_tex:
 			song2=transposition_song(song,songs_dict_transp[wildcards.song])
 		with open(output[0],"w+",encoding="utf-8") as f:
 			f.write(song2)
+
+rule song_pdf:
+	input:
+		sc_tex("{song}"),
+		os.path.join(cache_dir(),"template.tex"),
+		os.path.join(cache_dir(),"songbook.sty"),
+	output:
+		os.path.join(cache_dir(),"_single_{song}.tex"),
+		sc_pdf("{song,[^_].*}"),
+	run:
+		with open(output[0],"w+",encoding="utf-8") as f:
+			main_tex = "\\def\\thelist{{{}}}\n".format(os.path.basename(input[0]))
+			main_tex += "\\def\\SINGLE{}\n\\input{template.tex}\n"
+			f.write(main_tex)
+		call_xelatex(output[0])
+		shutil.copyfile(output[0].replace(".tex",".pdf"),output[1])

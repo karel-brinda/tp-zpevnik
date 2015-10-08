@@ -1,3 +1,8 @@
+\ifdefined\SINGLE
+  \def\ONESIDE{}
+  \def\NOHEADER{}
+\fi
+
 \documentclass[11pt,a4paper%
   \ifdefined\ONESIDE,oneside\fi%
 ]{book}
@@ -11,8 +16,10 @@
 \usepackage[xetex,pdfpagelabels=false,pdfborder={0 0 0}]{hyperref}
 \usepackage{forloop}
 
-\newindex[cisloPisne]{default}{idx_pisne}{ind_pisne}{Rejstřík písní}
-\newindex[cisloPisne]{interpreti}{idx_interpreti}{ind_interpreti}{Rejstřík interpretů}
+\unless\ifdefined\SINGLE
+  \newindex[cisloPisne]{default}{idx_pisne}{ind_pisne}{Rejstřík písní}
+  \newindex[cisloPisne]{interpreti}{idx_interpreti}{ind_interpreti}{Rejstřík interpretů}
+\fi
 
 \selectlanguage{czech}
 
@@ -34,12 +41,20 @@
 % Zkratky pro makra songbook.sty
 \newcommand\zp[2]{
   \stepcounter{cisloPisne}
-  \label{pis.\cisloPisne}
+  \unless\ifdefined\SINGLE
+    \label{pis.\cisloPisne}
+  \else
+    \ifnum\value{cisloPisne} > 1
+      \errmessage{Více než jedna píseň v režimu SINGLE.}
+    \fi
+  \fi
   \begin{song}{#1}{}{}{}{#2}{}
   \twopagecheck
   \global\lastsong={#1}
-  \index{#1}
-  \index[interpreti]{#2!#1}
+  \unless\ifdefined\SINGLE
+    \index{#1}
+    \index[interpreti]{#2!#1}
+  \fi
 }
 \newcommand\kp{\end{song}}
 \newcommand\zs{\begin{SBVerse}}
@@ -127,7 +142,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Seznam písní
 
-\input{_list.tex}
+\input{\thelist}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -139,12 +154,14 @@
 % na první stránce rejstříku
 \renewcommand\thispagestyle[1]{}
 
-% Rejstřík podle interpretů
-\fancyfoot{}
-\printindex[interpreti]
-% Rejstřík podle písní
-\fancyfoot{}
-\printindex
+\unless\ifdefined\SINGLE
+  % Rejstřík podle interpretů
+  \fancyfoot{}
+  \printindex[interpreti]
+  % Rejstřík podle písní
+  \fancyfoot{}
+  \printindex
+\fi
 
 % Zadní obálka
 \ifdefined\BACKCOVER
