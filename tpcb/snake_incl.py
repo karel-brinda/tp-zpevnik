@@ -2,7 +2,7 @@
 
 import collections
 import os
-import PyPDF2
+#import PyPDF2
 import shutil
 import platform
 import filecmp
@@ -14,31 +14,25 @@ from chords import *
 from index import *
 
 def cache_dir():
-	return "cache.{}".format(chordbook)
+	return os.path.join("cache",chordbook)
 
 def cb_pdf():
-	return "_{}.pdf".format(chordbook)
+	return os.path.join("output","{}.pdf".format(chordbook))
 
 def cb_tex():
-	return os.path.join(cache_dir(),"_{}.tex".format(chordbook))
+	return os.path.join(cache_dir(),"{}.tex".format(chordbook))
 
 def cb_idx():
-	return os.path.join(cache_dir(),"_{}.idx".format(chordbook))
+	return os.path.join(cache_dir(),"{}.idx".format(chordbook))
 
 def cb_ind():
-	return os.path.join(cache_dir(),"_{}.ind".format(chordbook))
+	return os.path.join(cache_dir(),"{}.ind".format(chordbook))
 
 def sc_tex(song):
-	return os.path.join(cache_dir(),"0_{}.tex".format(song))
-
-#def sc_pdf(song):
-#	try:
-#		return os.path.join(singles_dir,"{}.pdf".format(song))
-#	except NameError:
-#		return "{}.pdf".format(song)
+	return os.path.join(cache_dir(),"{}.tex".format(song))
 
 def sc_pdf(song):
-	return os.path.join(cache_dir(),"_single_{}.pdf".format(song))
+	return os.path.join("output",chordbook+"_singles","{}.pdf".format(song))
 
 def ind_pisne():
 	return cb_ind()+"_pisne"
@@ -128,6 +122,11 @@ rule main_pdf:
 		os.path.join(cache_dir(),"template.tex"),
 		os.path.join(cache_dir(),"songbook.sty"),
 	run:
+		# Výstup je nyní v adresáři output. Pokud existuje stará verze, smažeme
+		# ji, aby nemátla.
+		if os.path.isfile("_{}.pdf".format(chordbook)):
+			os.remove("_{}.pdf".format(chordbook))
+
 		if not os.path.isfile(ind_pisne()) or not os.path.isfile(ind_interpreti()):
 			call_xelatex(input[0])
 			udelejRejstrik(idx_pisne(),ind_pisne()); 
@@ -223,16 +222,16 @@ rule song_pdf:
 		os.path.join(cache_dir(),"template.tex"),
 		os.path.join(cache_dir(),"songbook.sty"),
 	output:
-		os.path.join(cache_dir(),"_single_{song}.tex"),
-		temp(os.path.join(cache_dir(),"_single_{song}.log")),
-		temp(os.path.join(cache_dir(),"_single_{song}.out")),
-		temp(os.path.join(cache_dir(),"_single_{song}.aux")),
-		#sc_pdf("{song,[^_].*}"),
-		sc_pdf("{song}")
+		sc_pdf("{song}"),
+		os.path.join(cache_dir(),"single_{song}.tex"),
+		temp(os.path.join(cache_dir(),"single_{song}.pdf")),
+		temp(os.path.join(cache_dir(),"single_{song}.log")),
+		temp(os.path.join(cache_dir(),"single_{song}.out")),
+		temp(os.path.join(cache_dir(),"single_{song}.aux")),
 	run:
-		with open(output[0],"w+",encoding="utf-8") as f:
+		with open(output[1],"w+",encoding="utf-8") as f:
 			main_tex = "\\def\\thelist{{{}}}\n".format(os.path.basename(input[0]))
 			main_tex += "\\def\\SINGLE{}\n\\input{template.tex}\n"
 			f.write(main_tex)
-		call_xelatex(output[0])
-		#shutil.copyfile(output[0].replace(".tex",".pdf"),output[1])
+		call_xelatex(output[1])
+		shutil.copyfile(output[2],output[0])
