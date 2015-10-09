@@ -68,6 +68,17 @@ def call_xelatex(xelatex_file):
 			)
 	shell(xelatex_command)
 
+def run():
+	if not "SINGLESONLY" in options:
+		outputs = [ cb_pdf() ]
+	else:
+		outputs = []
+
+	if "SINGLES" in options or "SINGLESONLY" in options:
+		outputs.extend([ sc_pdf(x) for x in songs_dict.keys() ])
+	
+	return outputs
+
 #####
 ##### SETTING ALL PARAMS
 #####
@@ -97,8 +108,6 @@ for x in songs:
 songs_dict = OrderedDict([ (x[2],x[0]) for x in songs_prop ])
 
 songs_dict_transp = OrderedDict([ (x[2],x[1]) for x in songs_prop ])
-
-singles = [ sc_pdf(x) for x in songs_dict.keys() ]
 
 # zpevnik.tex => zpevnik.pdf
 rule main_pdf:
