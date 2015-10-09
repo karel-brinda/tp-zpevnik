@@ -31,8 +31,8 @@
   \pagestyle{empty}
 \else
   \pagestyle{fancy}
-  \fancyhead[RE]{\RHEAD}
-  \fancyhead[LO]{\LHEAD}
+  \fancyhead[RE]{\ifdefined\RHEAD\RHEAD\fi}
+  \fancyhead[LO]{\ifdefined\LHEAD\LHEAD\fi}
   \fancyhead[RO]{}
   \fancyhead[LE]{}
   \fancyfoot{}
