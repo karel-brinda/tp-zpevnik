@@ -184,8 +184,8 @@ rule copies:
 		os.path.join("tpcb","template.tex"),
 		os.path.join("tpcb","songbook.sty"),
 	output:
-		temp(os.path.join(cache_dir(),"template.tex")),
-		temp(os.path.join(cache_dir(),"songbook.sty")),
+		os.path.join(cache_dir(),"template.tex"),
+		os.path.join(cache_dir(),"songbook.sty"),
 	run:
 		shutil.copyfile(os.path.join("tpcb","template.tex"),os.path.join(cache_dir(),"template.tex"))
 		shutil.copyfile(os.path.join("tpcb","songbook.sty"),os.path.join(cache_dir(),"songbook.sty"))
@@ -214,7 +214,7 @@ rule song_pdf:
 		os.path.join(cache_dir(),"template.tex"),
 		os.path.join(cache_dir(),"songbook.sty"),
 	output:
-		temp(os.path.join(cache_dir(),"_single_{song}.tex")),
+		os.path.join(cache_dir(),"_single_{song}.tex"),
 		temp(os.path.join(cache_dir(),"_single_{song}.log")),
 		temp(os.path.join(cache_dir(),"_single_{song}.out")),
 		temp(os.path.join(cache_dir(),"_single_{song}.aux")),
