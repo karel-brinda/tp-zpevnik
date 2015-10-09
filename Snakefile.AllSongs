@@ -22,5 +22,5 @@ include:"tpcb/snake_incl.py"
 
 rule all:
 	input:
-		cb_pdf()
+		run()
 

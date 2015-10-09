@@ -31,12 +31,14 @@ def cb_ind():
 def sc_tex(song):
 	return os.path.join(cache_dir(),"0_{}.tex".format(song))
 
-def sc_pdf(song):
-	try:
-		return os.path.join(singles_dir,"{}.pdf".format(song))
-	except NameError:
-		return "{}.pdf".format(song)
+#def sc_pdf(song):
+#	try:
+#		return os.path.join(singles_dir,"{}.pdf".format(song))
+#	except NameError:
+#		return "{}.pdf".format(song)
 
+def sc_pdf(song):
+	return os.path.join(cache_dir(),"_single_{}.pdf".format(song))
 
 def ind_pisne():
 	return cb_ind()+"_pisne"
@@ -66,18 +68,20 @@ def call_xelatex(xelatex_file):
 			)
 	shell(xelatex_command)
 
+def run():
+	if not "SINGLESONLY" in options:
+		outputs = [ cb_pdf() ]
+	else:
+		outputs = []
+
+	if "SINGLES" in options or "SINGLESONLY" in options:
+		outputs.extend([ sc_pdf(x) for x in songs_dict.keys() ])
+	
+	return outputs
+
 #####
 ##### SETTING ALL PARAMS
 #####
-
-try:
-	LHEAD=left_page_head
-except NameError:
-	LHEAD=""
-try:
-	RHEAD=right_page_head
-except NameError:
-	RHEAD=""
 
 try:
 	options=options
@@ -101,33 +105,26 @@ for x in songs:
 			os.path.basename(x[0]).replace(".tex","")
 		))
 
-songs_dict = OrderedDict(
-				[
-					(x[2],x[0]) for x in songs_prop
-				]
-			)
+songs_dict = OrderedDict([ (x[2],x[0]) for x in songs_prop ])
 
-songs_dict_transp = OrderedDict(
-				[
-					(x[2],x[1]) for x in songs_prop
-				]
-			)
-
-singles = [ sc_pdf(x) for x in songs_dict.keys() ]
+songs_dict_transp = OrderedDict([ (x[2],x[1]) for x in songs_prop ])
 
 # zpevnik.tex => zpevnik.pdf
 rule main_pdf:
 	output:
 		cb_pdf(),
+		temp(cb_tex().replace(".tex",".pdf")),
+		temp(cb_tex().replace(".tex",".log")),
+		temp(cb_tex().replace(".tex",".out")),
+		temp(idx_pisne()),
+		temp(idx_interpreti()),
 		ind_pisne(),
-		idx_pisne(),
-		idx_pisne()+".old",
 		ind_interpreti(),
-		idx_interpreti(),
+		temp(ind_pisne()+".old"),
 	input:
 		cb_tex(),
 		[sc_tex(x) for x in songs_dict.keys()],
-		workflow.snakefile,
+		os.path.join(cache_dir(),"_list.tex"),
 		os.path.join(cache_dir(),"template.tex"),
 		os.path.join(cache_dir(),"songbook.sty"),
 	run:
@@ -135,28 +132,22 @@ rule main_pdf:
 			call_xelatex(input[0])
 			udelejRejstrik(idx_pisne(),ind_pisne()); 
 			udelejRejstrik(idx_interpreti(),ind_interpreti());
-			shutil.copyfile(idx_pisne(),idx_pisne()+".old")
-		else:
-			shutil.copyfile(idx_pisne(),idx_pisne()+".old")
-			udelejRejstrik(idx_pisne(),ind_pisne()); 
-			udelejRejstrik(idx_interpreti(),ind_interpreti());
 
 		call_xelatex(input[0])
 
-		if not filecmp.cmp(idx_pisne(),idx_pisne()+".old"):
-			udelejRejstrik(idx_pisne(),ind_pisne()); 
-			udelejRejstrik(idx_interpreti(),ind_interpreti());
+		shutil.copyfile(ind_pisne(),ind_pisne()+".old")
+		udelejRejstrik(idx_pisne(),ind_pisne()); 
+		udelejRejstrik(idx_interpreti(),ind_interpreti());
+
+		if not filecmp.cmp(ind_pisne(),ind_pisne()+".old"):
 			call_xelatex(input[0])
 
-		main_pdf=cb_tex().replace(".tex",".pdf")
-		shutil.copyfile(main_pdf,output[0])
+		shutil.copyfile(output[1],output[0])
 
-# cache/pisen.tex, cache/pisen2.tex => zpevnik.tex
+# seznam => zpevnik.tex
 rule main_tex:
 	input:
 		workflow.snakefile,
-		[sc_tex(x) for x in songs_dict.keys()],
-		os.path.join("tpcb","template.tex"),
 	output:
 		cb_tex(),
 		os.path.join(cache_dir(),"_list.tex"),
@@ -172,8 +163,14 @@ rule main_tex:
 		with open(output[0],"w+",encoding="utf-8") as f:
 			main_tex = "\\def\\thelist{_list.tex}\n"
 			main_tex += os.linesep.join(["\\def\\{}{{}}".format(x) for x in options])+"\n"
-			main_tex += "\\def\\RHEAD{{{}}}\n".format(RHEAD)
-			main_tex += "\\def\\LHEAD{{{}}}\n".format(LHEAD)
+			try:
+				main_tex += "\\def\\RHEAD{{{}}}\n".format(right_page_head)
+			except NameError:
+				pass
+			try:
+				main_tex += "\\def\\LHEAD{{{}}}\n".format(left_page_head)
+			except NameError:
+				pass
 			try:
 				main_tex += "\\def\\FRONTCOVER{{{}}}\n".format(os.path.basename(cover_front))
 			except NameError:
@@ -219,6 +216,7 @@ rule song_tex:
 		with open(output[0],"w+",encoding="utf-8") as f:
 			f.write(song2)
 
+# cache/pisen.tex => cache/_single_pisen.pdf
 rule song_pdf:
 	input:
 		sc_tex("{song}"),
@@ -226,11 +224,15 @@ rule song_pdf:
 		os.path.join(cache_dir(),"songbook.sty"),
 	output:
 		os.path.join(cache_dir(),"_single_{song}.tex"),
-		sc_pdf("{song,[^_].*}"),
+		temp(os.path.join(cache_dir(),"_single_{song}.log")),
+		temp(os.path.join(cache_dir(),"_single_{song}.out")),
+		temp(os.path.join(cache_dir(),"_single_{song}.aux")),
+		#sc_pdf("{song,[^_].*}"),
+		sc_pdf("{song}")
 	run:
 		with open(output[0],"w+",encoding="utf-8") as f:
 			main_tex = "\\def\\thelist{{{}}}\n".format(os.path.basename(input[0]))
 			main_tex += "\\def\\SINGLE{}\n\\input{template.tex}\n"
 			f.write(main_tex)
 		call_xelatex(output[0])
-		shutil.copyfile(output[0].replace(".tex",".pdf"),output[1])
+		#shutil.copyfile(output[0].replace(".tex",".pdf"),output[1])
