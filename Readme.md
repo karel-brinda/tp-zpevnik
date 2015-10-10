@@ -148,8 +148,12 @@ Dodržujte, prosím, logiku celého zpěvníku:
 		input:
 			cb_pdf()
 	```	
+
+3.      Jestliže chcete písničky vysázet nezávisle na sobě jako jednotlivé 
+        soubory PDF, nahraďte poslední řádku `cb_pdf()` za `singles`. Jestliže si 
+        přejete vygenerovat oba výstupy, oddělte je čárkou.
 	
-3.	Spusťte
+4.	Spusťte
 	```bash
 	snakemake -s Snakefile.muj
 	```
