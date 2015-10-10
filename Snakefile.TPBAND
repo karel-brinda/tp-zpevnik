@@ -10,10 +10,11 @@ options=[
 		"TPBAND",
 		"NOHEADER",
 		"ONESIDE",
-#		"MUSIC",
+		"MUSIC",
 	]
 
 songs=[
+	"./tp-songs/03_zahranicni/Beatles____Love_me_do.lytex",
 	"./tp-songs/03_zahranicni/Champs____Tequilla.tex",
 	"./tp-songs/03_zahranicni/Steve_Miller_Band____Joker.tex",
 	"./tp-songs/03_zahranicni/Peggy_Lee____Good_Day.tex",

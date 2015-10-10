@@ -9,7 +9,7 @@ chordbook="muj_novy_zpevnik"
 # Takto lze přidávat volby (ONESIDE, NOHEADER, SKIPCHECK, TPBAND, MUSIC).
 # Odstraňte # před následující řádkou, jestli chcete, aby se u Love me do zobrazily (pokusné) noty.
 
-#options=["MUSIC"]
+options=["MUSIC"]
 
 songs=[
     ("./tp-songs/03_zahranicni/Beatles____Let_it_be.tex", 5), # 5 = transpozice o 5 půltónů nahoru
