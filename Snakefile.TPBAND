@@ -3,7 +3,7 @@
 left_page_head="Technická přestávka 2015"
 right_page_head="TP band"
 chordbook="TPBAND_zpevnik"
-cover_front="tp-zpevnik-covers/TPBAND_front.pdf"
+#cover_front="tp-zpevnik-covers/TPBAND_front.pdf"
 #cover_back="tp-zpevnik-covers/2013_back.pdf"
 
 options=[
@@ -45,6 +45,7 @@ songs=[
 	"./tp-songs/03_zahranicni/Pink____Fucking_Perfect.tex",
 	"./tp-songs/03_zahranicni/4_Non_Blondes____Whats_Up.tex",
 	"./tp-songs/03_zahranicni/Bobby_McFerrin____Dont_Worry_Be_Happy.tex",
+	"./tp-songs/03_zahranicni/Nirvana____Come_as_you_are.tex",
 
 ### Pridavky po pridavcich
 	"./tp-songs/03_zahranicni/Proclaimers____500_miles.tex",
