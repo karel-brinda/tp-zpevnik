@@ -221,7 +221,7 @@ rule song_tex:
 		if ".lytex" in input[0] and "MUSIC" in options:
 			with open(sc_lytex(wildcards.song),"w+",encoding="utf-8") as f:
 				f.write(song2)
-			shell("lilypond-book --format=latex --output="+cache_dir()+" "+sc_lytex(wildcards.song))
+			shell("lilypond-book --format=latex --pdf --output="+cache_dir()+" "+sc_lytex(wildcards.song))
 		else:
 			with open(output[0],"w+",encoding="utf-8") as f:
 				f.write(song2)
