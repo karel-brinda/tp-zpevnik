@@ -58,4 +58,29 @@ No I don't <Ami>have a <C>gun
 <Em>Memory <D>yeah
 \kr
 
+\begin{lilypond}
+riff = { 
+  d8\3 dis\3 e\3 g4\2 
+  e8\3 g\2  e\3 e\3
+  dis\3 d\3 a\2
+  d\3 d\3 a4\2
+}
+
+ \new Voice \with {
+    \omit StringNumber
+  } {
+    \clef "bass_8"
+    \relative c, {
+      \riff
+    }
+  }
+  \new TabStaff \with {
+    stringTunings = #bass-tuning
+  } {
+    \relative c, {
+      \riff
+    }
+  }
+\end{lilypond}
+ 
 \kp
