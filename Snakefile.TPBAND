@@ -3,7 +3,7 @@
 #left_page_head="Technická přestávka 2015"
 #right_page_head="TP band"
 chordbook="TPBAND_zpevnik"
-cover_front="tp-zpevnik-covers/TPBAND_cover.pdf"
+#cover_front="tp-zpevnik-covers/TPBAND_front.pdf"
 #cover_back="tp-zpevnik-covers/2013_back.pdf"
 
 options=[
@@ -14,19 +14,21 @@ options=[
 	]
 
 songs=[
-	"./tp-songs/03_zahranicni/Beatles____Love_me_do.lytex",
-	"./tp-songs/03_zahranicni/Champs____Tequilla.tex",
-	"./tp-songs/03_zahranicni/Steve_Miller_Band____Joker.tex",
-	"./tp-songs/03_zahranicni/Peggy_Lee____Good_Day.tex",
-	"./tp-songs/03_zahranicni/Meredith_Brooks____Bitch.tex",
-	"./tp-songs/03_zahranicni/Eva_Cassidy____Wade_in_the_Water.tex",
-
+	"./tp-songs/03_zahranicni/Champs____Tequilla.lytex",
 	"./tp-songs/03_zahranicni/Natalie_Imbruglia____Torn.tex",
 	"./tp-songs/03_zahranicni/Mamas__Papas____California_dreaming.tex",
 	"./tp-songs/03_zahranicni/Pink____Fucking_Perfect.tex",
+	"./tp-songs/03_zahranicni/Steve_Miller_Band____Joker.tex",
+	"./tp-songs/03_zahranicni/Eva_Cassidy____Wade_in_the_Water.tex",
+	"./tp-songs/03_zahranicni/Gerard_Lenorman____La_Ballade.tex",
+	"./tp-songs/03_zahranicni/Nirvana____Come_as_you_are.lytex",
+
+	"./tp-songs/03_zahranicni/Meredith_Brooks____Bitch.tex",
+	"./tp-songs/03_zahranicni/Peggy_Lee____Good_Day.tex",
+	"./tp-songs/01_folk/Ivo_Cicvárek____Banánové_blues.tex",
 	"./tp-songs/01_folk/Zuzana_Navarová____Sedávám_na_domovních_schodech.tex",
 	"./tp-songs/01_folk/Jarek_Nohavica____Básnířka.tex",
-	"./tp-songs/02_pop_rock/Petr_Hapka____Šaškové_počmáraní.tex",
+	"./tp-songs/02_pop_rock/Petr_Hapka____Šaškové_počmáraní.lytex",
 	("./tp-songs/02_pop_rock/Václav_Neckář____Holka_ta_okatá.tex",-3),
 	"./tp-songs/02_pop_rock/Jana_Kirschner____Žienka.tex",
 	"./tp-songs/01_folk/Zuzana_Navarová____Somrkrálka_Blues.tex",
@@ -49,17 +51,12 @@ songs=[
 	"./tp-songs/03_zahranicni/Chuck_Berry____Johnny_B_Goode.tex",
 	"./tp-songs/03_zahranicni/4_Non_Blondes____Whats_Up.tex",
 	"./tp-songs/03_zahranicni/Bobby_McFerrin____Dont_Worry_Be_Happy.tex",
-	"./tp-songs/03_zahranicni/Bill_Haley____Rock_Around_the_Clock.tex",
-	"./tp-songs/03_zahranicni/George_Gershwin____Summertime.tex",
-	"./tp-songs/03_zahranicni/Beautiful_South____Dont_Marry_Her.tex",
-	"./tp-songs/03_zahranicni/Mungo_Jerry____Summertime.tex",
-	"./tp-songs/03_zahranicni/Ray_Charles____Hit_the_road_Jack.tex",
+
 	"./tp-songs/03_zahranicni/Proclaimers____500_miles.tex",
 	("./tp-songs/02_pop_rock/film_Kouř____Je_to_fajn,_fajnový.tex",3),
 	"./tp-songs/03_zahranicni/Elvis_Presley____Blue_Suede_Shoes.tex",
 	"./tp-songs/03_zahranicni/Elvis_Presley____Hound_Dog.tex",
 ### Pridavky po pridavcich
-	"./tp-songs/03_zahranicni/Gerard_Lenorman____La_Ballade.tex",
 	"./tp-songs/03_zahranicni/Leonard_Cohen____Suzanne.tex",
 	"./tp-songs/03_zahranicni/Liquido____Narcotic.tex",
 ]

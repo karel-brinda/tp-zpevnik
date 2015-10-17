@@ -1,0 +1,163 @@
+% -*-coding: utf-8 -*-
+
+\zp{Šaškové počmáraní}{Petr Hapka}
+
+\zs
+<C>Koukněte na toho <H7>fintila,
+
+<Dmi7>pod krkem žlutého <G7>motýla,
+
+<Dmi7>zelený klobouček <G7>do týla,
+
+<D7>šoupne si <G7>na bílou <C>pleš. <G+>
+\ks
+
+\zs
+I když ten tralalák padá mi,
+
+hlavně že vyhrávám barvami,
+
+hlavně že vyhrávám barvami,
+
+zase jsem šťastnej jak <C>veš. <C7>
+\ks
+
+\zr
+Co po mně <F>chceš, pravdu či <Fmi>lež?
+
+Zkus ty dvě <C>rozeznat a pak se <C7>směj.
+
+Barevný <F>svět láme mi <Fmi>hřbet,
+
+<Emi>přesto chci <Ebdim>být šašek <Dmi7>počmára<G7>nej.
+\kr
+
+\zs
+Ucho mu hryžou jak oplatku,
+
+s rozběhem kopou ho do zadku,
+
+tvrděj že všechno je v pořádku,
+
+když mu daj mizernej plat.
+\ks
+
+\zs
+Když ale koukám se na lidi,
+
+všechno tak černě zas nevidím,
+
+všechno tak černě zas nevidím,
+
+ještě se dovedem smát.
+\ks
+
+\zr
+Ne že se snad není co bát,
+
+úzkost má tlapy jak Cassius Clay,
+
+ten věčný strach na miskách vah
+
+převážit chce šašek počmáranej.
+\kr
+
+\zs
+Kampak chcem ve věku rozumu
+
+strkat prý své nosy na gumu,
+
+určitě od rumu z konzumu
+
+tak strašně červené jsou.
+\ks
+
+\zs
+Ptám se však tebe, náš osude,
+
+co bude, až tady nebude,
+
+co bude, až tady nebude
+
+dojemně pitomá show.
+\ks
+
+\zr
+Bláhová show, šaškové jdou
+
+barevnou naději vytřískat z ní,
+
+hledáme brod uprostřed vod,
+
+my věční šaškové počmáraní.
+\kr
+
+\zs
+Ptám se však tebe, náš osude,
+
+co bude, až tady nebude,
+
+co bude, až tady nebude
+
+dojemně pitomá show.
+\ks
+
+\ifdefined\TPBAND
+
+\begin{lilypond}
+sloka = { 
+ c2 g b f 
+ d' a g b 
+ d a g b 
+ d g, c g 
+}
+
+ \new Voice \with {
+    \omit StringNumber
+  } {
+    \clef "bass_8"
+    \relative c, {
+      \sloka
+    }
+  }
+  \new TabStaff \with {
+    stringTunings = #bass-tuning
+  } {
+    \relative c, {
+      \sloka
+    }
+  }
+\end{lilypond}
+ 
+\begin{lilypond}
+
+refren = {
+  f,4 f f f
+  f' f f f 
+  c c c c
+  c b ais a
+  f f f f
+  f' f f f 
+  f e dis d
+}
+
+ \new Voice \with {
+    \omit StringNumber
+  } {
+    \clef "bass_8"
+    \relative c, {
+      \refren
+    }
+  }
+  \new TabStaff \with {
+    stringTunings = #bass-tuning
+  } {
+    \relative c, {
+      \refren
+    }
+  }
+\end{lilypond}
+ 
+\fi
+
+\kp
