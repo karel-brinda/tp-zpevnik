@@ -1,8 +1,5 @@
 % -*-coding: utf-8 -*-
-
 \zp{La ballade des gens heureux}{Gérard Lenorman}
-
-Pátý pražec
 
 \zs
 <A>Notre vieille terre est une étoile, où toi aussi tu <Hmi>brilles un <E7>peu
@@ -52,6 +49,32 @@ Comme un coeur dans une cathédrale, comme un oiseau qui fait ce qu'il peut
 Tu viens de chanter la ballade, la ballade des gens heureux
 \ks
 
+\ifdefined\TPBAND
+basová linka:
+
+\begin{lilypond}
+\paper {
+#(set-paper-size "a5")
+}
+
+riff = { 
+ a2  e' | a, e'  | 
+  a, e' | b  e   |
+  b e   | fis b, | 
+  e  b  | a  e'  |
+  b  e  | fis b, | 
+  e b | a  e'  |
+ 
+}
+  \new TabStaff \with {
+    stringTunings = #bass-tuning
+  } {
+    \relative c, {
+      \riff
+    }
+  }
+\end{lilypond}
+\fi 
 \kp
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

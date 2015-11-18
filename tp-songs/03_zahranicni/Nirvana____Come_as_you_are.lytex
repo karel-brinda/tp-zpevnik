@@ -59,11 +59,11 @@ No I don't <Ami>have a <C>gun
 \kr
 
 \begin{lilypond}
-riff = { 
-  d8\3 dis\3 e\3 g4\2 
-  e8\3 g\2  e\3 e\3
-  dis\3 d\3 a\2
-  d\3 d\3 a4\2
+riff = {
+  e2\3 r8
+  e8\3 g\2 e\3 
+  d2\3 r8
+  d8\3 a'\2 d,\3
 }
 
  \new Voice \with {

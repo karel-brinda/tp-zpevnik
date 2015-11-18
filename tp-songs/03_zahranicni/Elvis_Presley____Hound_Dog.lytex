@@ -61,4 +61,28 @@ And you ain't no friend of mine
 = 1.
 \ks
 
+\begin{lilypond}
+riff = { 
+  c8\4 c\4 b\4 b\4 a\4 a\4 gis\4 gis\4
+  g1\4
+  a4\4 b\4 bis\4 c\4 
+}
+
+ \new Voice \with {
+    \omit StringNumber
+  } {
+    \clef "bass_8"
+    \relative c, {
+      \riff
+    }
+  }
+  \new TabStaff \with {
+    stringTunings = #bass-tuning
+  } {
+    \relative c, {
+      \riff
+    }
+  }
+\end{lilypond}
+ 
 \kp
