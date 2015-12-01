@@ -9,15 +9,11 @@ chordbook="muj_novy_zpevnik"
 # Takto lze přidávat volby (ONESIDE, NOHEADER, SKIPCHECK, TPBAND, MUSIC).
 # Odstraňte # před následující řádkou, jestli chcete, aby se u Love me do zobrazily (pokusné) noty.
 
-options=["MUSIC", "TPBAND", "SKIPCHECK"]
+options=["SINGLES", "MUSIC", "TPBAND", "SKIPCHECK"]
 #options=["SINGLES","MUSIC"]
-#options=["SINGLES"]
 
 songs=[
-    "./tp-songs/03_zahranicni/Gerard_Lenorman____La_Ballade.lytex",
-    "./tp-songs/03_zahranicni/Nirvana____Come_as_you_are.lytex",
-    "./tp-songs/02_pop_rock/Petr_Hapka____Šaškové_počmáraní.lytex",
-    "./tp-songs/03_zahranicni/Champs____Tequilla.lytex",
+    "./tp-songs/03_zahranicni/Steve_Miller_Band____Joker.tex",
 ]
 
 include:"tpcb/snake_incl.py"

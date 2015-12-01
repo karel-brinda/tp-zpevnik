@@ -142,16 +142,6 @@
   \fi
 \fi
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Seznam písní
-
-\input{\thelist}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Kontrola dvojstránek probíhá v rámci \zs, takže pro poslední písničku ji 
-% musíme zavolat ručně
-\twopagecheck
 
 % Hot Fix: přebít \thispagestyle{plain} z index.sty, způsobuje čísla stránek
 % na první stránce rejstříku
@@ -165,6 +155,19 @@
   \fancyfoot{}
   \printindex
 \fi
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Seznam písní
+
+\input{\thelist}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Kontrola dvojstránek probíhá v rámci \zs, takže pro poslední písničku ji 
+% musíme zavolat ručně
+\twopagecheck
+
 
 % Zadní obálka
 \ifdefined\BACKCOVER

@@ -1,0 +1,92 @@
+% -*-coding: utf-8 -*-
+
+\zp{Praise You}{Fatboy Slim}
+
+<F> <C> <G>
+\zs
+We've come a long long way together,
+
+Through the hard times and the good,
+
+I have to celebrate you baby,
+
+I have to praise you like I should
+\ks
+
+\zs
+We've come a long long way together,
+
+Through the hard times and the good,
+
+I have to celebrate you baby,
+
+I have to praise you like I should
+\ks
+
+\zs
+I have to praise you
+
+I have to praise you
+
+I have to praise you
+
+I have to praise you like I should
+\ks
+
+\zr
+/: I have to <Dm>praise you<C> :/ (4x
+\kr
+
+\zr
+
+\kr
+
+\zs
+We've come a long long way together,
+
+Through the hard times and the good,
+
+I have to celebrate you baby,
+
+I have to praise you like I shouldddddd
+\ks
+
+\zr
+\kr
+
+\zs
+I have to praise you like I should
+I have to praise you
+I have to praise you
+I have to praise you
+\ks
+
+\zr
+\kr
+
+\begin{lilypond}
+riff = {
+  f f a ais
+  c,\3 c\3 e\2 f\2
+  g\1 g b b 
+  c c cis d
+}
+
+ \new Voice \with {
+    \omit StringNumber
+  } {
+    \clef "bass_8"
+    \relative c, {
+      \riff
+    }
+  }
+  \new TabStaff \with {
+    stringTunings = #bass-tuning
+  } {
+    \relative c, {
+      \riff
+    }
+  }
+\end{lilypond}
+ 
+\kp
