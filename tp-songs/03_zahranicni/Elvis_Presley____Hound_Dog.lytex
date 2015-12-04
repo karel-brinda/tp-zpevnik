@@ -1,6 +1,8 @@
-\zp{Hound dog}{Elvis Presley}
+\zp{Hound Dog}{Elvis Presley}
 
 \ifdefined\TPBAND
+<C> <F> <G>
+
 \zs
 You ain't nothin' but a hound dog
 
@@ -60,6 +62,10 @@ And you ain't no friend of mine
 \zs
 = 1.
 \ks
+
+\ifdefined\TPBAND
+<C> <C7> <F> <Fm> <G> <C>
+\fi
 
 \begin{lilypond}
 riff = { 
