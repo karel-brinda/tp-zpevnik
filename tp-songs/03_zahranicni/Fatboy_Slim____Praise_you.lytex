@@ -4,71 +4,76 @@
 
 <F> <C> <G>
 \zs
-We've come a long long way together,
+4x(piano)
 
-Through the hard times and the good,
+We've come a long long way together, Through the hard times and the good,
 
-I have to celebrate you baby,
+I have to celebrate you baby, I have to praise you like I should
 
-I have to praise you like I should
+4x (+tamburina) 4x (+bass)
+\ks
+
+2x (break)
+
+\zs
+4x (cajon, piano, tamburina, bass)
+
+We've come a long long way together, Through the hard times and the good,
+
+I have to celebrate you baby, I have to praise you like I should
 \ks
 
 \zs
-We've come a long long way together,
-
-Through the hard times and the good,
-
-I have to celebrate you baby,
-
-I have to praise you like I should
-\ks
-
-\zs
-I have to praise you
-
-I have to praise you
-
-I have to praise you
-
-I have to praise you like I should
+4x (+el. kytara) /: I have to praise you :/ like I should
 \ks
 
 \zr
-/: I have to <Dm>praise you<C> :/ (4x
-\kr
+2x (piano) /: I have to <Dm>praise you<C> :/
 
-\zr
+2x (+bass, +cajon) /: I have to praise you :/
 
+4x (+zbor) /: I have to praise you :/ <D>
 \kr
 
 \zs
-We've come a long long way together,
-
-Through the hard times and the good,
-
-I have to celebrate you baby,
-
-I have to praise you like I shouldddddd
+4x (+el.kytara)  I have to praise you
 \ks
 
-\zr
-\kr
+2x (break)
 
 \zs
-I have to praise you like I should
-I have to praise you
-I have to praise you
-I have to praise you
+(piano, tamburina)
+
+We've come a long long way together, Through the hard times and the good,
+
+I have to celebrate you baby, I have to 
+
+(break)
+
+praise you like I shouldddddd
+\ks
+
+\zs
+(vše)
+
+4x /: I have to praise you :/ like I should
+
+4x /: I have to praise you :/ like I should
 \ks
 
 \zr
 \kr
+
+\zr
+\kr
+
+I have to praise you
 
 \begin{lilypond}
 riff = {
   f f a ais
   c,\3 c\3 e\2 f\2
-  g\1 g b b 
+  g,\1 g b b 
   c c cis d
 }
 
