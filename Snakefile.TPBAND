@@ -33,6 +33,7 @@ songs=[
 	"./tp-songs/03_zahranicni/Norah_Jones____Dont_Know_Why.tex",
 	"./tp-songs/03_zahranicni/Nick_Cave____Where_the_Wild_Roses_Grow.tex",
 	("./tp-songs/03_zahranicni/Ben_E_King____Stand_By_Me.tex",5),
+	("./tp-songs/03_zahranicni/Police___Every_breath_you_take.tex",5),
 	"./tp-songs/03_zahranicni/Cranberries____Zombie.tex",
 	"./tp-songs/03_zahranicni/Cat_Stevens____Father_and_Son.tex",
 	"./tp-songs/03_zahranicni/Lou_Reed____Perfect_day.tex",
