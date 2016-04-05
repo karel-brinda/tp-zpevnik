@@ -1,0 +1,50 @@
+# -*-coding: utf-8 -*-
+
+left_page_head="Kéti zpěvník"
+right_page_head="Kéti zpěvník"
+chordbook="2kéťa"
+
+options = [
+	"SKIPCHECK",
+	"ONESIDE",
+	"SINGLEPAGE",
+]
+
+'''
+TODO:
+=====
+* Zamilovaná
+* Rukávy
+* Povídej
+* Prý se tomu říká láska
+* Stříhali do hola
+'''  
+
+songs=[
+	"./tp-songs/01_folk/Hop_Trop____Amazonka.tex",
+	"./tp-songs/02_pop_rock/Olympic____Dej_mi_víc_své_lásky.tex",
+	"./tp-songs/01_folk/Poutníci____Hotel_Hillary.tex",
+	"./tp-songs/01_folk/Žalman____Jdem_zpátky_do_lesů.tex",
+	"./tp-songs/01_folk/Jarek_Nohavica____Kometa.tex",
+	"./tp-songs/01_folk/Karel_Kryl____Lásko.tex",
+	"./tp-songs/03_zahranicni/R.E.M.____Losing_my_religion.tex",
+	"./tp-songs/02_pop_rock/Jiří_Suchý____Pramínek_vlasů.tex",
+	"./tp-songs/01_folk/Brontosauři____Podvod.tex",
+	"./tp-songs/01_folk/Karel_Plíhal____Ráda_se_miluje.tex",
+	"./tp-songs/01_folk/Brontosauři____Růže_z_papíru.tex",
+	"./tp-songs/01_folk/Brontosauři____Signály.tex",
+	"./tp-songs/02_pop_rock/Blue_Effect____Sluneční_hrob.tex",
+	"./tp-songs/01_folk/Brontosauři____Slunovrat.tex",
+	"./tp-songs/01_folk/Hoboes____Tereza.tex",
+	"./tp-songs/02_pop_rock/Vladimír_Mišík____Variace_na_renesanční_téma.tex",
+	"./tp-songs/01_folk/Fleret____Zafúkané.tex",
+	"./tp-songs/01_folk/Kamelot____Zachraňte_koně.tex",
+	"./tp-songs/01_folk/Jarek_Nohavica____Zatímco_se_koupeš.tex",
+]
+
+include:"tpcb/snake_incl.py"
+
+rule all:
+	input:
+		run()
+
