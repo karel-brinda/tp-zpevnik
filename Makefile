@@ -15,4 +15,5 @@ $(Zpevniky):
 
 clean:
 	rm -fr output/*
+	rm -fr cache/*
 
