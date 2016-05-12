@@ -24,6 +24,7 @@ script:
 - snakemake -p -s Snakefile.TP2015
 - snakemake -p -s Snakefile.AllSongs
 - snakemake -p -s Snakefile.TPBAND
+before_deploy:
 - cd output && ../make_index_html.py > index.html
 deploy:
   provider: surge
@@ -32,6 +33,5 @@ deploy:
   on:
     all_branches: true
 env:
-  matrix:
-  - secure: GMho7fiTNM2vv82HKEpMZVAw8ORPScdWbgHGsrh2cLbSQV82qqlUpFAmRh91HgL78Mk8aq01LFuvwGSqCNjY6eo4tY29eFW6p3GRL46+KDxq/ySnTi7ZtJcZFbRDpEhcbfSVDSAToxKS+bWPB3ANDNbZZvyY2iDi66fabzy/6Lg=
-  - secure: ZyEGmE9dVEf2Dej3NhHbA1ji+abTrddJ1c3bHkaitw4FYhCUpvfuvLZRCFmT8cmB7etM34qD34GvVMe7K7W21uQnSUOLL+tvGHgG/B8wMsaJvpWCZI7ayfgLm0sEnYti311emBHk/jtiA2z6qUgVK5fFX6+Y2tVQnxevcShb6gQ=
+- secure: GMho7fiTNM2vv82HKEpMZVAw8ORPScdWbgHGsrh2cLbSQV82qqlUpFAmRh91HgL78Mk8aq01LFuvwGSqCNjY6eo4tY29eFW6p3GRL46+KDxq/ySnTi7ZtJcZFbRDpEhcbfSVDSAToxKS+bWPB3ANDNbZZvyY2iDi66fabzy/6Lg=
+- secure: ZyEGmE9dVEf2Dej3NhHbA1ji+abTrddJ1c3bHkaitw4FYhCUpvfuvLZRCFmT8cmB7etM34qD34GvVMe7K7W21uQnSUOLL+tvGHgG/B8wMsaJvpWCZI7ayfgLm0sEnYti311emBHk/jtiA2z6qUgVK5fFX6+Y2tVQnxevcShb6gQ=
