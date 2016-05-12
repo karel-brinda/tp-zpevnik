@@ -1,8 +1,8 @@
 language: python
 os:
-  - linux
+- linux
 python:
-  - "3.4"
+- '3.4'
 addons:
   apt:
     packages:
@@ -12,16 +12,26 @@ addons:
     - texlive-fonts-recommended
     - texlive-xetex
 install:
-  - "pip install -r requirements.txt"
-  #- "sudo apt-get install texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-xetex"
-  - "sudo ln -s /usr/share/i18n/SUPPORTED /var/lib/locales/supported.d/all"
-  - "sudo locale-gen cs_CZ.UTF-8"
+- pip install -r requirements.txt
+- sudo ln -s /usr/share/i18n/SUPPORTED /var/lib/locales/supported.d/all
+- sudo locale-gen cs_CZ.UTF-8
 script:
-  - "snakemake -p -s Snakefile.test"
-  - "snakemake -p -s Snakefile.2pedro"
-  - "snakemake -p -s Snakefile.TP2011"
-  - "snakemake -p -s Snakefile.TP2012"
-  - "snakemake -p -s Snakefile.TP2013"
-  - "snakemake -p -s Snakefile.TP2015"
-  - "snakemake -p -s Snakefile.AllSongs"
-  - "snakemake -p -s Snakefile.TPBAND"
+- snakemake -p -s Snakefile.test
+- snakemake -p -s Snakefile.2pedro
+- snakemake -p -s Snakefile.TP2011
+- snakemake -p -s Snakefile.TP2012
+- snakemake -p -s Snakefile.TP2013
+- snakemake -p -s Snakefile.TP2015
+- snakemake -p -s Snakefile.AllSongs
+- snakemake -p -s Snakefile.TPBAND
+- cd output && ../make_index_html.py > index.html
+deploy:
+  provider: surge
+  project: "./output/"
+  domain: tp-zpevnik.surge.sh
+  on:
+    all_branches: true
+env:
+  matrix:
+  - secure: GMho7fiTNM2vv82HKEpMZVAw8ORPScdWbgHGsrh2cLbSQV82qqlUpFAmRh91HgL78Mk8aq01LFuvwGSqCNjY6eo4tY29eFW6p3GRL46+KDxq/ySnTi7ZtJcZFbRDpEhcbfSVDSAToxKS+bWPB3ANDNbZZvyY2iDi66fabzy/6Lg=
+  - secure: ZyEGmE9dVEf2Dej3NhHbA1ji+abTrddJ1c3bHkaitw4FYhCUpvfuvLZRCFmT8cmB7etM34qD34GvVMe7K7W21uQnSUOLL+tvGHgG/B8wMsaJvpWCZI7ayfgLm0sEnYti311emBHk/jtiA2z6qUgVK5fFX6+Y2tVQnxevcShb6gQ=
