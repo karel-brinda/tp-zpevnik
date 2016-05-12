@@ -1,50 +1,54 @@
-#!/usr/bin/env python
- 
-# index_gen.py
- 
-import os
-import os.path
+#! /usr/bin/env python3
+
 import sys
- 
-class SimpleHtmlFilelistGenerator:
-    # start from this directory
-    base_dir = None
- 
-    def __init__(self, dir):
-        self.base_dir = dir
- 
-    def print_html_header(self):
-        print """<html>
-<body>
-<code>
-""",
- 
-    def print_html_footer(self):
-        print """</code>
-</body>
-</html>
-""",
- 
-    def processDirectory ( self, args, dirname, filenames ):
-        print '<strong>', dirname + '/', '</strong>', '<br>'
-        for filename in sorted(filenames):
-            rel_path = os.path.join(dirname, filename)
-            if rel_path in [sys.argv[0], './index.html']:
-                continue   # exclude this generator script and the generated index.html
-            if os.path.isfile(rel_path):
-                href = "<a href=\"%s\">%s</a>" % (rel_path, filename)
-                print '&nbsp;' * 4, href, '<br>'
- 
-    def start(self):
-        self.print_html_header()
-        os.path.walk( self.base_dir, self.processDirectory, None )
-        self.print_html_footer()
- 
-# class SimpleHtmlFilelistGenerator
- 
-if __name__ == "__main__":
-    base_dir = '.'
-    if len(sys.argv) > 1:
-        base_dir = sys.argv[1]
-    gen = SimpleHtmlFilelistGenerator(base_dir)
-    gen.start()
+
+def walktree(top = ".", depthfirst = True):
+    """Walk the directory tree, starting from top. Credit to Noah Spurrier and Doug Fort."""
+    import os, stat, types
+    names = os.listdir(top)
+    if not depthfirst:
+        yield top, names
+    for name in names:
+        try:
+            st = os.lstat(os.path.join(top, name))
+        except os.error:
+            continue
+        if stat.S_ISDIR(st.st_mode):
+            for (newtop, children) in walktree (os.path.join(top, name), depthfirst):
+                yield newtop, children
+    if depthfirst:
+        yield top, names
+
+def makeHTMLtable(top, depthfirst=False):
+    from xml.sax.saxutils import escape # To quote out things like &amp;
+    ret = ['<table class="fileList">\n']
+    for top, names in walktree(top):
+        ret.append('   <tr><td class="directory"><a href="{a}">{a}</a></td></tr>\n'.format(a=escape(top)))
+        for name in names:
+            ret.append('   <tr><td class="file"><a href="{a}">{a}</a></td></tr>\n'.format(a=escape(name)))
+    ret.append('</table>')
+    return ''.join(ret) # Much faster than += method
+
+def makeHTMLpage(top, depthfirst=False):
+    return '\n'.join(['<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"',
+                      '"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">',
+                      '<html>'
+                      '<head>',
+                      '   <title>TP zpěvník</title>',
+                      '   <style type="text/css">',
+                      '      table.fileList { text-align: left; }',
+                      '      td.directory { font-weight: bold; }',
+                      '      td.file { padding-left: 4em; }',
+                      '   </style>',
+                      '</head>',
+                      '<body>',
+                      '<h1>TP zpěvník</h1>',
+                      makeHTMLtable(top, depthfirst),
+                      '</body>',
+                      '</html>'])
+                   
+if __name__ == '__main__':
+    if len(sys.argv) == 2:
+        top = sys.argv[1]
+    else: top = '.'
+    print(makeHTMLpage(top))

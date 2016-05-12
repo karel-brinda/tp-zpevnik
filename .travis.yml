@@ -25,7 +25,7 @@ script:
 - snakemake -p -s Snakefile.AllSongs
 - snakemake -p -s Snakefile.TPBAND
 before_deploy:
-- cd output && ../make_index_html.py > index.html
+- make_indexes_html.sh
 deploy:
   provider: surge
   project: "./output/"
