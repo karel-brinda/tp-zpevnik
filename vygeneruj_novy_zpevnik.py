@@ -22,7 +22,7 @@ songs=[""")
 for fn in fns.split("\n"):
 	#if fn is not None:
 	if fn!="":
-		print('#\t"{}",'.format(fn))
+		print('#\t("{}",0),'.format(fn))
 
 print("""]
 
