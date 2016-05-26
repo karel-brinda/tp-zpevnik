@@ -1,0 +1,31 @@
+# -*-coding: utf-8 -*-
+
+#left_page_head="Zpěvník písní táborových a jiných"
+#right_page_head="www.technicka-prestavka.cz"
+chordbook="2karel"
+
+options = [
+	"SKIPCHECK",
+	"ONESIDE",
+	"SINGLEPAGE",
+]
+
+
+songs=[
+	"tp-songs/03_zahranicni/Georges_Brassens____Fernande.tex",
+	"tp-songs/03_zahranicni/Gerard_Lenorman____La_Ballade.tex",
+	"tp-songs/03_zahranicni/Pink_Floyd____Another_brick_in_the_wall.tex",
+	"tp-songs/03_zahranicni/Pink_Floyd____Comfortably_Numb.tex",
+	"tp-songs/03_zahranicni/Pink_Floyd____Money.tex",
+	"tp-songs/03_zahranicni/Pink_Floyd____Mother.tex",
+	"tp-songs/03_zahranicni/Pink_Floyd____Shine_on_your_crazy_diamond.tex",
+	"tp-songs/03_zahranicni/Pink_Floyd____Time.tex",
+	"tp-songs/03_zahranicni/Pink_Floyd____Wish_you_were_here.tex",
+]
+
+include:"tpcb/snake_incl.py"
+
+rule all:
+	input:
+		run()
+

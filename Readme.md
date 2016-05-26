@@ -22,12 +22,6 @@ Tento githubový repozitář poskytuje jednotný přístup k těmto zpěvníkům
 	* MacOS
 	* Windows
 * **Python 3** (včetně programu **pip**) – nejjednodušší instalace je pravděpodobně v rámci balíku Anacoda (k dispozici pro Windows, Linux i MacOS)
-	* **Balík pypdf2**, nainstalovat lze např. příkazem
-
-		```bash
-		pip install pypdf2
-		```
-
 	* **Snakemake** (http://bitbucket.org/johanneskoester/snakemake/) – program podobný Make s mnohem většími možnostmi, který je postaven na Pythonu, slouží k sestavení celého zpěvníku. Nainstalujete ho pomocí
 
 		```bash
