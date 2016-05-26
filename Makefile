@@ -14,4 +14,6 @@ $(Zpevniky):
 	snakemake -s Snakefile.$@ --cores
 
 clean:
-	git clean -fxd .
+	rm -fr output/*
+	rm -fr cache/*
+
