@@ -39,6 +39,7 @@ songs=[
 	"./tp-songs/01_folk/Hoboes____Tereza.tex",
 	"./tp-songs/02_pop_rock/Vladimír_Mišík____Variace_na_renesanční_téma.tex",
 	"./tp-songs/01_folk/Fleret____Zafúkané.tex",
+	("tp-songs/01_folk/Pavel_Roth____Zahrada_ticha.tex",0),
 	"./tp-songs/01_folk/Kamelot____Zachraňte_koně.tex",
 	("./tp-songs/01_folk/Lenka_Filipová____Zamilovaná.tex",5),
 	"./tp-songs/01_folk/Jarek_Nohavica____Zatímco_se_koupeš.tex",
