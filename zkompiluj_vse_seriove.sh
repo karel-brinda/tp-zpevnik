@@ -3,6 +3,6 @@
 set -e -o pipefail
 
 for zpevnik in Snakefile.*; do
-	snakemake -s $zpevnik --cores
+	snakemake -p -s $zpevnik --cores
 done
 

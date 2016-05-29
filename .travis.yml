@@ -16,7 +16,7 @@ install:
 - sudo ln -s /usr/share/i18n/SUPPORTED /var/lib/locales/supported.d/all
 - sudo locale-gen cs_CZ.UTF-8
 script:
-- ./zkompiluj_vse_seriove.sh
+- make
 before_deploy:
 - ./make_indexes_html.sh
 deploy:
