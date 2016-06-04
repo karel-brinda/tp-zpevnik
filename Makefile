@@ -11,7 +11,7 @@ Zpevniky = $(patsubst Snakefile.%,%,$(wildcard Snakefile.*))
 all:	$(Zpevniky)
 
 $(Zpevniky):
-	snakemake -s Snakefile.$@ --cores
+	snakemake -p -s Snakefile.$@ --cores
 
 clean:
 	rm -fr output/*
