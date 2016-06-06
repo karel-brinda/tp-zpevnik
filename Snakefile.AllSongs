@@ -10,8 +10,8 @@ try:
 	if os.environ['TRAVIS_BRANCH'] in ['master','surge']:
 		# singles jenom pro surge.sh
 		options.append("SINGLES")
-	except:
-		pass
+except:
+	pass
 
 songs = []
 
