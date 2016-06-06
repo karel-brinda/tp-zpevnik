@@ -6,7 +6,11 @@ import subprocess
 cmd='cd output && find . -type f -name "*.pdf" | sort'
 				   
 def html_pisen(fn):
-	return '\n\t<li><a href="{url}">{url}</a></li>'.format(url=fn.replace("./",""))
+	fn=fn.replace("./","")
+	return '\n\t<li><a href="{url}">{name}</a></li>'.format(
+			url=fn,
+			name=fn.replace("TP_zpevnik_komplet_singles/",""),
+		)
 
 if __name__ == '__main__':
 	res=subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, universal_newlines=True).stdout.read()
