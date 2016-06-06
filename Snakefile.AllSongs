@@ -5,7 +5,13 @@ right_page_head="www.technicka-prestavka.cz"
 chordbook="TP_zpevnik_komplet"
 
 # U AllSongs nemáme žádnou kontrolu nad levými/pravými stránkami
-options = [ "SKIPCHECK" ]
+options = [ "SKIPCHECK"]
+try:
+	if os.environ['TRAVIS_BRANCH'] in ['master','surge']:
+		# singles jenom pro surge.sh
+		options.append("SINGLES")
+	except:
+		pass
 
 songs = []
 
