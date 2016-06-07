@@ -18,6 +18,7 @@ install:
 script:
 - make
 before_deploy:
+- make orizni
 - ./vygeneruj_index_surge.py > output/index.html
 deploy:
   provider: surge
