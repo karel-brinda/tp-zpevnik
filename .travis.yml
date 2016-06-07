@@ -16,15 +16,9 @@ install:
 - sudo ln -s /usr/share/i18n/SUPPORTED /var/lib/locales/supported.d/all
 - sudo locale-gen cs_CZ.UTF-8
 script:
-- snakemake -p -s Snakefile.test
-- snakemake -p -s Snakefile.2pedro
-- snakemake -p -s Snakefile.TP2011
-- snakemake -p -s Snakefile.TP2012
-- snakemake -p -s Snakefile.TP2013
-- snakemake -p -s Snakefile.TP2015
-- snakemake -p -s Snakefile.AllSongs
-- snakemake -p -s Snakefile.TPBAND
+- make
 before_deploy:
+- make orizni
 - ./vygeneruj_index_surge.py > output/index.html
 deploy:
   provider: surge

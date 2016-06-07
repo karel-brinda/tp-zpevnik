@@ -16,8 +16,6 @@ if __name__ == '__main__':
 	res=subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, universal_newlines=True).stdout.read()
 	fns=str(res)
 	fns=fns.split()
-	#list_singles=[html_pisen(url) for url in fns if "TP_zpevnik_komplet_singles" in url]
-	#list_singles=[html_pisen(url) for url in fns if "TP_zpevnik_komplet_singles" in url]
 
 	list_tp_zpevniky=[]
 	list_ostatni_zpevniky=[]
