@@ -2,8 +2,15 @@
 
 import sys
 import subprocess
+import locale
 
-cmd='cd output && find . -type f -name "*.pdf" | sort'
+try:
+	locale.setlocale(locale.LC_ALL,'czech')
+except:
+	locale.setlocale(locale.LC_ALL,'cs_CZ.UTF-8')
+
+
+cmd='cd output && find . -type f -name "*.pdf" | grep -v "muj_novy_zpevnik"'
 				   
 def html_pisen(fn):
 	fn=fn.replace("./","")
@@ -16,6 +23,8 @@ if __name__ == '__main__':
 	res=subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, universal_newlines=True).stdout.read()
 	fns=str(res)
 	fns=fns.split()
+
+	fns = sorted(fns, key=locale.strxfrm)
 
 	list_tp_zpevniky=[]
 	list_ostatni_zpevniky=[]
