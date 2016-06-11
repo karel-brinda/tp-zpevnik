@@ -21,7 +21,7 @@ script:
 before_deploy:
 - make orizni
 - ./vygeneruj_index_surge.py > output/index.html
-- ./vygeneruj_novy_zpevnik.py > Snakefile.sablona
+- ./vygeneruj_novy_zpevnik.py > output/Snakefile.sablona
 deploy:
   provider: surge
   project: "./output/"
