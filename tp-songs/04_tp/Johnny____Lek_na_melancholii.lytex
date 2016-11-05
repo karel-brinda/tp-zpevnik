@@ -1,0 +1,88 @@
+% -*-coding: utf-8 -*-
+
+\zp{Lék na melancholii}{Jan \uv{Johnny} Dočkal}
+
+\zs
+<Am>Podzim na mě <E7>zvenku smutně <Am>kouká <E7>
+
+<Am>Suché listí do <E7>oken mi fouká <Am> <E7>
+
+A <Dm7>slunce o chlup <G7>dříve zapadá <Dm7> <G7>
+
+A mě <Am>rozpouští se <E7>dobrá nála<Am>da
+\ks
+
+\zs
+<C>Dejte mi <E7>lék na melancholii <Am> <C>
+
+co <E7>chytl barvu z dubového dře<Am>va
+
+já chci být <A7>zdravý, proto jej piji <D7>
+
+a komu se má medicína <G>nezdá 
+\ks
+
+\zr
+Tak ten ať <C>ví <C7>
+
+že se <F>jen léčím
+
+dobrému <A7>rozmaru
+
+svým elixírům <Dm>vděčím 
+
+A kdo se <F>zbavit <D>chce 
+
+<C>něja<H7>kého <A7>bolu
+
+ať si <D7>přisedne
+
+<G7>budem to léčit <C>spolu
+\kr
+
+\zs
+<C>Dejte mi <E7>lék na melancholii <Am> <C>
+
+co <E7>chytl vůni z dubového <Am>sudu 
+
+mám v duši <A7>splín, proto jej <D7>piji 
+
+a dokud budu chorý pít jej <G>budu 
+\ks
+
+\zr
+Ať každý <C>ví <C7>... 
+
+\kr
+
+\begin{lilypond}
+riff = {
+  a  c e gis a c a e
+  a, c e gis a c a e
+  d f g e 
+  d f g e 
+  a, c e gis a c a c
+  e, gis b gis a c a c
+  e, gis b gis a c a e
+  a, cis e dis d fis a b
+  c  b   a fis g d ais b
+  c  e g fis
+  f dis c ais
+  a cis e dis d f a b
+  f f d d
+  c b a a
+  d fis g d
+  c1 
+}
+
+ \new Voice \with {
+    \omit StringNumber
+  } {
+    \clef "bass_8"
+    \relative c, {
+      \riff
+    }
+  }
+\end{lilypond}
+ 
+\kp
