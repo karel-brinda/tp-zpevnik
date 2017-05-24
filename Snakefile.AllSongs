@@ -1,5 +1,7 @@
 # -*-coding: utf-8 -*-
 
+import glob
+
 left_page_head="Zpěvník komplet"
 right_page_head="www.technicka-prestavka.cz"
 chordbook="TP_zpevnik_komplet"
@@ -13,12 +15,7 @@ try:
 except:
 	pass
 
-songs = []
-
-for path, subdirs, files in os.walk(r'tp-songs'):
-        for filename in files:
-                f = os.path.join(path, filename)
-                songs.append(str(f))
+songs = glob.glob('tp-songs/*/*.tex')
 
 #print(songs)
 songs=sorted(songs)
