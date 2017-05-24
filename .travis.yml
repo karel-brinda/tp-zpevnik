@@ -19,8 +19,7 @@ install:
 script:
 - make
 before_deploy:
-- make orizni
-- ./vygeneruj_index_surge.py > output/index.html
+- make -C output
 - ./vygeneruj_novy_zpevnik.py > output/Snakefile.sablona
 deploy:
   provider: surge
