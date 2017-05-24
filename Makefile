@@ -7,7 +7,7 @@
 
 Zpevniky = $(patsubst Snakefile.%,%,$(wildcard Snakefile.*))
 
-.PHONY:	all clean cleanall orizni surge $(Zpevniky)
+.PHONY:	all clean cleanall orizni surge singles $(Zpevniky)
 
 all:	$(Zpevniky)
 
@@ -18,6 +18,8 @@ clean:
 	rm -fr cache/*
 	$(MAKE) -C output
 
-surge: $(Zpevniky)
+surge: $(Zpevniky) singles
 	$(MAKE) -C output surge
 
+singles:
+	TRAVIS_BRANCH=surge snakemake -p -s Snakefile.AllSongs --cores
