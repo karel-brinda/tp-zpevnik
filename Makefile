@@ -19,5 +19,5 @@ clean:
 	$(MAKE) -C output
 
 surge: $(Zpevniky)
-	$(MAKE) -C output
+	$(MAKE) -C output surge
 

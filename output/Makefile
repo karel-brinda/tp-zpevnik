@@ -6,7 +6,7 @@ ZPEVNIKY_T=$(patsubst %.pdf,%.tablet.pdf,$(ZPEVNIKY))
 
 .SECONDARY:
 
-all: orizni index.html
+all: orizni index.html Snakefile.sablona
 
 orizni: $(ZPEVNIKY_T)
 
@@ -21,11 +21,14 @@ orizni: $(ZPEVNIKY_T)
 	);\
 	cp $${tmp}/3.pdf $@;
 
-surge: orizni index.html
+surge: orizni index.html Snakefile.sablona
 	surge -d tp-zpevnik.surge.sh
 
+Snakefile.sablona:
+	p=$$(pwd) && cd .. && ./vygeneruj_novy_zpevnik.py > $$p/$@
+
 index.html:
-	p=$$(pwd) && cd .. && ./vygeneruj_index_surge.py > $$p/index.html
+	p=$$(pwd) && cd .. && ./vygeneruj_index_surge.py > $$p/$@
 
 clean:
 	rm -f *.tablet.pdf index.html

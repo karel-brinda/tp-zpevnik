@@ -20,7 +20,6 @@ script:
 - make
 before_deploy:
 - make -C output
-- ./vygeneruj_novy_zpevnik.py > output/Snakefile.sablona
 deploy:
   provider: surge
   project: "./output/"
