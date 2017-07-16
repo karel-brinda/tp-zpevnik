@@ -37,7 +37,7 @@ def sc_pdf(song):
 def ind_pisne():
 	return cb_ind()+"_pisne"
 
-def	ind_interpreti():
+def ind_interpreti():
 	return cb_ind()+"_interpreti"
 
 def idx_pisne():
@@ -195,8 +195,13 @@ rule copies:
 		os.path.join(cache_dir(),"template.tex"),
 		os.path.join(cache_dir(),"songbook.sty"),
 	run:
-		shutil.copyfile(os.path.join("tpcb","template.tex"),os.path.join(cache_dir(),"template.tex"))
-		shutil.copyfile(os.path.join("tpcb","songbook.sty"),os.path.join(cache_dir(),"songbook.sty"))
+		dir_rel=os.path.relpath("tpcb", cache_dir())
+		for x in ["template.tex", "songbook.sty"]:
+			sfile=os.path.join(cache_dir(),x)
+			rfile=os.path.join(dir_rel,x)
+			os.symlink(rfile,sfile)
+		#shutil.copyfile(os.path.join("tpcb","template.tex"),os.path.join(cache_dir(),"template.tex"))
+		#shutil.copyfile(os.path.join("tpcb","songbook.sty"),os.path.join(cache_dir(),"songbook.sty"))
 
 # o1/pisen.tex   =>  cache/pisen.tex
 # o2/pisen2.tex  =>  cache/pisen2.tex
