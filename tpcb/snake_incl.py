@@ -48,14 +48,14 @@ def idx_interpreti():
 
 def call_xelatex(xelatex_file):
 	if platform.system()=="Windows":
-		xelatex_command = """lualatex -latexoption='-interaction nonstopmode' -include-directory "{dir}" -aux-directory "{dir}" -output-directory "{dir}" "{texfile}" """.format(
+		xelatex_command = """lualatex -interaction nonstopmode -include-directory "{dir}" -aux-directory "{dir}" -output-directory "{dir}" "{texfile}" """.format(
 				dir=os.path.basedir(xelatex_file),
 				texfile=xelatex_file,
 			)
 	else:
 		xelatex_command = """
 			cd "{dir}"
-			latexmk -interaction=nonstopmode -pdflatex=lualatex -pdf "{texfile}"
+			latexmk  -latexoption='-interaction nonstopmode' -pdflatex=lualatex -pdf "{texfile}"
 			""".format(
 				dir=os.path.dirname(xelatex_file),
 				texfile=os.path.basename(xelatex_file),
