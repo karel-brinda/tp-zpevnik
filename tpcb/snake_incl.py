@@ -48,14 +48,14 @@ def idx_interpreti():
 
 def call_xelatex(xelatex_file):
 	if platform.system()=="Windows":
-		xelatex_command = """xelatex -interaction nonstopmode -include-directory "{dir}" -aux-directory "{dir}" -output-directory "{dir}" "{texfile}" """.format(
+		xelatex_command = """lualatex -interaction nonstopmode -include-directory "{dir}" -aux-directory "{dir}" -output-directory "{dir}" "{texfile}" """.format(
 				dir=os.path.basedir(xelatex_file),
 				texfile=xelatex_file,
 			)
 	else:
 		xelatex_command = """
 			cd "{dir}"
-			xelatex -interaction nonstopmode "{texfile}"
+			lualatex -interaction nonstopmode "{texfile}"
 			""".format(
 				dir=os.path.dirname(xelatex_file),
 				texfile=os.path.basename(xelatex_file),
@@ -70,7 +70,7 @@ def run():
 
 	if "SINGLES" in options or "SINGLESONLY" in options:
 		outputs.extend([ sc_pdf(x) for x in songs_dict.keys() ])
-	
+
 	return outputs
 
 #####
@@ -129,13 +129,13 @@ rule main_pdf:
 
 		if not os.path.isfile(ind_pisne()) or not os.path.isfile(ind_interpreti()):
 			call_xelatex(input[0])
-			udelejRejstrik(idx_pisne(),ind_pisne()); 
+			udelejRejstrik(idx_pisne(),ind_pisne());
 			udelejRejstrik(idx_interpreti(),ind_interpreti());
 
 		call_xelatex(input[0])
 
 		shutil.copyfile(ind_pisne(),ind_pisne()+".old")
-		udelejRejstrik(idx_pisne(),ind_pisne()); 
+		udelejRejstrik(idx_pisne(),ind_pisne());
 		udelejRejstrik(idx_interpreti(),ind_interpreti());
 
 		if not filecmp.cmp(ind_pisne(),ind_pisne()+".old"):

@@ -13,7 +13,7 @@
 \usepackage{fancyhdr}
 \usepackage[czech]{babel}
 \usepackage[chordbk]{songbook}
-\usepackage[xetex,pdfpagelabels=false,pdfborder={0 0 0}]{hyperref}
+\usepackage[pdfpagelabels=false,pdfborder={0 0 0}]{hyperref}
 \usepackage{forloop}
 
 \unless\ifdefined\SINGLE
@@ -130,7 +130,7 @@
 \ifdefined\FRONTCOVER
   \insertPDF{\FRONTCOVER}
   \unless\ifdefined\ONESIDE
-    % Pokud přední obálka existuje, vloží ji a jednu nebo dvě volné strany za 
+    % Pokud přední obálka existuje, vloží ji a jednu nebo dvě volné strany za
     % ni (mimo ONESIDE), aby první stránka zpěvníku vyšla napravo
     \emptyPage
     \ifodd\value{page}\emptyPage\fi
@@ -146,7 +146,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Kontrola dvojstránek probíhá v rámci \zs, takže pro poslední písničku ji 
+% Kontrola dvojstránek probíhá v rámci \zs, takže pro poslední písničku ji
 % musíme zavolat ručně
 \twopagecheck
 
@@ -166,7 +166,7 @@
 % Zadní obálka
 \ifdefined\BACKCOVER
   \unless\ifdefined\ONESIDE
-    % Vložit jednu nebo dvě prázdné stránky tak, aby poslední strana zadní 
+    % Vložit jednu nebo dvě prázdné stránky tak, aby poslední strana zadní
     % obálky (pokud existuje) vyšla nalevo (mimo ONESIDE)
     \emptyPage
     \countPages{\BACKCOVER}
