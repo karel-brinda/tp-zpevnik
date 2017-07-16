@@ -55,7 +55,7 @@ def call_xelatex(xelatex_file):
 	else:
 		xelatex_command = """
 			cd "{dir}"
-			latexmk  -latexoption='-interaction nonstopmode' -pdflatex=lualatex -pdf "{texfile}"
+			latexmk "{texfile}"
 			""".format(
 				dir=os.path.dirname(xelatex_file),
 				texfile=os.path.basename(xelatex_file),
@@ -191,12 +191,14 @@ rule copies:
 	input:
 		os.path.join("tpcb","template.tex"),
 		os.path.join("tpcb","songbook.sty"),
+		os.path.join("tpcb",".latexmkrc"),
 	output:
 		os.path.join(cache_dir(),"template.tex"),
 		os.path.join(cache_dir(),"songbook.sty"),
+		os.path.join(cache_dir(),".latexmkrc"),
 	run:
 		dir_rel=os.path.relpath("tpcb", cache_dir())
-		for x in ["template.tex", "songbook.sty"]:
+		for x in map(os.path.basename, input):
 			sfile=os.path.join(cache_dir(),x)
 			rfile=os.path.join(dir_rel,x)
 			os.symlink(rfile,sfile)
