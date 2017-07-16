@@ -7,6 +7,15 @@
   \ifdefined\ONESIDE,oneside\fi%
 ]{book}
 
+
+\ifdefined\suppressfontnotfounderror
+  \expandafter\let\csname xetex_suppressfontnotfounderror:D\endcsname
+    \suppressfontnotfounderror
+\else
+  \expandafter\let\csname xetex_suppressfontnotfounderror:D\endcsname
+    \luatexsuppressfontnotfounderror
+\fi
+
 \usepackage{fontspec}
 \usepackage{index}
 \usepackage{calc}
