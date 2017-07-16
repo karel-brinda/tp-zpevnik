@@ -11,6 +11,7 @@ addons:
     - texlive-latex-extra
     - texlive-fonts-recommended
     - texlive-xetex
+    - texlive-luatex
     - texlive-extra-utils
     - latexmk
 install:
