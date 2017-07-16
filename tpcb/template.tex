@@ -16,6 +16,19 @@
 \usepackage[pdfpagelabels=false,pdfborder={0 0 0}]{hyperref}
 \usepackage{forloop}
 
+\newcommand*{\pdfnumberofpages}[1]{%
+  \directlua{%
+    local doc = epdf.open("\luaescapestring{#1}")
+    local pages
+    if (doc) then
+      pages = doc:getCatalog():getNumPages()
+    else
+      pages = 0
+    end
+    tex.write(pages)
+  }%
+}
+
 \unless\ifdefined\SINGLE
   \newindex[cisloPisne]{default}{idx_pisne}{ind_pisne}{Rejstřík písní}
   \newindex[cisloPisne]{interpreti}{idx_interpreti}{ind_interpreti}{Rejstřík interpretů}
@@ -77,8 +90,11 @@
 % Makra pro vkládání celých PDF (přední a zadní obálka)
 \newcounter{insertCur}
 \newcounter{insertTotal}
-\newcommand\insertPage[2]{\shipout\vbox to 29.7cm{\vss\hbox to 21cm{\hss{\XeTeXpdffile #1 page #2 }\hss}\vss}\stepcounter{page}}
-\newcommand\countPages[1]{\setcounter{insertTotal}{\XeTeXpdfpagecount #1 }}
+\newcommand\insertPage[2]{\shipout\vbox to 29.7cm{\vss\hbox to 21cm{\hss{
+%% TODO: include file !!
+%\XeTeXpdffile #1 page #2
+}\hss}\vss}\stepcounter{page}}
+\newcommand\countPages[1]{\setcounter{insertTotal}{\pdfnumberofpages #1 }}
 \newcommand\insertPDF[1]{\countPages{#1}\stepcounter{insertTotal}
   \forloop{insertCur}{1}{\value{insertCur} < \value{insertTotal}}{%
     \insertPage{#1}{\value{insertCur}}}}

@@ -55,7 +55,7 @@ def call_xelatex(xelatex_file):
 	else:
 		xelatex_command = """
 			cd "{dir}"
-			lualatex -interaction nonstopmode "{texfile}"
+			latexmk -pdflatex=lualatex -pdf "{texfile}"
 			""".format(
 				dir=os.path.dirname(xelatex_file),
 				texfile=os.path.basename(xelatex_file),
