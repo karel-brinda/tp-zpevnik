@@ -17,7 +17,7 @@ orizni: $(ZPEVNIKY_T)
 	(\
 	cd $$tmp;\
 	pdfcrop --margins '0 -25 0 0' 1.pdf 2.pdf;\
-	gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile=3.pdf 2.pdf;\
+	/usr/bin/env gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile=3.pdf 2.pdf;\
 	);\
 	cp $${tmp}/3.pdf $@;
 
