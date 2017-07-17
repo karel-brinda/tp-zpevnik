@@ -12,6 +12,7 @@ addons:
     - texlive-fonts-recommended
     - texlive-xetex
     - texlive-extra-utils
+    - ghostscript
 install:
 - pip install -r requirements.txt
 - sudo ln -s /usr/share/i18n/SUPPORTED /var/lib/locales/supported.d/all
