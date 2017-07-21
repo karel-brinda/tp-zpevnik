@@ -21,6 +21,7 @@ script:
 - make
 before_deploy:
 - make -C output
+- rm .gitignore output/.gitignore
 deploy:
   provider: pages
   skip_cleanup: true
