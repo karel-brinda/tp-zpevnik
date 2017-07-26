@@ -3,8 +3,8 @@
 left_page_head="Zpěvník Technická přestávka 2017"
 right_page_head="www.technicka-prestavka.cz"
 chordbook="TP_zpevnik_2017"
-cover_front="tp-zpevnik-covers/2016_front.pdf"
-#cover_back="tp-zpevnik-covers/2013_back.pdf"
+cover_front="tp-zpevnik-covers/2017_front.pdf"
+cover_back="tp-zpevnik-covers/2017_back.pdf"
 
 # Některé písně (Hotel California, 500 miles a další) nevycházejí správně na dvoustranu, ale
 # v rámci zachování číslování kontrolu vypneme
@@ -13,8 +13,8 @@ cover_front="tp-zpevnik-covers/2016_front.pdf"
 songs=[
 	"./tp-songs/01_folk/lidová____A_te_Rehradice.tex",
 #	"./tp-songs/03_zahranicni/Alexandrovci____Kaťuša.tex",
-	"./tp-songs/01_folk/Argema____Jarošovský_pivovar.tex",
 	"./tp-songs/01_folk/Asonance____Čarodějnice_z_Amesbury.tex",
+	"./tp-songs/01_folk/Argema____Jarošovský_pivovar.tex",
 	"./tp-songs/01_folk/Brontosauři____Franky_Dlouhán.tex",
 	"./tp-songs/01_folk/Brontosauři____Kytka.tex",
 	"./tp-songs/01_folk/Brontosauři____Podvod.tex",
@@ -34,7 +34,7 @@ songs=[
 	"./tp-songs/01_folk/Jarek_Nohavica____Afričančata.tex",
 	"./tp-songs/01_folk/Jarek_Nohavica____Básnířka.tex",
 	"./tp-songs/01_folk/Jarek_Nohavica____Cukrářská_bossanova.tex",
-	"./tp-songs/01_folk/Jarek_Nohavica____Danse_Macabre.tex",
+#	"./tp-songs/01_folk/Jarek_Nohavica____Danse_Macabre.tex",
 	"./tp-songs/01_folk/Jarek_Nohavica____Dokud_se_zpívá.tex",
 	"./tp-songs/01_folk/Jarek_Nohavica____Hvězda.tex",
 	"./tp-songs/01_folk/Jarek_Nohavica____Jdou_po_mně_jdou.tex",
@@ -62,6 +62,7 @@ songs=[
 	"./tp-songs/01_folk/Karel_Kryl____Píseň_neznámého_vojína.tex",
 	"./tp-songs/01_folk/Karel_Kryl____Veličenstvo_kat____2pages.tex",
 	"./tp-songs/01_folk/Karel_Plíhal____Nosorožec.tex",
+#	"./tp-songs/01_folk/Karel_Plíhal____Plíhalova_univerzální_melodie.tex",
 	"./tp-songs/01_folk/Karel_Plíhal____Ráda_se_miluje.tex",
 	"./tp-songs/01_folk/Samson_a_jeho_parta____Už_to_nenapravím.tex",
 	"./tp-songs/01_folk/Michal_Tučný____Pověste_ho_vejš.tex",
@@ -124,8 +125,8 @@ songs=[
 	"./tp-songs/02_pop_rock/Olympic____Slzy_tvý_mámy.tex",
 	"./tp-songs/02_pop_rock/Olympic____Snad_jsem_to_zavinil_já.tex",
 	"./tp-songs/02_pop_rock/Olympic____Želva.tex",
-	"./tp-songs/02_pop_rock/Petr_Hapka____Šaškové_počmáraní.tex",
 	"./tp-songs/02_pop_rock/Premiér____Hrobař.tex",
+	"./tp-songs/02_pop_rock/Petr_Hapka____Šaškové_počmáraní.tex",
 	"./tp-songs/02_pop_rock/Richard_Müller____Nebude_to_ľahké.tex",
 	"./tp-songs/02_pop_rock/Richard_Müller____Po_schodoch.tex",
 	"./tp-songs/02_pop_rock/Richard_Müller____Srdce_jako_kníže_Rohan.tex",
@@ -159,8 +160,8 @@ songs=[
 	"./tp-songs/03_zahranicni/Beatles____Yellow_submarine.tex",
 	"./tp-songs/03_zahranicni/Beatles____Yesterday.tex",
 	"./tp-songs/03_zahranicni/Bob_Dylan____Knockin_on_heavens_door.tex",
+	"./tp-songs/03_zahranicni/Eric_Clapton____Layla.tex",
 	"./tp-songs/03_zahranicni/Eagles____Hotel_California.tex",
-#	"./tp-songs/03_zahranicni/Eric_Clapton____Layla.tex",
 #	"./tp-songs/03_zahranicni/Las_Ketchup____Aserejé.tex",
 	"./tp-songs/03_zahranicni/Limp_Bizkit____Behind_blue_eyes.tex",
 	"./tp-songs/03_zahranicni/Lou_Reed____Perfect_day.tex",
@@ -192,7 +193,6 @@ songs=[
 #	"./tp-songs/01_folk/Jarek_Nohavica____Cukrářská_bossanova.tex",
 	"./tp-songs/02_pop_rock/Trabant____Černej_pasažér.tex",
 	"./tp-songs/02_pop_rock/Yvonne_Přenosilová____Sklípek.tex",
-	"./tp-songs/04_tp/Johnny____Dej_mi_nějaký_tóny.tex",
 	"./tp-songs/02_pop_rock/Jana_Kirschner____Žienka.tex",
 	"./tp-songs/02_pop_rock/Yvonne_Přenosilová____Boty_proti_lásce.tex",
 #	"./tp-songs/02_pop_rock/film_Pražská_5____Strom_kýve_pahýly.tex",
@@ -220,6 +220,7 @@ songs=[
 	"./tp-songs/03_zahranicni/Elvis_Presley____Hound_Dog.tex",
 	"./tp-songs/03_zahranicni/Elvis_Presley____Blue_Suede_Shoes.tex",
 	"./tp-songs/03_zahranicni/Ben_E_King____Stand_By_Me.tex",
+	"./tp-songs/04_tp/Johnny____Dej_mi_nějaký_tóny.tex",
 	"./tp-songs/04_tp/Johnny____On_hledá_ji.tex",
 
 ### Pridavky po pridavcich
