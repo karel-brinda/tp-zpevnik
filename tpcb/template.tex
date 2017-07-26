@@ -15,6 +15,7 @@
 \usepackage[chordbk]{songbook}
 \usepackage[xetex,pdfpagelabels=false,pdfborder={0 0 0}]{hyperref}
 \usepackage{forloop}
+\usepackage{sectsty,titlesec}
 
 \unless\ifdefined\SINGLE
   \newindex[cisloPisne]{default}{idx_pisne}{ind_pisne}{Rejstřík písní}
@@ -37,6 +38,9 @@
   \fancyhead[LE]{}
   \fancyfoot{}
 \fi
+
+% Menší nadpisy rejstříků
+\chaptertitlefont{\huge}
 
 % Zkratky pro makra songbook.sty
 \newcommand\zp[2]{
