@@ -12,6 +12,7 @@ addons:
     - texlive-fonts-recommended
     - texlive-xetex
     - texlive-extra-utils
+    - texlive-lang-czech
     - ghostscript
 install:
 - pip install -r requirements.txt
