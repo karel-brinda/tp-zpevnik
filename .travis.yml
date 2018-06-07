@@ -2,7 +2,7 @@ language: python
 os:
 - linux
 python:
-- '3.4'
+- '3.5'
 addons:
   apt:
     packages:
@@ -12,6 +12,7 @@ addons:
     - texlive-fonts-recommended
     - texlive-xetex
     - texlive-extra-utils
+    - ghostscript
 install:
 - pip install -r requirements.txt
 - sudo ln -s /usr/share/i18n/SUPPORTED /var/lib/locales/supported.d/all
@@ -20,17 +21,16 @@ script:
 - make
 before_deploy:
 - make -C output
+- rm .gitignore output/.gitignore
 deploy:
-  provider: surge
-  project: "./output/"
-  domain: tp-zpevnik.surge.sh
+  provider: pages
   skip_cleanup: true
+  github_token: "$GITHUB_TOKEN"
+  local_dir: output
   on:
-    branch:
-    - master
-    - surge
-#    all_branches: true
+    branch: master
 env:
   global:
   - secure: lZxQ9+kfyqzvmPvxLPv6FvTwGbOrAdek3tU/05me30vVb2VA8mvBj8+ELQjWvuuNEtUJ6NSAIDn0o2wntoy5uK8cA7jPMOCMUH3H1oHNxiAjJb9Pj0l14RZJ6HxVQCdTXDDlcV99AkkD5YbFNhNcLsiQO+o7FLIvXpEoS1J0HsY=
   - secure: CvGQvGyks7jQLk4LbhgyQkm+O3ycoW/Qq64Yy5BXBrHwLgeUAPgY2j10pwSlWAZ8UO37cChpe+itD0LAGJqeRAlp1KhtUgtslVqJWEZQDRyZ8HPjT+2SWJVZtFTCYr/4/fzx2Vsjl6el7I3cGLzyUbuQM9h168pxYEINePTD1As=
+  - secure: IqxdLWclnMZ/TFphOh9dfJfX/hyJpZmE+63KuECylfJkAkOFQ83BoV5aJWFdBVSMx/l0PB05IElTa/ZNB2EUhUA1sB42PuNJYsQkQZuw6I/5X7a8+q4hOrBUlF7kVJEKlwf15nmwgnytyJStZCHjGssDF0mpsdjVNHai6dqGHsk=
