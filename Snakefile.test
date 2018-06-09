@@ -9,8 +9,8 @@ chordbook="muj_novy_zpevnik"
 options=["SINGLES"]
 
 songs=[
-    ("./tp-songs/03_zahranicni/Beatles____Let_it_be.tex", 5), # 5 = transpozice o 5 půltónů nahoru
-    "./tp-songs/03_zahranicni/Beatles____Love_me_do.tex",
+    ("tp-songs/03_zahranicni/Beatles____Let_it_be.tex", 5), # 5 = transpozice o 5 půltónů nahoru
+    "tp-songs/03_zahranicni/Beatles____Love_me_do.tex",
 ]
 
 include:"tpcb/snake_incl.py"
