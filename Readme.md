@@ -1,7 +1,7 @@
 # TP zpěvník
 [![Build Status](https://travis-ci.org/karel-brinda/tp-zpevnik.svg?branch=master)](https://travis-ci.org/karel-brinda/tp-zpevnik)
 
-Na tomto místě naleznete podklady k sestavení TP zpěvníků z let 2011 – 2013. Vysázené zpěvníky naleznete na http://tp-zpevnik.surge.sh.
+Na tomto místě naleznete podklady k sestavení TP zpěvníků z let 2011 – 2013. Vysázené zpěvníky naleznete na http://karel-brinda.github.io/tp-zpevnik/.
 
 Co tento systém umožňuje:
 *	Sestavit existující TP zpěvníky.
@@ -169,3 +169,7 @@ Dodržujte, prosím, logiku celého zpěvníku:
 * Používejte evropskou hudební notaci (*B* = *A#*).
 * Pro mollové akordy používejte *mi*, tedy např. *Ami*.
 * Do jedné značky ```<...>``` vkládejte právě jeden akordy (pokud jich tam bude více, program ohlásí neznámý formát akordové značky).
+
+## Podobné zpěvníky
+
+* [VOC songbook](https://github.com/ababaian/VOCsongbook)
