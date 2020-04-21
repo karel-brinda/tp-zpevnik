@@ -9,9 +9,6 @@ cover_back="tp-zpevnik-covers/2020_back.pdf"
 options = [ "SKIPCHECK" ]
 
 songs=[
-	#JP1: HoHoW, 1000mil
-	#JP2: BlázUk, BLBH, Mont, ZPláně, Toulavej
-	##Mám jizvu
 	"tp-songs/01_folk/Argema____Jarošovský_pivovar.tex",
 	"tp-songs/01_folk/Asonance____Čarodějnice_z_Amesbury.tex",
 	"tp-songs/01_folk/Balada_pro_banditu____Zabili,_zabili.tex",
@@ -48,6 +45,7 @@ songs=[
 #	"tp-songs/01_folk/Folk_Team____Beze_slov.tex",
 #	"tp-songs/01_folk/František_Nedvěd____Kočovní_herci.tex",
 #	"tp-songs/01_folk/František_Nedvěd____Řemeslo.tex",
+	"tp-songs/01_folk/Greenhorni____Blízko_Little_Big_Hornu.tex",
 #	"tp-songs/01_folk/Greenhorni____Blues_folsomské_věznice.tex",
 #	"tp-songs/01_folk/Greenhorni____Cizinec.tex",
 #	"tp-songs/01_folk/Greenhorni____Když_náš_táta_hrál.tex",
@@ -92,6 +90,7 @@ songs=[
 	"tp-songs/01_folk/Jarek_Nohavica____Košilka.tex",
 	"tp-songs/01_folk/Jarek_Nohavica____Kozel.tex",
 	"tp-songs/01_folk/Jarek_Nohavica____Margita.tex",
+	"tp-songs/01_folk/Jarek_Nohavica____Mám_jizvu_na_rtu.tex",
 	"tp-songs/01_folk/Jarek_Nohavica____Mařenka.tex",
 	"tp-songs/01_folk/Jarek_Nohavica____Mikymauz.tex",
 	"tp-songs/01_folk/Jarek_Nohavica____Milionář.tex",
@@ -122,6 +121,7 @@ songs=[
 #	"tp-songs/01_folk/Jaroslav_Uhlíř,_Zdeněk_Svěrák____Není_nutno.tex",
 	"tp-songs/01_folk/Jaroslav_Uhlíř,_Zdeněk_Svěrák____Pramen_zdraví.tex",
 #	"tp-songs/01_folk/Jiří_Schmitzer____Kaluž.tex",
+	"tp-songs/01_folk/Josef_Zíma____Zelený_pláně.tex",
 #	"tp-songs/01_folk/Kamelot____Amulet.tex",
 #	"tp-songs/01_folk/Kamelot____Cikáni.tex",
 #	"tp-songs/01_folk/Kamelot____Honolulu.tex",
@@ -178,6 +178,7 @@ songs=[
 #	"tp-songs/01_folk/Nezmaři____Ráno_bylo_stejný.tex",
 #	"tp-songs/01_folk/neznámý____Balada_o_princezně_a_o_hradu.tex",
 #	"tp-songs/01_folk/neznámý____Kolo_rovno_hovno.tex",
+	"tp-songs/01_folk/neznámý____Montgomery.tex",
 	"tp-songs/01_folk/neznámý____Okoř.tex",
 #	"tp-songs/01_folk/neznámý____Tři_citrónky.tex",
 #	"tp-songs/01_folk/Pacifik____Malý_velký_muž.tex",
@@ -187,6 +188,7 @@ songs=[
 	"tp-songs/01_folk/Pavel_Dobeš____Pražce.tex",
 #	"tp-songs/01_folk/Wabi_Daněk____Vítr.tex",
 	"tp-songs/01_folk/neznámý____Matfyzácké_pražce.tex",
+	"tp-songs/01_folk/Pavel_Dydovič____Bláznova_ukolébavka.tex",
 #	"tp-songs/01_folk/Pavel_Roth____Zahrada_ticha.tex",
 	"tp-songs/01_folk/Petr_Lutka____Točí_se,_točí.tex",
 	"tp-songs/01_folk/Petr_Novák____Povídej.tex",
@@ -210,6 +212,7 @@ songs=[
 #	"tp-songs/01_folk/Tomáš_Klus____Panenka.tex",
 #	"tp-songs/01_folk/Tomáš_Klus____Pocity.tex",
 	("tp-songs/01_folk/Vlasta_Redl____Sbohem_galánečko.tex", 5),
+	"tp-songs/01_folk/Vojtěch_Tomáško____Toulavej.tex",
 #	"tp-songs/01_folk/Wabi_Daněk____Mávej.tex",
 	"tp-songs/01_folk/Wabi_Daněk____Outsider_waltz.tex",
 	"tp-songs/01_folk/Wabi_Daněk____Píseň_co_mě_učil_listopad.tex",
@@ -222,12 +225,14 @@ songs=[
 #	"tp-songs/01_folk/Waldemar_Matuška____Sbohem_lásko.tex",
 	"tp-songs/01_folk/Waldemar_Matuška____Sedm_dostavníků.tex",
 	"tp-songs/01_folk/Waldemar_Matuška____Slavíci_z_Madridu.tex",
+	"tp-songs/01_folk/Waldemar_Matuška____Tisíc_mil.tex",
 	("tp-songs/01_folk/Waldemar_Matuška____Už_koníček_pádí.tex", 5),
 	"tp-songs/01_folk/Waldemar_Matuška____Vítr_to_ví.tex",
 #	"tp-songs/01_folk/Zuzana_Navarová____Andělská.tex",
 	"tp-songs/01_folk/Zuzana_Navarová____Já_s_tebou_žít_nebudu.tex",
 #	"tp-songs/01_folk/Zuzana_Navarová____Sedávám_na_domovních_schodech.tex",
 #	"tp-songs/01_folk/Zuzana_Navarová____Somrkrálka_Blues.tex",
+	"tp-songs/01_folk/Žalman____Ho_Ho_Watanay.tex",
 #	"tp-songs/01_folk/Žalman____Já_písnička.tex",
 	"tp-songs/01_folk/Žalman____Jdem_zpátky_do_lesů.tex",
 	"tp-songs/01_folk/Žalman____Rána_v_trávě.tex",
