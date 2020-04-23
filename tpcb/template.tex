@@ -22,6 +22,22 @@
   \newindex[cisloPisne]{interpreti}{idx_interpreti}{ind_interpreti}{Rejstřík interpretů}
 \fi
 
+% https://tex.stackexchange.com/a/132415/16770
+\makeatletter
+\newif\iffirst@subitem
+\def\@idxitem{%
+  \par\hangindent40\p@
+  \first@subitemtrue
+}
+\def\subitem{%
+  \par\hangindent40\p@
+  \iffirst@subitem
+    \nobreak
+    \first@subitemfalse
+  \fi
+  \hspace*{20\p@}}
+\makeatother
+
 \selectlanguage{czech}
 
 \newcounter{cisloPisne}
