@@ -36,6 +36,15 @@
     \first@subitemfalse
   \fi
   \hspace*{20\p@}}
+
+\def\@makeschapterhead#1{%
+  \vspace*{20\p@}%
+  {\parindent \z@ \raggedright
+    \normalfont
+    \interlinepenalty\@M
+    \huge \bf\sf  #1\par\nobreak
+    \vskip 20\p@
+  }}
 \makeatother
 
 \selectlanguage{czech}
