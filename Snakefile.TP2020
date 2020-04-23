@@ -9,6 +9,7 @@ cover_back="tp-zpevnik-covers/2020_back.pdf"
 options = [ "SKIPCHECK" ]
 
 songs=[
+	"tp-songs/04_tp/Eso____Hymna_TP.tex",
 #	"tp-songs/01_folk/Jarek_Nohavica____Afričančata.tex",
 #	"tp-songs/03_zahranicni/Beatles____A_hard_days_night.tex",
 #	"tp-songs/03_zahranicni/Michel_Teló____Ai_se_eu_te_pego.tex",
@@ -124,7 +125,6 @@ songs=[
 	"tp-songs/02_pop_rock/Premiér____Hrobař.tex",
 	"tp-songs/01_folk/Čechomor____Hruška.tex",
 #	"tp-songs/01_folk/Jarek_Nohavica____Hvězda.tex",
-	"tp-songs/04_tp/Eso____Hymna_TP.tex",
 #	"tp-songs/02_pop_rock/Buty____Chtěl_bych_se_jmenovat_Jan.tex",
 #	"tp-songs/03_zahranicni/Johnny_Nash____I_can_see_clearly_now.tex",
 #	"tp-songs/03_zahranicni/Joan_Jett____I_Love_Rock_n_Roll.tex",
@@ -206,7 +206,6 @@ songs=[
 #	"tp-songs/01_folk/Marsyas____Marsyas_a_Apollón.tex",
 	"tp-songs/01_folk/Jarek_Nohavica____Mařenka.tex",
 	"tp-songs/01_folk/Semtex____Mašinka.tex",
-	"tp-songs/01_folk/neznámý____Matfyzácké_pražce.tex",
 #	"tp-songs/01_folk/Humbuk____MatFyz_Blues.tex",
 #	"tp-songs/01_folk/Wabi_Daněk____Mávej.tex",
 #	"tp-songs/02_pop_rock/Lucie____Medvídek.tex",
@@ -292,6 +291,7 @@ songs=[
 	"tp-songs/02_pop_rock/Jiří_Suchý____Pramínek_vlasů.tex",
 #	"tp-songs/02_pop_rock/Pražský_výběr____Pražákům_je_hej.tex",
 	"tp-songs/01_folk/Pavel_Dobeš____Pražce____1page.tex",
+	"tp-songs/01_folk/neznámý____Matfyzácké_pražce.tex",
 	"tp-songs/01_folk/Čechomor____Proměny.tex",
 #	"tp-songs/03_zahranicni/Creedence_Clearwater_Revival____Proud_Mary.tex",
 #	"tp-songs/01_folk/Lenka_Filipová____Prý_se_tomu_říká_láska.tex",
