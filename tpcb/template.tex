@@ -6,6 +6,9 @@
 \documentclass[11pt,a4paper%
   \ifdefined\ONESIDE,oneside\fi%
 ]{book}
+\usepackage[textwidth=6.25in,textheight=10in,
+  inner=1.4in,top=0.91in,
+  headheight=0.51in,headsep=0.2in]{geometry}
 
 \usepackage{fontspec}
 \usepackage{index}
@@ -32,10 +35,10 @@
   \pagestyle{empty}
 \else
   \pagestyle{fancy}
-  \fancyhead[RE]{\ifdefined\RHEAD\RHEAD\fi}
-  \fancyhead[LO]{\ifdefined\LHEAD\LHEAD\fi}
-  \fancyhead[RO]{}
-  \fancyhead[LE]{}
+  \fancyhead[RO]{\ifdefined\RHEAD\RHEAD\fi}
+  \fancyhead[LE]{\ifdefined\LHEAD\LHEAD\fi}
+  \fancyhead[RE]{}
+  \fancyhead[LO]{}
   \fancyfoot{}
 \fi
 
@@ -81,7 +84,7 @@
 % Makra pro vkládání celých PDF (přední a zadní obálka)
 \newcounter{insertCur}
 \newcounter{insertTotal}
-\newcommand\insertPage[2]{\shipout\vbox to 29.7cm{\vss\hbox to 21cm{\hss{\XeTeXpdffile #1 page #2 }\hss}\vss}\stepcounter{page}}
+\newcommand\insertPage[2]{{\hoffset=-1in\voffset=-1in\shipout\vbox to 29.7cm{\vss\hbox to 21cm{\hss{\XeTeXpdffile #1 page #2 }\hss}\vss}\stepcounter{page}}}
 \newcommand\countPages[1]{\setcounter{insertTotal}{\XeTeXpdfpagecount #1 }}
 \newcommand\insertPDF[1]{\countPages{#1}\stepcounter{insertTotal}
   \forloop{insertCur}{1}{\value{insertCur} < \value{insertTotal}}{%
@@ -105,7 +108,7 @@
       \edef\nerrors{\the\errors^^J\space\space\the\lastsong}
       \global\errors\expandafter{\nerrors}
     \else\ifnum\value{numpages}>1
-      \unless\ifodd\value{page}
+      \ifodd\value{page}
         \message{^^J^^J\space\space Píseň "\the\lastsong" začala na pravé a skončila na levé.^^J^^J}
         \stepcounter{errorCount}
         \edef\nerrors{\the\errors^^J\space\space\the\lastsong}
@@ -127,9 +130,6 @@
   \twocolumn
 \fi
 
-% Stránky je potřeba počítat od sudé (pravé)
-\setcounter{page}{0}
-
 % Přední obálka
 \ifdefined\FRONTCOVER
   \insertPDF{\FRONTCOVER}
@@ -137,7 +137,7 @@
     % Pokud přední obálka existuje, vloží ji a jednu nebo dvě volné strany za 
     % ni (mimo ONESIDE), aby první stránka zpěvníku vyšla napravo
     \emptyPage
-    \ifodd\value{page}\emptyPage\fi
+    \unless\ifodd\value{page}\emptyPage\fi
     % Pro budoucí \twopagecheck v \zs první písničky
     \setcounter{lastpage}{\value{page}}
   \fi
@@ -175,7 +175,7 @@
     \emptyPage
     \countPages{\BACKCOVER}
     \addtocounter{insertTotal}{\value{page}}
-    \ifodd\value{insertTotal}\emptyPage\fi
+    \unless\ifodd\value{insertTotal}\emptyPage\fi
   \fi
   \insertPDF{\BACKCOVER}
 \fi
