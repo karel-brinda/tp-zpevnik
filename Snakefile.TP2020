@@ -1,12 +1,13 @@
 # -*-coding: utf-8 -*-
 
 left_page_head="Zpěvník Technická přestávka 2020"
-right_page_head="www.technicka-prestavka.cz"
+right_page_head="Zpěvník Technická přestávka 2020"
+#right_page_head="www.technicka-prestavka.cz"
 chordbook="TP_zpevnik_2020"
 cover_front="tp-zpevnik-covers/2020_front.pdf"
 cover_back="tp-zpevnik-covers/2020_back.pdf"
 
-options = [ "SKIPCHECK" ]
+options = [ "ONESIDE", "SKIPCHECK" ]
 
 songs=[
 	"tp-songs/04_tp/Eso____Hymna_TP.tex",
