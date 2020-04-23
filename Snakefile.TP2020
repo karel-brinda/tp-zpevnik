@@ -7,7 +7,7 @@ chordbook="TP_zpevnik_2020"
 cover_front="tp-zpevnik-covers/2020_front.pdf"
 cover_back="tp-zpevnik-covers/2020_back.pdf"
 
-options = [ "ONESIDE", "SKIPCHECK" ]
+options = [ "ONESIDE", "SKIPCHECK", "PREVIOUS" ]
 
 songs=[
 	"tp-songs/04_tp/Eso____Hymna_TP.tex",
