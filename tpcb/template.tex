@@ -25,6 +25,18 @@
   \newindex[cisloPisne]{interpreti}{idx_interpreti}{ind_interpreti}{Rejstřík interpretů}
 \fi
 
+% Označování čísel písniček v dřívějších zpěvnících
+\ifdefined\PREVIOUS
+  \newbox\inbox
+  \newdimen\boxheight
+  \renewcommand\in[2]{%
+    \setbox\inbox=\hbox to 2cm{\small #1:\hfil #2}%
+    \advance\boxheight by 1.5\ht\inbox
+    \vbox to 0pt{\vskip-2cm\vskip\boxheight\hbox to \hsize{\hss\box\inbox}\vss}\vskip-\baselineskip}
+\else
+  \renewcommand\in[2]{}
+\fi
+
 % https://tex.stackexchange.com/a/132415/16770
 \makeatletter
 \newif\iffirst@subitem
