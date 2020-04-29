@@ -81,12 +81,6 @@
 \newif\ifPrintAllSongs  \PrintAllSongsfalse
 \newif\ifSamepageMode   \SamepageModefalse
 \newif\ifSongEject      \SongEjecttrue
-\newif\ifSBpaperAfour   \SBpaperAfourfalse
-\newif\ifSBpaperAfive   \SBpaperAfivefalse
-\newif\ifSBpaperBfive   \SBpaperBfivefalse
-\newif\ifSBpaperLtr     \SBpaperLtrfalse
-\newif\ifSBpaperLgl     \SBpaperLglfalse
-\newif\ifSBpaperExc     \SBpaperExcfalse
 %%========================================================
 %%                      F O N T S                        %
 %%========================================================
@@ -155,19 +149,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%=======================================================%
-%%          P A P E R S I Z E   O P T I O N S            %
-%%=======================================================%
-\DeclareOption{a4paper}{% Paper size: 210mm x 297mm
-  \SBpaperAfourtrue
-  \SBpaperAfivefalse
-  \SBpaperBfivefalse
-  \SBpaperLtrfalse
-  \SBpaperLglfalse
-  \SBpaperExcfalse
-}
-
-
-%%=======================================================%
 %%         C O M P A C T S O N G   O P T I O N           %
 %%=======================================================%
 %\DeclareOption{compactsong}{%
@@ -196,21 +177,6 @@
   \NotWordsOnlytrue
   \SongEjecttrue
 
-  \voffset=-1.00in
-  \hoffset=-1.00in
-
-    \topmargin=0.5in
-    \headheight=0.21in
-    \headsep=0.2in
-    \textheight=10.0in
-    \footskip=0.19in
-    %
-    \oddsidemargin=0.618in
-    \evensidemargin=1.4in
-    \textwidth=6.25in
-    \marginparsep=0.2in
-    \marginparwidth=0.8in
-
   \raggedbottom
 
 }
@@ -223,7 +189,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ExecuteOptions{a4paper}
 \ProcessOptions
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
