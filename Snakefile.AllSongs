@@ -8,12 +8,17 @@ chordbook="TP_zpevnik_komplet"
 
 # U AllSongs nemáme žádnou kontrolu nad levými/pravými stránkami
 options = [ "SKIPCHECK"]
+
+singles = True
+
 try:
-	if os.environ['TRAVIS_BRANCH'] in ['master','surge']:
-		# singles jenom pro surge.sh
-		options.append("SINGLES")
-except:
+	if os.environ['TRAVIS_BRANCH'] not in ['master','surge']:
+		singles = False
+except KeyError:
 	pass
+
+if singles:
+	options.append("SINGLES")
 
 songs = glob.glob('tp-songs/*/*.tex')
 
