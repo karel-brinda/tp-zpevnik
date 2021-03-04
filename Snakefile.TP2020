@@ -1,13 +1,13 @@
 # -*-coding: utf-8 -*-
 
 left_page_head="Zpěvník Technická přestávka 2020"
-right_page_head="Zpěvník Technická přestávka 2020"
-#right_page_head="www.technicka-prestavka.cz"
+#right_page_head="Zpěvník Technická přestávka 2020"
+right_page_head="www.technicka-prestavka.cz"
 chordbook="TP_zpevnik_2020"
 cover_front="tp-zpevnik-covers/2020_front.pdf"
 cover_back="tp-zpevnik-covers/2020_back.pdf"
 
-options = [ "ONESIDE", "SKIPCHECK", "PREVIOUS" ]
+options = [ "PREVIOUS" ]
 
 songs=[
 	"tp-songs/04_tp/Eso____Hymna_TP.tex",
@@ -100,7 +100,7 @@ songs=[
 #	"tp-songs/01_folk/Karel_Kryl____Habet.tex",
 #	"tp-songs/03_zahranicni/Afric_Simone____Hafanana.tex",
 #	"tp-songs/01_folk/Jarek_Nohavica____Halelujá.tex",
-	("tp-songs/03_zahranicni/Leonard_Cohen____Hallelujah.tex", 5),
+#	("tp-songs/03_zahranicni/Leonard_Cohen____Hallelujah.tex", 5),
 #	"tp-songs/02_pop_rock/Slávek_Janoušek____Halleyova_kometa.tex",
 #	"tp-songs/03_zahranicni/Alanis_Morisette____Hand_in_my_pocket.tex",
 #	"tp-songs/01_folk/Nezmaři____Hej_člověče_boží.tex",
@@ -110,6 +110,7 @@ songs=[
 #	"tp-songs/03_zahranicni/Ray_Charles____Hit_the_road_Jack.tex",
 #	"tp-songs/01_folk/Ivan_Mládek____Hlasná_třebáň.tex",
 	"tp-songs/01_folk/Karel_Kryl____Hle_jak_se_perou.tex",
+	("tp-songs/03_zahranicni/Leonard_Cohen____Hallelujah.tex", 5), # přemístěno kvůli dvoustraně
 	"tp-songs/01_folk/Jarek_Nohavica____Hlídač_krav.tex",
 #	"tp-songs/02_pop_rock/Mňága_a_Žďorp____Hodinový_hotel.tex",
 	"tp-songs/01_folk/Žalman____Ho_Ho_Watanay.tex",
@@ -214,8 +215,8 @@ songs=[
 	"tp-songs/02_pop_rock/Tři_sestry____Mexiko.tex",
 	"tp-songs/01_folk/Čechomor____Mezi_horami.tex",
 	"tp-songs/01_folk/Jarek_Nohavica____Mikymauz.tex",
+	"tp-songs/01_folk/Jarek_Nohavica____Milionář.tex", # přemístěno kvůli dvoustraně
 	"tp-songs/02_pop_rock/Josef_Zíma,_Karel_Štědrý____Milenci_v_texaskách.tex",
-	"tp-songs/01_folk/Jarek_Nohavica____Milionář.tex",
 	"tp-songs/02_pop_rock/Kabát____Moderní_děvče.tex",
 #	"tp-songs/01_folk/Karel_Plíhal____Modrá_knížka.tex",
 	"tp-songs/02_pop_rock/Žlutý_pes____Modrá.tex",
@@ -405,8 +406,8 @@ songs=[
 #	"tp-songs/02_pop_rock/Xindl_X____V_blbým_věku.tex",
 	"tp-songs/01_folk/Čechomor____Včelín.tex",
 #	"tp-songs/01_folk/Karel_Kryl____Veličenstvo_kat.tex",
-	"tp-songs/01_folk/Karel_Kryl____Veličenstvo_kat____2pages.tex",
 	("tp-songs/01_folk/Pacifik____Velrybářská_výprava.tex", 5),
+	"tp-songs/01_folk/Karel_Kryl____Veličenstvo_kat____2pages.tex", # přemístěno kvůli dvoustraně
 	"tp-songs/01_folk/Čechomor____Větříček.tex",
 #	"tp-songs/03_zahranicni/The_Buggles____Video_killed_the_radio_star.tex",
 #	"tp-songs/01_folk/Wabi_Daněk____Vítr.tex",
