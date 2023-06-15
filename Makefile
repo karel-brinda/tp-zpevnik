@@ -27,7 +27,7 @@ surge: orizni index.html Snakefile.sablona
 Snakefile.sablona:
 	p=$$(pwd) && cd .. && ./vygeneruj_novy_zpevnik.py > $$p/$@
 
-index.html:
+index.html: $(ZPEVNIKY_T)
 	p=$$(pwd) && cd .. && ./vygeneruj_index_surge.py > $$p/$@
 
 clean:
