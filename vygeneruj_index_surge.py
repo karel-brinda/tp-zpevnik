@@ -54,10 +54,10 @@ if __name__ == '__main__':
 		<ul>{ostatni_zpevniky}
 		</ul>
 
-		<h3>Singles</h3>
+		<!-- <h3>Singles</h3>
 
 		<ul>{singles}
-		</ul>
+		</ul> -->
 	""".format(
         tp_zpevniky="".join(list_tp_zpevniky),
         ostatni_zpevniky="".join(list_ostatni_zpevniky),
