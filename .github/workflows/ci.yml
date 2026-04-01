@@ -36,23 +36,31 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Build chordbooks
-        run: make
+        run: make -j
+
+  pages:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v5
 
       - name: Build Pages output
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: |
-          make -C output
+          make -C output -j
           rm -f .gitignore output/.gitignore
 
       - name: Upload Pages artifact
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         uses: actions/upload-pages-artifact@v4
         with:
           path: output
 
   deploy:
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-    needs: build
+    needs: pages
     runs-on: ubuntu-latest
     permissions:
       pages: write
