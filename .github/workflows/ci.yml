@@ -4,21 +4,13 @@ on:
   push:
     branches:
       - master
-      - lyrics-correct
   pull_request:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
@@ -33,12 +25,9 @@ jobs:
           sudo apt-get install -y \
             ghostscript \
             locales \
-            lmodern \
             texlive-extra-utils \
-            texlive-fonts-recommended \
             texlive-lang-czechslovak \
             texlive-latex-extra \
-            texlive-latex-recommended \
             texlive-xetex
           sudo locale-gen cs_CZ.UTF-8
 
@@ -49,6 +38,7 @@ jobs:
         run: make
 
       - name: Build Pages output
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: |
           make -C output
           rm -f .gitignore output/.gitignore
@@ -63,6 +53,9 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
