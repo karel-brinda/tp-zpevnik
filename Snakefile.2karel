@@ -13,6 +13,7 @@ options = [
 songs = [
     "songs/03_zahranicni/Blue_Oyster_Cult____Dont_fear_the_reaper.tex",
     "songs/03_zahranicni/Box_Tops____Letter.tex",
+    "songs/03_zahranicni/Dire_Straits____Sultans_of_Swing.tex",
     "songs/03_zahranicni/Georges_Brassens____Fernande.tex",
     "songs/03_zahranicni/Gerard_Lenorman____La_Ballade.tex",
     "songs/03_zahranicni/Jefferson_Airplane____Somebody_to_love.tex",
