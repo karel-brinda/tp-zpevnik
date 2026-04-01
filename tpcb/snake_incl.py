@@ -1,14 +1,10 @@
 # -*-coding: utf-8 -*-
 
-import collections
 import os
 #import PyPDF2
 import shutil
 import platform
 import filecmp
-
-ruleorder:
-	song_tex > main_tex
 
 from chords import *
 from index import *
@@ -33,6 +29,14 @@ def sc_tex(song):
 
 def sc_pdf(song):
 	return os.path.join("output",chordbook+"_singles","{}.pdf".format(song))
+
+def prepare_outputs():
+	return [
+		cb_tex(),
+		os.path.join(cache_dir(),"_list.tex"),
+		os.path.join(cache_dir(),"template.tex"),
+		os.path.join(cache_dir(),"songbook.sty"),
+	] + [sc_tex(x) for x in songs_dict.keys()]
 
 def ind_pisne():
 	return cb_ind()+"_pisne"
@@ -102,53 +106,14 @@ songs_dict = OrderedDict([ (x[3],x[0]) for x in songs_prop ])
 
 songs_dict_transp = OrderedDict([ (x[3],x[1]) for x in songs_prop ])
 
-# zpevnik.tex => zpevnik.pdf
-rule main_pdf:
-	output:
-		cb_pdf(),
-		temp(cb_tex().replace(".tex",".pdf")),
-		temp(cb_tex().replace(".tex",".log")),
-		temp(cb_tex().replace(".tex",".out")),
-		temp(idx_pisne()),
-		temp(idx_interpreti()),
-		ind_pisne(),
-		ind_interpreti(),
-		temp(ind_pisne()+".old"),
-	input:
-		cb_tex(),
-		[sc_tex(x) for x in songs_dict.keys()],
-		os.path.join(cache_dir(),"_list.tex"),
-		os.path.join(cache_dir(),"template.tex"),
-		os.path.join(cache_dir(),"songbook.sty"),
-	run:
-		# Výstup je nyní v adresáři output. Pokud existuje stará verze, smažeme
-		# ji, aby nemátla.
-		if os.path.isfile("_{}.pdf".format(chordbook)):
-			os.remove("_{}.pdf".format(chordbook))
-
-		if not os.path.isfile(ind_pisne()) or not os.path.isfile(ind_interpreti()):
-			call_xelatex(input[0])
-			udelejRejstrik(idx_pisne(),ind_pisne()); 
-			udelejRejstrik(idx_interpreti(),ind_interpreti());
-
-		call_xelatex(input[0])
-
-		shutil.copyfile(ind_pisne(),ind_pisne()+".old")
-		udelejRejstrik(idx_pisne(),ind_pisne()); 
-		udelejRejstrik(idx_interpreti(),ind_interpreti());
-
-		if not filecmp.cmp(ind_pisne(),ind_pisne()+".old"):
-			call_xelatex(input[0])
-
-		shutil.copyfile(output[1],output[0])
-
-# seznam => zpevnik.tex
-rule main_tex:
+# připravit celý chordbook cache adresář najednou
+rule prepare_chordbook:
 	input:
 		workflow.snakefile,
+		os.path.join("tpcb","template.tex"),
+		os.path.join("tpcb","songbook.sty"),
 	output:
-		cb_tex(),
-		os.path.join(cache_dir(),"_list.tex"),
+		prepare_outputs()
 	run:
 		try:
 			shutil.copyfile(cover_front, os.path.join(cache_dir(),os.path.basename(cover_front)))
@@ -158,6 +123,10 @@ rule main_tex:
 			shutil.copyfile(cover_back, os.path.join(cache_dir(),os.path.basename(cover_back)))
 		except NameError:
 			pass
+
+		shutil.copyfile(os.path.join("tpcb","template.tex"),os.path.join(cache_dir(),"template.tex"))
+		shutil.copyfile(os.path.join("tpcb","songbook.sty"),os.path.join(cache_dir(),"songbook.sty"))
+
 		with open(output[0],"w+",encoding="utf-8") as f:
 			main_tex = "\\def\\thelist{_list.tex}\n"
 			main_tex += os.linesep.join(["\\def\\{}{{}}".format(x) for x in options])+"\n"
@@ -179,6 +148,7 @@ rule main_tex:
 				pass
 			main_tex += "\n\input{template.tex}\n"
 			f.write(main_tex)
+
 		with open(output[1],"w+",encoding="utf-8") as f:
 			list_tex = os.linesep.join(
 					["\input {{{}}}".format(os.path.relpath(sc_tex(x),cache_dir()))
@@ -186,33 +156,48 @@ rule main_tex:
 				)
 			f.write(list_tex)
 
-rule copies:
-	input:
-		os.path.join("tpcb","template.tex"),
-		os.path.join("tpcb","songbook.sty"),
-	output:
-		os.path.join(cache_dir(),"template.tex"),
-		os.path.join(cache_dir(),"songbook.sty"),
-	run:
-		shutil.copyfile(os.path.join("tpcb","template.tex"),os.path.join(cache_dir(),"template.tex"))
-		shutil.copyfile(os.path.join("tpcb","songbook.sty"),os.path.join(cache_dir(),"songbook.sty"))
+		for song_id, song_path in songs_dict.items():
+			with open(song_path,"r",encoding="utf-8") as f:
+				song=f.read()
+				song2=transposition_song(song,songs_dict_transp[song_id])
+			with open(sc_tex(song_id),"w+",encoding="utf-8") as f:
+				f.write(song2)
 
-# o1/pisen.tex   =>  cache/pisen.tex
-# o2/pisen2.tex  =>  cache/pisen2.tex
-rule song_tex:
+# zpevnik.tex => zpevnik.pdf
+rule main_pdf:
 	output:
-		sc_tex("{song}"),
+		cb_pdf(),
+		temp(cb_tex().replace(".tex",".pdf")),
+		temp(cb_tex().replace(".tex",".log")),
+		temp(cb_tex().replace(".tex",".out")),
+		temp(idx_pisne()),
+		temp(idx_interpreti()),
+		ind_pisne(),
+		ind_interpreti(),
+		temp(ind_pisne()+".old"),
 	input:
-		lambda wildcards: songs_dict[wildcards.song],
-		workflow.snakefile
+		prepare_outputs(),
 	run:
-		song=""
-		song2=""
-		with open(input[0],"r",encoding="utf-8") as f:
-			song=f.read()
-			song2=transposition_song(song,songs_dict_transp[wildcards.song])
-		with open(output[0],"w+",encoding="utf-8") as f:
-			f.write(song2)
+		# Výstup je nyní v adresáři output. Pokud existuje stará verze, smažeme
+		# ji, aby nemátla.
+		if os.path.isfile("_{}.pdf".format(chordbook)):
+			os.remove("_{}.pdf".format(chordbook))
+
+		if not os.path.isfile(ind_pisne()) or not os.path.isfile(ind_interpreti()):
+			call_xelatex(input[0])
+			udelejRejstrik(idx_pisne(),ind_pisne()); 
+			udelejRejstrik(idx_interpreti(),ind_interpreti());
+
+		call_xelatex(input[0])
+
+		shutil.copyfile(ind_pisne(),ind_pisne()+".old")
+		udelejRejstrik(idx_pisne(),ind_pisne()); 
+		udelejRejstrik(idx_interpreti(),ind_interpreti());
+
+		if not filecmp.cmp(ind_pisne(),ind_pisne()+".old"):
+			call_xelatex(input[0])
+
+		shutil.copyfile(output[1],output[0])
 
 # cache/pisen.tex => cache/_single_pisen.pdf
 rule song_pdf:
