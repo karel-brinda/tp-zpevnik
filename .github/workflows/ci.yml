@@ -29,7 +29,7 @@ jobs:
             texlive-extra-utils \
             texlive-lang-czechslovak \
             texlive-latex-extra \
-            texlive-xetex
+            texlive-luatex
           sudo locale-gen cs_CZ.UTF-8
 
       - name: Install Python dependencies

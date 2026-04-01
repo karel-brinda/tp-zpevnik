@@ -13,12 +13,13 @@
   headheight=0.51in,headsep=0.2in]{geometry}
 
 \usepackage{fontspec}
+\usepackage{graphicx}
 \usepackage{index}
 \usepackage{calc}
 \usepackage{fancyhdr}
 \usepackage[czech]{babel}
 \usepackage[chordbk]{songbook}
-\usepackage[xetex,pdfpagelabels=false,pdfborder={0 0 0}]{hyperref}
+\usepackage[pdfpagelabels=false,pdfborder={0 0 0}]{hyperref}
 \usepackage{forloop}
 \usepackage{sectsty,titlesec}
 
@@ -123,8 +124,8 @@
 % Makra pro vkládání celých PDF (přední a zadní obálka)
 \newcounter{insertCur}
 \newcounter{insertTotal}
-\newcommand\insertPage[2]{{\hoffset=-1in\voffset=-1in\shipout\vbox to 29.7cm{\vss\hbox to 21cm{\hss{\XeTeXpdffile #1 page #2 }\hss}\vss}\stepcounter{page}}}
-\newcommand\countPages[1]{\setcounter{insertTotal}{\XeTeXpdfpagecount #1 }}
+\newcommand\insertPage[2]{{\hoffset=-1in\voffset=-1in\shipout\vbox to 29.7cm{\vss\hbox to 21cm{\hss\includegraphics[page=#2,width=21cm,height=29.7cm]{#1}\hss}\vss}\stepcounter{page}}}
+\newcommand\countPages[1]{\saveimageresource{#1}\setcounter{insertTotal}{\lastsavedimageresourcepages}}
 \newcommand\insertPDF[1]{\countPages{#1}\stepcounter{insertTotal}
   \forloop{insertCur}{1}{\value{insertCur} < \value{insertTotal}}{%
     \insertPage{#1}{\value{insertCur}}}}

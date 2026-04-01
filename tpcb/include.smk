@@ -64,21 +64,21 @@ def idx_interpreti():
     return cb_idx() + "_interpreti"
 
 
-def call_xelatex(xelatex_file):
+def call_lualatex(tex_file):
     if platform.system() == "Windows":
-        xelatex_command = """xelatex -interaction nonstopmode -include-directory "{dir}" -aux-directory "{dir}" -output-directory "{dir}" "{texfile}" """.format(
-            dir=os.path.basedir(xelatex_file),
-            texfile=xelatex_file,
+        lualatex_command = """lualatex -interaction nonstopmode -include-directory "{dir}" -aux-directory "{dir}" -output-directory "{dir}" "{texfile}" """.format(
+            dir=os.path.dirname(tex_file),
+            texfile=tex_file,
         )
     else:
-        xelatex_command = """
+        lualatex_command = """
             cd "{dir}"
-            xelatex -interaction nonstopmode "{texfile}"
+            lualatex -interaction nonstopmode "{texfile}"
             """.format(
-            dir=os.path.dirname(xelatex_file),
-            texfile=os.path.basename(xelatex_file),
+            dir=os.path.dirname(tex_file),
+            texfile=os.path.basename(tex_file),
         )
-    shell(xelatex_command)
+    shell(lualatex_command)
 
 
 def run():
@@ -159,18 +159,18 @@ def main_pdf_run(input, output):
         os.remove("_{}.pdf".format(chordbook))
 
     if not os.path.isfile(ind_pisne()) or not os.path.isfile(ind_interpreti()):
-        call_xelatex(input[0])
+        call_lualatex(input[0])
         udelejRejstrik(idx_pisne(), ind_pisne())
         udelejRejstrik(idx_interpreti(), ind_interpreti())
 
-    call_xelatex(input[0])
+    call_lualatex(input[0])
 
     shutil.copyfile(ind_pisne(), ind_pisne() + ".old")
     udelejRejstrik(idx_pisne(), ind_pisne())
     udelejRejstrik(idx_interpreti(), ind_interpreti())
 
     if not filecmp.cmp(ind_pisne(), ind_pisne() + ".old"):
-        call_xelatex(input[0])
+        call_lualatex(input[0])
 
     shutil.copyfile(output[1], output[0])
 
@@ -180,7 +180,7 @@ def song_pdf_run(input, output):
         main_tex = "\\def\\thelist{{{}}}\n".format(os.path.basename(input[0]))
         main_tex += "\\def\\SINGLE{}\n\\input{template.tex}\n"
         f.write(main_tex)
-    call_xelatex(output[1])
+    call_lualatex(output[1])
     shutil.copyfile(output[2], output[0])
 
 
