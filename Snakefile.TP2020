@@ -87,7 +87,7 @@ songs=[
 #	"tp-songs/01_folk/Spirituál_kvintet____Dvě_báby.tex",
 	"tp-songs/01_folk/Karel_Plíhal____Dvě_spálený_srdce.tex",
 	"tp-songs/03_zahranicni/neznámý____El_Condor_Pasa.tex",
-#	"tp-songs/01_folk/Jaroslav_Ježek____Ezob_a_brabenec.tex",
+#	"tp-songs/01_folk/Jaroslav_Ježek____Ezop_a_brabenec.tex",
 #	"tp-songs/03_zahranicni/Cat_Stevens____Father_and_Son.tex",
 #	"tp-songs/03_zahranicni/Georges_Brassens____Fernande.tex",
 #	"tp-songs/01_folk/Bratři_Ebenové____Folklóreček.tex",
@@ -462,4 +462,3 @@ include:"tpcb/snake_incl.py"
 rule all:
 	input:
 		run()
-

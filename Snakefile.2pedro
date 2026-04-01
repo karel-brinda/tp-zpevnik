@@ -83,7 +83,7 @@ songs=[
 	"tp-songs/01_folk/Jarek_Nohavica____Zatanči.tex",
 	"tp-songs/01_folk/Jarek_Nohavica____Zatímco_se_koupeš.tex",
 	"tp-songs/01_folk/Jarek_Nohavica____Zítra_ráno_v_pět.tex",
-	"tp-songs/01_folk/Jaroslav_Ježek____Ezob_a_brabenec.tex",
+	"tp-songs/01_folk/Jaroslav_Ježek____Ezop_a_brabenec.tex",
 	"tp-songs/01_folk/Jaroslav_Ježek____Babička_Mary.tex",
 	"tp-songs/01_folk/Jaroslav_Ježek____Nebe_na_zemi.tex",
 	"tp-songs/01_folk/Jaroslav_Uhlíř,_Zdeněk_Svěrák____Není_nutno.tex",
@@ -287,4 +287,3 @@ include:"tpcb/snake_incl.py"
 rule all:
 	input:
 		run()
-
