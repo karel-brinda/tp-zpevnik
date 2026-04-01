@@ -50,7 +50,7 @@ jobs:
 
       - name: Build Pages output
         run: |
-          make -C output
+          make -C output -j
           rm -f .gitignore output/.gitignore
 
       - name: Upload Pages artifact
