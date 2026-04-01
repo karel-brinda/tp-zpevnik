@@ -315,8 +315,8 @@ songs=[
 #	("tp-songs/02_pop_rock/Žlutý_pes____Sametová.tex",0),
 	("tp-songs/03_zahranicni/4_Non_Blondes____Whats_Up.tex",5),
 #	("tp-songs/03_zahranicni/Afric_Simone____Hafanana.tex",0),
-#	("tp-songs/03_zahranicni/Alanis_Morisette____Hand_in_my_pocket.tex",0),
-#	("tp-songs/03_zahranicni/Alanis_Morisette____Ironic.tex",0),
+#	("tp-songs/03_zahranicni/Alanis_Morissette____Hand_in_my_pocket.tex",0),
+#	("tp-songs/03_zahranicni/Alanis_Morissette____Ironic.tex",0),
 #	("tp-songs/03_zahranicni/Alexandrovci____Kaťuša.tex",0),
 #	("tp-songs/03_zahranicni/Animals____House_of_the_Rising_Sun.tex",0),
 #	("tp-songs/03_zahranicni/Beatles____A_hard_days_night.tex",0),
@@ -416,4 +416,3 @@ include:"tpcb/snake_incl.py"
 rule all:
         input:
                 run()
-

@@ -179,8 +179,8 @@ songs=[
 
 #########################
 
-	"tp-songs/03_zahranicni/Alanis_Morisette____Hand_in_my_pocket.tex",
-	"tp-songs/03_zahranicni/Alanis_Morisette____Ironic.tex",
+	"tp-songs/03_zahranicni/Alanis_Morissette____Hand_in_my_pocket.tex",
+	"tp-songs/03_zahranicni/Alanis_Morissette____Ironic.tex",
 	"tp-songs/03_zahranicni/Beatles____All_my_loving.tex",
 	"tp-songs/03_zahranicni/Beatles____Help.tex",
 	"tp-songs/03_zahranicni/Beatles____Hey_Jude.tex",
@@ -211,4 +211,3 @@ include:"tpcb/snake_incl.py"
 rule all:
 	input:
 		run()
-
