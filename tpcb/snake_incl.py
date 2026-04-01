@@ -83,25 +83,27 @@ except NameError:
 	options=[]
 
 songs_prop = []
-for x in songs:
+for i, x in enumerate(songs):
 	# no transposition
 	if isinstance(x,str):
 		songs_prop.append((
 			x,
 			0,
-			os.path.basename(x).replace(".tex","")
+			os.path.basename(x).replace(".tex",""),
+			"s{:04d}".format(i)
 		))
 	# transposition ... must be a list
 	else:
 		songs_prop.append((
 			x[0],
 			int(x[1]),
-			os.path.basename(x[0]).replace(".tex","")
+			os.path.basename(x[0]).replace(".tex",""),
+			"s{:04d}".format(i)
 		))
 
-songs_dict = OrderedDict([ (x[2],x[0]) for x in songs_prop ])
+songs_dict = OrderedDict([ (x[3],x[0]) for x in songs_prop ])
 
-songs_dict_transp = OrderedDict([ (x[2],x[1]) for x in songs_prop ])
+songs_dict_transp = OrderedDict([ (x[3],x[1]) for x in songs_prop ])
 
 # zpevnik.tex => zpevnik.pdf
 rule main_pdf:
