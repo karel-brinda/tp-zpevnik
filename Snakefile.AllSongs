@@ -17,7 +17,7 @@ try:
 except:
     pass
 
-songs = glob.glob("tp-songs/*/*.tex")
+songs = glob.glob("songs/*/*.tex")
 
 # print(songs)
 songs = sorted(songs)

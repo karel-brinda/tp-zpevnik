@@ -33,7 +33,7 @@ Tento githubový repozitář poskytuje jednotný přístup k těmto zpěvníkům
 
 ## Organizace repozitářů
 
-Samotné písně naleznete v adresáři *tp-songs*, který dále obsahuje 4 podadresáře podle skupin písní v TP zpěvnících (obdobná logika jako v modré Já písničce).
+Samotné písně naleznete v adresáři *songs*, který dále obsahuje 4 podadresáře podle skupin písní v TP zpěvnících (obdobná logika jako v modré Já písničce).
 
 ## Jak sestavit zpěvníky
 
@@ -132,8 +132,8 @@ Dodržujte, prosím, logiku celého zpěvníku:
 	#cover_back="obalka_zadni.pdf"
 	
 	songs=[
-		("./tp-songs/03_zahranicni/Beatles____Let_it_be.tex", 5), # 5 = transpozice o 5 půltónů nahoru
-		"./tp-songs/03_zahranicni/Beatles____Love_me_do.tex",
+		("./songs/03_zahranicni/Beatles____Let_it_be.tex", 5), # 5 = transpozice o 5 půltónů nahoru
+		"./songs/03_zahranicni/Beatles____Love_me_do.tex",
 	]
 
 	include:"tpcb/snake_incl.py"
