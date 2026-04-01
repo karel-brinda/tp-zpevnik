@@ -63,12 +63,9 @@ def call_xelatex(xelatex_file):
 	shell(xelatex_command)
 
 def run():
-	if not "SINGLESONLY" in options:
-		outputs = [ cb_pdf() ]
-	else:
-		outputs = []
+	outputs = [ cb_pdf() ]
 
-	if "SINGLES" in options or "SINGLESONLY" in options:
+	if "SINGLES" in options:
 		outputs.extend([ sc_pdf(x) for x in songs_dict.keys() ])
 	
 	return outputs
