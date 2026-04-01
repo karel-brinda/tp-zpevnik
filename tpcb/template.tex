@@ -3,9 +3,11 @@
   \def\NOHEADER{}
 \fi
 
-\documentclass[11pt,a4paper%
-  \ifdefined\ONESIDE,oneside\fi%
-]{book}
+\ifdefined\ONESIDE
+  \documentclass[11pt,a4paper,oneside]{book}
+\else
+  \documentclass[11pt,a4paper]{book}
+\fi
 \usepackage[textwidth=6.25in,textheight=10in,
   inner=1.4in,top=0.91in,
   headheight=0.51in,headsep=0.2in]{geometry}

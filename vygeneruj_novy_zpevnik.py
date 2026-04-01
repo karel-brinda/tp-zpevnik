@@ -25,7 +25,6 @@ chordbook="jmeno_souboru"
 options = [
  	"SKIPCHECK",
  	"ONESIDE",
-	"SINGLEPAGE",
 ]
 
 songs=[""")

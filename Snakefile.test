@@ -1,20 +1,28 @@
 # -*-coding: utf-8 -*-
 
-left_page_head="Levá hlavička"
-right_page_head="Pravá hlavička"
-chordbook="muj_novy_zpevnik"
-#cover_front="obalka_predni.pdf"
-#cover_back="obalka_zadni.pdf"
+left_page_head = "Levá hlavička"
+right_page_head = "Pravá hlavička"
+chordbook = "muj_novy_zpevnik"
+# cover_front="obalka_predni.pdf"
+# cover_back="obalka_zadni.pdf"
 
-options=["SINGLES"]
+options = [
+    "SINGLES",
+    "ONESIDE",
+]
 
-songs=[
-    ("tp-songs/03_zahranicni/Beatles____Let_it_be.tex", 5), # 5 = transpozice o 5 půltónů nahoru
+songs = [
+    (
+        "tp-songs/03_zahranicni/Beatles____Let_it_be.tex",
+        5,
+    ),  # 5 = transpozice o 5 půltónů nahoru
     "tp-songs/03_zahranicni/Beatles____Love_me_do.tex",
 ]
 
-include:"tpcb/snake_incl.py"
+
+include: "tpcb/snake_incl.py"
+
 
 rule all:
     input:
-        run()
+        run(),
