@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    env:
+      LANG: cs_CZ.UTF-8
+      LC_ALL: cs_CZ.UTF-8
 
     steps:
       - uses: actions/checkout@v5
@@ -30,7 +33,9 @@ jobs:
             texlive-lang-czechslovak \
             texlive-latex-extra \
             texlive-luatex
+          sudo sed -i 's/^# *cs_CZ.UTF-8 UTF-8/cs_CZ.UTF-8 UTF-8/' /etc/locale.gen
           sudo locale-gen cs_CZ.UTF-8
+          sudo update-locale LANG=cs_CZ.UTF-8 LC_ALL=cs_CZ.UTF-8
 
       - name: Install Python dependencies
         run: pip install -r requirements.txt
@@ -44,9 +49,20 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    env:
+      LANG: cs_CZ.UTF-8
+      LC_ALL: cs_CZ.UTF-8
 
     steps:
       - uses: actions/checkout@v5
+
+      - name: Install locale
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y locales
+          sudo sed -i 's/^# *cs_CZ.UTF-8 UTF-8/cs_CZ.UTF-8 UTF-8/' /etc/locale.gen
+          sudo locale-gen cs_CZ.UTF-8
+          sudo update-locale LANG=cs_CZ.UTF-8 LC_ALL=cs_CZ.UTF-8
 
       - name: Build Pages output
         run: |
