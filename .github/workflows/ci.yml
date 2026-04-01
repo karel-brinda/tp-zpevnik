@@ -36,7 +36,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Build chordbooks
-        run: make
+        run: make -j
 
       - name: Build Pages output
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
