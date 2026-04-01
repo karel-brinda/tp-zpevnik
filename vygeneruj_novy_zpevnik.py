@@ -9,7 +9,7 @@ try:
 except:
     locale.setlocale(locale.LC_ALL, 'cs_CZ.UTF-8')
 
-cmd = "find tp-songs -type f -name '*.tex'"
+cmd = "find songs -type f -name '*.tex'"
 
 res = subprocess.Popen(cmd,
                        shell=True,
@@ -25,7 +25,6 @@ chordbook="jmeno_souboru"
 options = [
  	"SKIPCHECK",
  	"ONESIDE",
-	"SINGLEPAGE",
 ]
 
 songs=[""")
@@ -37,7 +36,7 @@ for fn in fns:
 
 print("""]
 
-include:"tpcb/snake_incl.py"
+include:"tpcb/include.smk"
 
 rule all:
         input:

@@ -61,6 +61,7 @@ target/
 
 ## Chordbook cache files
 *.pdf
+!tp-zpevnik-covers/*.pdf
 *.cache
 cache.*
 .snakemake
