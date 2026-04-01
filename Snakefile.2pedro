@@ -6,7 +6,11 @@ chordbook="2pedro"
 #cover_front="tp-zpevnik-covers/pedro_front.pdf"
 #cover_back="tp-zpevnik-covers/pedro_back.pdf"
 
-options = [ "SKIPCHECK" ]
+options = [
+	"SKIPCHECK",
+	"ONESIDE",
+	"SINGLEPAGE",
+]
 
 
 songs=[
@@ -287,4 +291,3 @@ include:"tpcb/snake_incl.py"
 rule all:
 	input:
 		run()
-
