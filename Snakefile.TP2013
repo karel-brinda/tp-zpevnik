@@ -6,6 +6,9 @@ chordbook="TP_zpevnik_2013"
 cover_front="tp-zpevnik-covers/2013_front.pdf"
 cover_back="tp-zpevnik-covers/2013_back.pdf"
 
+options = [
+]
+
 
 songs=[
 	"tp-songs/01_folk/lidová____A_te_Rehradice.tex",
@@ -228,4 +231,3 @@ include:"tpcb/snake_incl.py"
 rule all:
 	input:
 		run()
-

@@ -4,7 +4,6 @@ chordbook="2romča"
 options = [
  	"SKIPCHECK",
  	"ONESIDE",
-	"SINGLEPAGE",
 ]
 
 songs=[
@@ -416,5 +415,4 @@ include:"tpcb/snake_incl.py"
 rule all:
         input:
                 run()
-
 

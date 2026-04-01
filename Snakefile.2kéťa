@@ -7,7 +7,6 @@ chordbook="2kéťa"
 options = [
 	"SKIPCHECK",
 	"ONESIDE",
-	"SINGLEPAGE",
 ]
 
 '''
@@ -51,4 +50,3 @@ include:"tpcb/snake_incl.py"
 rule all:
 	input:
 		run()
-
