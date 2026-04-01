@@ -223,7 +223,7 @@ songs=[
 	"songs/04_tp/Eso____Hymna_TP.tex",
 ]
 
-include:"tpcb/snake_incl.py"
+include:"tpcb/include.smk"
 
 rule all:
 	input:

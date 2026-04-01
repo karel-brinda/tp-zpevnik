@@ -136,7 +136,7 @@ Dodržujte, prosím, logiku celého zpěvníku:
 		"./songs/03_zahranicni/Beatles____Love_me_do.tex",
 	]
 
-	include:"tpcb/snake_incl.py"
+	include:"tpcb/include.smk"
 
 	rule all:
 		input:

@@ -36,7 +36,7 @@ for fn in fns:
 
 print("""]
 
-include:"tpcb/snake_incl.py"
+include:"tpcb/include.smk"
 
 rule all:
         input:

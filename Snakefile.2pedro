@@ -282,7 +282,7 @@ songs=[
 
 ]
 
-include:"tpcb/snake_incl.py"
+include:"tpcb/include.smk"
 
 rule all:
 	input:

@@ -411,7 +411,7 @@ songs=[
 #	("songs/04_tp/Kristý____Bohyně_ve_vaně.tex",0),
 ]
 
-include:"tpcb/snake_incl.py"
+include:"tpcb/include.smk"
 
 rule all:
         input:
