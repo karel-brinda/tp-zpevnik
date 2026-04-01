@@ -1,5 +1,5 @@
 # TP zpěvník
-[![Build Status](https://travis-ci.org/karel-brinda/tp-zpevnik.svg?branch=master)](https://travis-ci.org/karel-brinda/tp-zpevnik)
+[![CI](https://github.com/karel-brinda/tp-zpevnik/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/karel-brinda/tp-zpevnik/actions/workflows/ci.yml)
 
 Na tomto místě naleznete podklady k sestavení TP zpěvníků z let 2011 – 2013. Vysázené zpěvníky naleznete na http://karel-brinda.github.io/tp-zpevnik/.
 

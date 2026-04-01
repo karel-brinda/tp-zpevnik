@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            ghostscript \
+            locales \
+            texlive-extra-utils \
+            texlive-lang-czechslovak \
+            texlive-latex-extra \
+            texlive-xetex
+          sudo locale-gen cs_CZ.UTF-8
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build chordbooks
+        run: make
+
+      - name: Build Pages output
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: |
+          make -C output
+          rm -f .gitignore output/.gitignore
+
+      - name: Upload Pages artifact
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: output
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
