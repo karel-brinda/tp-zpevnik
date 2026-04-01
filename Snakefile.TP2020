@@ -7,7 +7,9 @@ chordbook="TP_zpevnik_2020"
 cover_front="tp-zpevnik-covers/2020_front.pdf"
 cover_back="tp-zpevnik-covers/2020_back.pdf"
 
-options = [ "PREVIOUS" ]
+options = [
+	"PREVIOUS",
+]
 
 songs=[
 	"tp-songs/04_tp/Eso____Hymna_TP.tex",
@@ -462,4 +464,3 @@ include:"tpcb/snake_incl.py"
 rule all:
 	input:
 		run()
-

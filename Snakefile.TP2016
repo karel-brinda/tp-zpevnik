@@ -8,7 +8,9 @@ cover_front="tp-zpevnik-covers/2016_front.pdf"
 
 # Některé písně (Hotel California, 500 miles a další) nevycházejí správně na dvoustranu, ale
 # v rámci zachování číslování kontrolu vypneme
-options = [ "SKIPCHECK" ]
+options = [
+	"SKIPCHECK",
+]
 
 songs=[
 	"tp-songs/01_folk/lidová____A_te_Rehradice.tex",
@@ -232,4 +234,3 @@ include:"tpcb/snake_incl.py"
 rule all:
 	input:
 		run()
-
