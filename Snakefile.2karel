@@ -11,15 +11,15 @@ options = [
 
 
 songs = [
-    "tp-songs/03_zahranicni/Georges_Brassens____Fernande.tex",
-    "tp-songs/03_zahranicni/Gerard_Lenorman____La_Ballade.tex",
-    "tp-songs/03_zahranicni/Pink_Floyd____Another_brick_in_the_wall.tex",
-    "tp-songs/03_zahranicni/Pink_Floyd____Comfortably_Numb.tex",
-    "tp-songs/03_zahranicni/Pink_Floyd____Money.tex",
-    "tp-songs/03_zahranicni/Pink_Floyd____Mother.tex",
-    "tp-songs/03_zahranicni/Pink_Floyd____Shine_on_your_crazy_diamond.tex",
-    "tp-songs/03_zahranicni/Pink_Floyd____Time.tex",
-    "tp-songs/03_zahranicni/Pink_Floyd____Wish_you_were_here.tex",
+    "songs/03_zahranicni/Georges_Brassens____Fernande.tex",
+    "songs/03_zahranicni/Gerard_Lenorman____La_Ballade.tex",
+    "songs/03_zahranicni/Pink_Floyd____Another_brick_in_the_wall.tex",
+    "songs/03_zahranicni/Pink_Floyd____Comfortably_Numb.tex",
+    "songs/03_zahranicni/Pink_Floyd____Money.tex",
+    "songs/03_zahranicni/Pink_Floyd____Mother.tex",
+    "songs/03_zahranicni/Pink_Floyd____Shine_on_your_crazy_diamond.tex",
+    "songs/03_zahranicni/Pink_Floyd____Time.tex",
+    "songs/03_zahranicni/Pink_Floyd____Wish_you_were_here.tex",
 ]
 
 

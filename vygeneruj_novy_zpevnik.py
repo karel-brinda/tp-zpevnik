@@ -9,7 +9,7 @@ try:
 except:
     locale.setlocale(locale.LC_ALL, 'cs_CZ.UTF-8')
 
-cmd = "find tp-songs -type f -name '*.tex'"
+cmd = "find songs -type f -name '*.tex'"
 
 res = subprocess.Popen(cmd,
                        shell=True,
