@@ -63,10 +63,8 @@ jobs:
           LANG: cs_CZ.UTF-8
           LC_ALL: cs_CZ.UTF-8
         run: |
-          mkdir -p output
-          cp *.pdf output/
           make -C output orizni index.html Snakefile.sablona -j
-          rm -f .gitignore output/.gitignore
+          rm -f output/.gitignore
 
       - name: Upload downloadable artifacts
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
@@ -74,7 +72,7 @@ jobs:
         with:
           name: chordbooks
           path: |
-            *.pdf
+            output/*.pdf
             output/*.tablet.pdf
 
       - name: Configure Pages
