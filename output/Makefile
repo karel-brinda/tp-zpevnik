@@ -28,8 +28,7 @@ Snakefile.sablona:
 	p=$$(pwd) && cd .. && ./vygeneruj_novy_zpevnik.py > $$p/$@
 
 index.html: $(ZPEVNIKY_T)
-	p=$$(pwd) && cd .. && ./vygeneruj_index_surge.py > $$p/$@
+	p=$$(pwd) && cd .. && ./vygeneruj_index_html.py > $$p/$@
 
 clean:
 	rm -f *.tablet.pdf index.html
-

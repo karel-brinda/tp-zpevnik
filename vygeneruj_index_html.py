@@ -4,10 +4,18 @@ import sys
 import subprocess
 import locale
 
-try:
-    locale.setlocale(locale.LC_ALL, 'czech')
-except:
-    locale.setlocale(locale.LC_ALL, 'cs_CZ.UTF-8')
+
+def set_czech_locale():
+    for loc in ("czech", "cs_CZ.UTF-8", "cs_CZ.utf8"):
+        try:
+            locale.setlocale(locale.LC_ALL, loc)
+            return
+        except locale.Error:
+            pass
+    raise locale.Error("Czech locale is required")
+
+
+set_czech_locale()
 
 cmd = 'cd output && find . -type f -name "*.pdf" | grep -v "muj_novy_zpevnik"'
 

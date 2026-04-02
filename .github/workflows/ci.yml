@@ -1,10 +1,14 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - master
   pull_request:
+  push:
+    branches: [master]
+
+# keep only the latest job
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -17,50 +21,75 @@ jobs:
 
       - uses: actions/setup-python@v6
         with:
-          python-version: "3.11"
-          cache: "pip"
+          python-version: '3.11'
+          cache: pip
 
-      - name: Install system dependencies
+      - name: Install dependencies
+        shell: bash
         run: |
           sudo apt-get update
-          sudo apt-get install -y \
-            ghostscript \
-            locales \
-            texlive-extra-utils \
-            texlive-lang-czechslovak \
-            texlive-latex-extra \
-            texlive-luatex
-          sudo locale-gen cs_CZ.UTF-8
 
-      - name: Install Python dependencies
-        run: pip install -r requirements.txt
+          packages=(
+            locales
+            texlive-lang-czechslovak
+            texlive-latex-extra
+            texlive-luatex
+          )
+
+          if [[ '${{ github.event_name }}' == 'push' && '${{ github.ref }}' == 'refs/heads/master' ]]; then
+            packages+=(
+              ghostscript
+              texlive-extra-utils
+            )
+          fi
+
+          sudo apt-get install -y "${packages[@]}"
+          sudo sed -i 's/^# *cs_CZ.UTF-8 UTF-8/cs_CZ.UTF-8 UTF-8/' /etc/locale.gen
+          sudo locale-gen cs_CZ.UTF-8
+          python -m pip install -r requirements.txt
 
       - name: Build chordbooks
-        run: make -j
-
-  pages:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-
-    steps:
-      - uses: actions/checkout@v5
-
-      - name: Build Pages output
+        env:
+          LANG: cs_CZ.UTF-8
+          LC_ALL: cs_CZ.UTF-8
         run: |
-          make -C output -j
+          locale -a | grep -iq '^cs_CZ\.utf\?8$'
+          python -c "import locale; locale.setlocale(locale.LC_ALL, 'cs_CZ.UTF-8')"
+          make -j
+
+      - name: Prepare release files
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        env:
+          LANG: cs_CZ.UTF-8
+          LC_ALL: cs_CZ.UTF-8
+        run: |
+          mkdir -p output
+          cp *.pdf output/
+          make -C output orizni index.html Snakefile.sablona -j
           rm -f .gitignore output/.gitignore
 
+      - name: Upload downloadable artifacts
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        uses: actions/upload-artifact@v4
+        with:
+          name: chordbooks
+          path: |
+            *.pdf
+            output/*.tablet.pdf
+
+      - name: Configure Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        uses: actions/configure-pages@v5
+
       - name: Upload Pages artifact
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         uses: actions/upload-pages-artifact@v4
         with:
           path: output
 
   deploy:
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-    needs: pages
+    needs: build
     runs-on: ubuntu-latest
     permissions:
       pages: write
