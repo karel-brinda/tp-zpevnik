@@ -1,11 +1,28 @@
 # TP zpěvník
-<!-- vim-markdown-toc GFM -->
-
-<!-- vim-markdown-toc -->
-
 
 [![CI](https://github.com/karel-brinda/tp-zpevnik/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/karel-brinda/tp-zpevnik/actions/workflows/ci.yml)
 
+
+<!-- vim-markdown-toc GFM -->
+
+* [Jak je repozitář uspořádán](#jak-je-repozitá-uspoádán)
+* [Požadavky](#poadavky)
+    * [Prostředí](#prostedí)
+    * [Potřebný software](#potebný-software)
+* [Jak sestavit zpěvníky](#jak-sestavit-zpvníky)
+    * [Sestavení více zpěvníků](#sestavení-více-zpvník)
+* [Webový výstup](#webový-výstup)
+* [Jak opravit chybu v písni](#jak-opravit-chybu-v-písni)
+    * [Jednodušší varianta](#jednoduí-varianta)
+    * [Preferovaná varianta](#preferovaná-varianta)
+* [Jak přidat novou píseň](#jak-pidat-novou-píse)
+* [Jak vytvořit vlastní zpěvník](#jak-vytvoit-vlastní-zpvník)
+    * [Jednotlivé písně jako samostatná PDF](#jednotlivé-písn-jako-samostatná-pdf)
+* [Přehled značek](#pehled-znaek)
+* [Poznámky](#poznámky)
+* [Podobné zpěvníky](#podobné-zpvníky)
+
+<!-- vim-markdown-toc -->
 
 
 Repozitář obsahuje podklady pro sazbu TP zpěvníků a příbuzných variant. Jsou zde historické i novější edice,
