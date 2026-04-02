@@ -148,31 +148,32 @@ git push
 
 Postupujte obdobně jako při opravě chyby. Dodržujte, prosím, logiku celého zpěvníku:
 
-1. Pojmenujte píseň podle vzoru `Cele_Jmeno_Interpreta____Jmeno_pisne.tex`.
- * Jestliže se jiná píseň od interpreta ve zpěvníku už vyskytuje, ověřte, že je jeho jméno v přesně stejné formě.
- * V případě nejistoty si ověřte křestní jméno nebo pravopis na Google.
- * Jména písní by měla velké jen první písmeno a pak tam, kde patří podle jiných pravidel (vlastní jména, anglické dny v týdnu a mě
+1. **Pojmenujte píseň**
+      * Vzor: `Cele_Jmeno_Interpreta____Jmeno_pisne.tex`.
+      * Jestliže se jiná píseň od interpreta ve zpěvníku už vyskytuje, ověřte, že je jeho jméno v přesně stejné formě.
+      * V případě nejistoty si ověřte křestní jméno nebo pravopis na Google.
+      * Jména písní by měla velké jen první písmeno a pak tam, kde patří podle jiných pravidel (vlastní jména, anglické dny v týdnu a mě
 síce apod.)
- * Dodržujte přesně čtyři podtržítka mezi jménem interpreta a názvem písně.
-2. Vložte text
- * České písně by měly mít texty psané jako celé věty včetně kompletní interpunkce, zalámané do veršů.
- * Písničky v angličtině a několika dalších jazycích mají velké písmeno na začátku každé řádky a interpunkce na jejich koncích (kromě té se speciálním významem), včetně tečky na konci věty, se ruší.
- * Zkontrolujte překlepy v textovém editoru nebo pomocí LLM.
- * "Sólo", "předehra" / "intro", "mezihra" a podobné nepotřebují text a vlastní `\zs ... \ks` (výjimkou je sloka nahrazená sólem beze zpívá
+      * Dodržujte přesně čtyři podtržítka mezi jménem interpreta a názvem písně.
+3. **Vložte text**
+      * České písně by měly mít texty psané jako celé věty včetně kompletní interpunkce, zalámané do veršů.
+      ***** Písničky v angličtině a několika dalších jazycích mají velké písmeno na začátku každé řádky a interpunkce na jejich koncích (kromě té se speciálním významem), včetně tečky na konci věty, se ruší.
+      ***** Zkontrolujte překlepy v textovém editoru nebo pomocí LLM.
+      * "Sólo", "předehra" / "intro", "mezihra" a podobné nepotřebují text a vlastní `\zs ... \ks` (výjimkou je sloka nahrazená sólem beze zpívá
 ní). Stačí v odpovídajícím místě napsat řadu akordů s prázdným textem.
-3. Vložte akordy
- * Do jedné značky `<...>` vkládejte právě jeden akord (jinak program ohlásí neznámý formát akordové značky)
- * Ověřte správnost akordů a jejich umístění nad začátky slabik.
- * Pro všechny písně včetně anglických používejte české značení akordů (t.j., A#=B, A##=H, B# = H).
- * Mollové akordy zapisujte jako `Ami`, `Dmi7` apod.
-4. Zpěvník znovu přeložte a vizuálně zkontrolujte výsledek
-5. Pokud píseň přetéká na druhou stránku, postupujte následovně:
- * Pokud přetéká jen o několik řádků, zkuste ji zkrátit nebo přeskládat tak, aby se vešla na jednu A4 celá
- * Sekvenci akordů, které se v průběhu písně nebo v jejích částech opakuje v přesně stejném sledu, stačí napsat jen jednou.
- * Řádky od druhé sloky dále pospojovat po dvou nebo po celých slokách.
- * Zkrátit opakovaný text pomocí repetic `/: ... :/` nebo tří teček, refrény vynechat.
- * Vynechat od druhé sloky dále výplně jako u Zítra ráno v pět nebo u Milionáře od Nohavici.
- * Když se vtěsnat na jednu stránku nepovede, využijte dobře prostor obou stránek. Je možno i ponechat na výběr dvě verze (viz Veličenstvo Kat)
+4. **Vložte akordy**
+      * Do jedné značky `<...>` vkládejte právě jeden akord (jinak program ohlásí neznámý formát akordové značky)
+      * Ověřte správnost akordů a jejich umístění nad začátky slabik.
+      * Pro všechny písně včetně anglických používejte české značení akordů (t.j., A#=B, A##=H, B# = H).
+       * Mollové akordy zapisujte jako `Ami`, `Dmi7` apod.
+5. **Zpěvník znovu přeložte** a **vizuálně zkontrolujte** výsledek
+6. **Pokud píseň přetéká** na druhou stránku, postupujte následovně:
+      * Pokud přetéká jen o několik řádků, zkuste ji zkrátit nebo přeskládat tak, aby se vešla na jednu A4 celá
+      * Sekvenci akordů, které se v průběhu písně nebo v jejích částech opakuje v přesně stejném sledu, stačí napsat jen jednou.
+      * Řádky od druhé sloky dále pospojovat po dvou nebo po celých slokách.
+      * Zkrátit opakovaný text pomocí repetic `/: ... :/` nebo tří teček, refrény vynechat.
+      * Vynechat od druhé sloky dále výplně jako u Zítra ráno v pět nebo u Milionáře od Nohavici.
+      * Když se vtěsnat na jednu stránku nepovede, využijte dobře prostor obou stránek. Je možno i ponechat na výběr dvě verze (viz Veličenstvo Kat)
 
 
 
