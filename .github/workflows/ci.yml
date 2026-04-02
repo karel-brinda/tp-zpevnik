@@ -15,9 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-    env:
-      LANG: cs_CZ.UTF-8
-      LC_ALL: cs_CZ.UTF-8
 
     steps:
       - uses: actions/checkout@v5
@@ -47,17 +44,24 @@ jobs:
           fi
 
           sudo apt-get install -y "${packages[@]}"
-
           sudo sed -i 's/^# *cs_CZ.UTF-8 UTF-8/cs_CZ.UTF-8 UTF-8/' /etc/locale.gen
           sudo locale-gen cs_CZ.UTF-8
-
           python -m pip install -r requirements.txt
 
       - name: Build chordbooks
-        run: make -j
+        env:
+          LANG: cs_CZ.UTF-8
+          LC_ALL: cs_CZ.UTF-8
+        run: |
+          locale -a | grep -iq '^cs_CZ\.utf\?8$'
+          python -c "import locale; locale.setlocale(locale.LC_ALL, 'cs_CZ.UTF-8')"
+          make -j
 
       - name: Prepare release files
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        env:
+          LANG: cs_CZ.UTF-8
+          LC_ALL: cs_CZ.UTF-8
         run: |
           mkdir -p output
           cp *.pdf output/
