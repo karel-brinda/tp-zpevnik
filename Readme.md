@@ -5,22 +5,22 @@
 
 <!-- vim-markdown-toc GFM -->
 
-* [Jak je repozitář uspořádán](#jak-je-repozitá-uspoádán)
-* [Požadavky](#poadavky)
-    * [Prostředí](#prostedí)
-    * [Potřebný software](#potebný-software)
-* [Jak sestavit zpěvníky](#jak-sestavit-zpvníky)
-    * [Sestavení více zpěvníků](#sestavení-více-zpvník)
+* [Jak je repozitář uspořádán](#jak-je-repozitář-uspořádán)
+* [Požadavky](#požadavky)
+    * [Prostředí](#prostředí)
+    * [Potřebný software](#potřebný-software)
+* [Jak sestavit zpěvníky](#jak-sestavit-zpěvníky)
+    * [Sestavení více zpěvníků](#sestavení-více-zpěvníků)
 * [Webový výstup](#webový-výstup)
 * [Jak opravit chybu v písni](#jak-opravit-chybu-v-písni)
-    * [Jednodušší varianta](#jednoduí-varianta)
+    * [Jednodušší varianta](#jednodušší-varianta)
     * [Preferovaná varianta](#preferovaná-varianta)
-* [Jak přidat novou píseň](#jak-pidat-novou-píse)
-* [Jak vytvořit vlastní zpěvník](#jak-vytvoit-vlastní-zpvník)
-    * [Jednotlivé písně jako samostatná PDF](#jednotlivé-písn-jako-samostatná-pdf)
-* [Přehled značek](#pehled-znaek)
+* [Jak přidat novou píseň](#jak-přidat-novou-píseň)
+* [Jak vytvořit vlastní zpěvník](#jak-vytvořit-vlastní-zpěvník)
+    * [Jednotlivé písně jako samostatná PDF](#jednotlivé-písně-jako-samostatná-pdf)
+* [Přehled značek](#přehled-značek)
 * [Poznámky](#poznámky)
-* [Podobné zpěvníky](#podobné-zpvníky)
+* [Podobné zpěvníky](#podobné-zpěvníky)
 
 <!-- vim-markdown-toc -->
 
